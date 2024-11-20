@@ -32,9 +32,9 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Animales'),
             onTap: () {
               Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context) => const AnimalScreen())
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AnimalScreen()));
             },
           ),
           ListTile(
