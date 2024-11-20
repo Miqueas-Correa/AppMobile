@@ -67,6 +67,8 @@ flutter:
     - assets/images/
     # portada home
     - assets/images/portada.png
+    # acerca de
+    - assets/images/acerca_de_screens/exintos_acerca_De.png
     # categorias animales
     - assets/animals_screen/
     - assets/animals_screen/cat.jpg
@@ -87,7 +89,7 @@ flutter:
     - assets/images/scroll_horizontal/animal_3.jpg
     - assets/images/scroll_horizontal/animal_4.jpg
     - assets/images/scroll_horizontal/animal_5.jpg
-
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
