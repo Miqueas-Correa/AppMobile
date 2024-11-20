@@ -1,4 +1,5 @@
-import 'dart:developer';
+// import 'dart:developer';
+import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:appanimals/widgets/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
@@ -9,6 +10,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Amor Salvaje',
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         // Hace que el contenido sea desplazable
         child: Center(
