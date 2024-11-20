@@ -47,7 +47,7 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250, // Altura del contenedor
+      height: 255, // Altura del contenedor
       width: double.infinity, // Ancho del contenedor
       child: PageView.builder(
         controller: _pageController,
