@@ -61,7 +61,13 @@ flutter:
   assets:
     # aca se agregan todo lo que es imagen/videos
     - assets/images/
+    - assets/images/scroll_horizontal/
     - assets/images/portada.png
+    - assets/images/scroll_horizontal/animal_1.jpg
+    - assets/images/scroll_horizontal/animal_2.jpg
+    - assets/images/scroll_horizontal/animal_3.jpg
+    - assets/images/scroll_horizontal/animal_4.jpg
+    - assets/images/scroll_horizontal/animal_5.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
