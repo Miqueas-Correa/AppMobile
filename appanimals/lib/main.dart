@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
 import 'package:appanimals/screens/home_screen.dart';
+import 'package:appanimals/screens/animals_screen.dart';
+import 'package:appanimals/providers/fishes_provider.dart';
+import 'package:appanimals/screens/peces/list_fishes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => FishesProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 // StatelessWidget: pagina estatica. StatefullWidget: dinamico.
@@ -14,10 +23,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/home',
+      title: 'App Animals',
       routes: {
-        // '/': (context) => const HomeScreen(),
-        // '/animals': (context) => const AnimalsScreen(),
+        // '/buscar': (context) => const OtherScreen(),  // Define otras rutas
+        // '/perfiles': (context) => const OtherScreen(),
+        '/animals': (context) => const AnimalScreen(),
+        '/list_fishes': (context) => const ListFishesScreen(),
       },
     );
   }
