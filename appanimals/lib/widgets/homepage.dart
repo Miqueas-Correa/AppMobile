@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/botonera_navigation.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +24,12 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              //Scroll horizontal
-
-              // boton
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BotoneraNavigation(),
     );
   }
+  
 }
+

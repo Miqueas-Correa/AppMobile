@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:appanimals/screens/animals_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -11,7 +12,7 @@ class CustomDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Color.fromARGB(255, 21, 100, 21),
             ),
             child: Center(
                 child: Text(
@@ -30,7 +31,10 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.pets),
             title: const Text('Animales'),
             onTap: () {
-              // Navigator.pushNamed(context, '/animals');
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const AnimalScreen())
+              );
             },
           ),
           ListTile(
