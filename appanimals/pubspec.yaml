@@ -62,6 +62,7 @@ flutter:
     # aca se agregan todo lo que es imagen/videos
     - assets/images/
     - assets/images/portada.png
+    - assets/images/acerca_de_screens/exintos_acerca_De.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
