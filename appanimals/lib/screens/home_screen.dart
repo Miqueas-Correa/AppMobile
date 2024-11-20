@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:appanimals/widgets/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/custom_drawer.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,17 +9,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Amor Salvaje',
-            style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-        ),
-        backgroundColor: Colors.green,
-      ),
-      drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         // Hace que el contenido sea desplazable
         child: Center(
@@ -35,8 +24,7 @@ class HomeScreen extends StatelessWidget {
                 fit: BoxFit
                     .cover, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
               ),
-              const SizedBox(
-                  height: 20), // Espaciado entre la imagen y el texto
+              const SizedBox(height: 20),
               const Text(
                 'Bienvenido a la aplicación de animales "Amor Salvaje"💖.\n\nAutores: Miqueas Correa, Wanda Suarez, Matias Hittler, Brenda Yañez.',
                 style: TextStyle(fontSize: 20),
@@ -57,17 +45,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        child: const Icon(
-          Icons.help,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          log('Clicked');
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: BotoneraNavigation(),
     );
   }
 }
