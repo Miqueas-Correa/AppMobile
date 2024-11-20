@@ -65,7 +65,9 @@ flutter:
   assets:
     # aca se agregan todo lo que es imagen/videos
     - assets/images/
+    # portada home
     - assets/images/portada.png
+    # categorias animales
     - assets/animals_screen/
     - assets/animals_screen/cat.jpg
     - assets/animals_screen/cocodrile.png
@@ -78,6 +80,13 @@ flutter:
     - assets/animals_details/perro_details.jpg
     - assets/animals_details/peces_details.jpg
     - assets/animals_details/cocodrilo_detail.jpg
+    # scroll horizontal del home
+    - assets/images/scroll_horizontal/
+    - assets/images/scroll_horizontal/animal_1.jpg
+    - assets/images/scroll_horizontal/animal_2.jpg
+    - assets/images/scroll_horizontal/animal_3.jpg
+    - assets/images/scroll_horizontal/animal_4.jpg
+    - assets/images/scroll_horizontal/animal_5.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
