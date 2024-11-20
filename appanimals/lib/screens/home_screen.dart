@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:appanimals/widgets/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
