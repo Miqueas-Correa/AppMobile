@@ -2,6 +2,7 @@ import 'package:appanimals/screens/news_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/acerca_de_.dart';
 import 'package:appanimals/screens/animals_screen.dart';
+import 'package:appanimals/screens/explorar_screen.dart'; // Importar la nueva pantalla Explorar
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -17,10 +18,11 @@ class CustomDrawer extends StatelessWidget {
               color: Color.fromARGB(255, 21, 100, 21),
             ),
             child: Center(
-                child: Text(
-              'A n i m a l s \n   M e n u',
-              style: TextStyle(fontSize: 30, color: Colors.white),
-            )),
+              child: Text(
+                'A n i m a l s \n   M e n u',
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              ),
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.home),
@@ -34,9 +36,23 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Animales'),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AnimalScreen()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AnimalScreen(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.explore),
+            title: const Text('Explorar'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ExplorarScreen(),
+                ),
+              );
             },
           ),
           ListTile(
@@ -53,7 +69,9 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AcercaDePage()),
+                MaterialPageRoute(
+                  builder: (context) => const AcercaDePage(),
+                ),
               );
             },
           ),
