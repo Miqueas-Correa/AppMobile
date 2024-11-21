@@ -1,9 +1,17 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/custom_drawer.dart';
+import 'package:appanimals/screens/buscar_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+// Lista de páginas que corresponden a cada pestaña en el BottomNavigationBar
+  final List<Widget> _pages = [
+    const Center(child: Text('Página Home')),
+    BuscarScreen(), 
+    const Center(child: Text('Página Perfiles')),
+  ];
 
   @override
   Widget build(BuildContext context) {

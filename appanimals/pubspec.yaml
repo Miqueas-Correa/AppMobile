@@ -63,6 +63,10 @@ flutter:
     - assets/images/
     - assets/images/portada.png
     - assets/images/acerca_de_screens/exintos_acerca_De.png
+    - assets/images/buscar_page/cocodriloo_2.jpg
+    - assets/images/buscar_page/gato_2.jpg
+    - assets/images/buscar_page/perro_2.jpg
+    - assets/images/buscar_page/pez_2.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
