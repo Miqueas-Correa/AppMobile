@@ -1,7 +1,8 @@
-import 'dart:developer';
+// import 'dart:developer';
+import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:appanimals/widgets/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/custom_drawer.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,7 +18,8 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(
@@ -35,10 +37,10 @@ class HomeScreen extends StatelessWidget {
                 fit: BoxFit
                     .cover, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
               ),
-              const SizedBox(
-                  height: 20), // Espaciado entre la imagen y el texto
+              const SizedBox(height: 20),
               const Text(
-                'Bienvenido a la aplicación de animales "Amor Salvaje"💖.\n\nAutores: Miqueas Correa, Wanda Suarez, Matias Hittler, Brenda Yañez.',
+                '🐾 ¡Bienvenido a Amor Salvaje! 🐾.\n'
+                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales.¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
@@ -57,17 +59,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        child: const Icon(
-          Icons.help,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          log('Clicked');
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: BotoneraNavigation(),
     );
   }
 }
