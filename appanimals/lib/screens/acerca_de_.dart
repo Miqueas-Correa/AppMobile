@@ -45,7 +45,7 @@ class AcercaDePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Descripcion de la App',
+                      'Descripcion de la App:',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                     ),
