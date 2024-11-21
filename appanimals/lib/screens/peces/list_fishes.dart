@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/providers/fishes_provider.dart';
+import 'package:appanimals/provider/fishes_provider.dart';
 import 'package:provider/provider.dart';
 
 class ListFishesScreen extends StatelessWidget {
