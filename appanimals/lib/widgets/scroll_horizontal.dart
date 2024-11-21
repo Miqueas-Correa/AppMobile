@@ -58,6 +58,7 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
             // Centra la tarjeta en el contenedor
             child: SizedBox(
               width: 350, // Ancho específico de la tarjeta
+              height: 350, // Altura específica de la tarjeta
               child: Card(
                 color: Colors.green, // Color verde para la tarjeta
                 elevation: 5, // Sombra
