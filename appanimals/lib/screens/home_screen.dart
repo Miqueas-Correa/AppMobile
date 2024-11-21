@@ -72,28 +72,36 @@ class _HomeScreenState extends State<HomeScreen> {
         iconTheme: const IconThemeData(color: Colors.white), // Ajustes adicionales
       ),
       drawer: const CustomDrawer(),
-      body: _pages[_paginaActual],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-        currentIndex: _paginaActual,
-        elevation: 10,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.white,
-        onTap: (value) {
-          setState(() {
-            _paginaActual = value;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            activeIcon: Icon(Icons.home_filled),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Buscar',
-            activeIcon: Icon(Icons.search_rounded),
+      body: SingleChildScrollView(
+        // Hace que el contenido sea desplazable
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/portada.png', // Ruta de tu imagen
+                fit: BoxFit
+                    .contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                '🐾 ¡Bienvenido a Amor Salvaje! 🐾.\n'
+                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales.¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                  height: 40), // Espaciado antes del scroll horizontal
+              // Scroll horizontal de tarjetas
+              HorizontalScroll(
+                imagePaths: List.generate(
+                  5,
+                  (index) =>
+                      'assets/images/scroll_horizontal/animal_${index + 1}.jpg',
+                ),
+              ),
+              const SizedBox(height: 20), // Espaciado al final
+            ],
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

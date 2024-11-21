@@ -1,3 +1,4 @@
+import 'package:appanimals/screens/news_screen.dart';
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
 import 'package:appanimals/screens/home_screen.dart';
 import 'package:provider/provider.dart'; // Proveedor de estado
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/profiles': (context) => ProfilesScreen(),
         '/animals': (context) => const AnimalScreen(),
         '/list_fishes': (context) => const ListFishesScreen(),
+        '/noticias': (context) => const NewsScreen(),
       },
     );
   }
