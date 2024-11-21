@@ -47,7 +47,7 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250, // Altura del contenedor
+      height: 255, // Altura del contenedor
       width: double.infinity, // Ancho del contenedor
       child: PageView.builder(
         controller: _pageController,
@@ -58,6 +58,7 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
             // Centra la tarjeta en el contenedor
             child: SizedBox(
               width: 350, // Ancho específico de la tarjeta
+              height: 350, // Altura específica de la tarjeta
               child: Card(
                 color: Colors.green, // Color verde para la tarjeta
                 elevation: 5, // Sombra
@@ -83,7 +84,7 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Tarjeta ${index + 1}',
+                        '(NEW ${index + 1})',
                         style:
                             const TextStyle(fontSize: 18, color: Colors.white),
                       ),

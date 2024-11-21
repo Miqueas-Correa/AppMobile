@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:appanimals/screens/acerca_de_.dart';
 import 'package:appanimals/screens/animals_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -41,7 +42,10 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.info),
             title: const Text('Acerca de'),
             onTap: () {
-              // Navigator.pushNamed(context, '/about');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AcercaDePage()),
+              );
             },
           ),
         ],
