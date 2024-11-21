@@ -1,3 +1,4 @@
+import 'package:appanimals/screens/home_screen.dart';
 import 'package:appanimals/screens/peces/list_fishes.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/animals_screen.dart';
@@ -116,10 +117,11 @@ class AnimalDetails extends StatelessWidget {
                           onPressed: () {
                           // Volver al inicio al presionar "Volver al inicio"
                           /* pageController.jumpToPage(0); */
+                            Navigator.pop(context);
                             Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => AnimalScreen()));
+                              MaterialPageRoute(builder: (context) => HomeScreen()));
                           },
-                          child: const Text('Ir a animales'),
+                          child: const Text('Ir al inicio'),
                         ),
                       ),
                       SizedBox(
