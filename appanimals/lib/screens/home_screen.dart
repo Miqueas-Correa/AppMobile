@@ -30,12 +30,8 @@ class HomeScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/portada.png', // Ruta de tu imagen
-                width: double
-                    .infinity, // El ancho de la imagen ocupa todo el ancho de la pantalla
-                height:
-                    450, // Altura de la imagen, ajusta según tus necesidades
                 fit: BoxFit
-                    .cover, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
+                    .contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
               ),
               const SizedBox(height: 20),
               const Text(
