@@ -86,7 +86,7 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
                       child: Text(
                         '(NEW ${index + 1})',
                         style:
-                            const TextStyle(fontSize: 18, color: Colors.white),
+                            const TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),
                   ],
