@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                '🐾 ¡Bienvenido a Amor Salvaje! 🐾.'
+                '🐾 ¡Bienvenido a Amor Salvaje! 🐾.\n'
                 'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales.¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
