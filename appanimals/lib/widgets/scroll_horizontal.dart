@@ -84,7 +84,7 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Tarjeta ${index + 1}',
+                        '(NEW ${index + 1})',
                         style:
                             const TextStyle(fontSize: 18, color: Colors.white),
                       ),

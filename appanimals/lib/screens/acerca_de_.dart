@@ -30,9 +30,10 @@ class AcercaDePage extends StatelessWidget {
                 child: Center(
                   child: Image.asset(
                     'assets/images/acerca_de_screens/exintos_acerca_De.png',
-                    width: double.infinity,
-                    height: 250,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
+                    height:
+                        MediaQuery.of(context).size.height, // Ajusta la altura
+                    width: MediaQuery.of(context).size.width, // Ajusta el ancho
                   ),
                 ),
               ),
