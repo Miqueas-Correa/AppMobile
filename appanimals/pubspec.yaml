@@ -94,6 +94,19 @@ flutter:
     - assets/images/scroll_horizontal/animal_3.jpg
     - assets/images/scroll_horizontal/animal_4.jpg
     - assets/images/scroll_horizontal/animal_5.jpg
+    #avatars listado de animales
+    - assets/avatars_peces/
+    - assets/avatars_peces/avatar1.png
+    - assets/avatars_peces/avatar2.png
+    - assets/avatars_peces/avatar3.png
+    - assets/avatars_peces/avatar4.png
+    - assets/avatars_peces/avatar5.png
+    - assets/avatars_peces/avatar6.png
+    - assets/avatars_peces/avatar7.png
+    - assets/avatars_peces/avatar8.png
+    - assets/avatars_peces/avatar9.png
+    - assets/avatars_peces/avatar10.png
+
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
