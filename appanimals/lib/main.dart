@@ -1,9 +1,9 @@
-import 'package:appanimals/screens/peces/peces_list_item.dart';
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
 import 'package:appanimals/screens/home_screen.dart';
 import 'package:appanimals/screens/animals_screen.dart';
 import 'package:appanimals/providers/fishes_provider.dart';
 /* import 'package:appanimals/screens/peces/peces_list_screen.dart'; */
+import 'package:appanimals/screens/peces/peces_list_item.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,11 +24,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      /* initialRoute: '/home', */
       title: 'App Animals',
       routes: {
+        /* '/home': (context) => HomeScreen(), */
         // '/buscar': (context) => const OtherScreen(),  // Define otras rutas
-        // '/perfiles': (context) => const OtherScreen(),
+        '/perfiles': (context) => PecesListItem(),
         '/animals': (context) => const AnimalScreen(),
         '/list_fishes': (context) => const PecesListItem(),
 
