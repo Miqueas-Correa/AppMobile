@@ -58,12 +58,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BotoneraNavigation(
-        /* screens: [
-          const HomeScreen(),
-          const PecesListScreen(),
-        ], */
-      ),
+      bottomNavigationBar: BotoneraNavigation(),
     );
   }
 }

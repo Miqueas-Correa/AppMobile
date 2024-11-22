@@ -28,15 +28,15 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
           backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-          elevation: 10,
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.white,
+          elevation: 10, //sombra
+          unselectedItemColor: Colors.grey, //color de los no seleccionados
+          selectedItemColor: Colors.white, //color cuando esta seleccionado el icono
           currentIndex: _paginaActual,
           onTap: (value) {
             setState(() {
               _paginaActual = value;
             });
-
+            //logica para cuando se seleccionan otras pantallas
             if (_paginaActual !=1 && _paginaActual !=2) {
               Navigator.push(
                 context, 
