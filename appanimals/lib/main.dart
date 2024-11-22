@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomeScreen(),
+      home:  HomeScreen(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/home',
       title: 'App Animals',
