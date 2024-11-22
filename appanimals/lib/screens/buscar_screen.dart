@@ -4,12 +4,15 @@ import 'package:appanimals/widgets/category_card.dart';
 import 'package:appanimals/screens/animal_detail_screen.dart';
 
 class BuscarScreen extends StatelessWidget{
+  BuscarScreen({super.key});
   final List<Category> categories = [
     Category(title: 'Gato', imagePath: 'assets/images/buscar_page/gato_2.jpg', color: Colors.white),
     Category(title: 'Perro', imagePath: 'assets/images/buscar_page/perro_2.jpg', color: Colors.white),
     Category(title: 'Pez', imagePath: 'assets/images/buscar_page/pez_2.jpg', color: Colors.white),
     Category(title: 'Cocodrilo', imagePath: 'assets/images/buscar_page/cocodriloo_2.jpg', color: Colors.white),
   ];
+
+
 
   @override
   Widget build(BuildContext context) {
