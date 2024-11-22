@@ -1,7 +1,7 @@
 import 'package:appanimals/screens/home_screen.dart';
-import 'package:appanimals/screens/peces/list_fishes.dart';
+/* import 'package:appanimals/screens/peces/list_fishes.dart'; */
+import 'package:appanimals/screens/peces/peces_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/animals_screen.dart';
 
 class AnimalDetails extends StatelessWidget {
   final String imagePath;
@@ -141,7 +141,7 @@ class AnimalDetails extends StatelessWidget {
                             /* pageController.jumpToPage(0); */
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ListFishesScreen())); //ACA HAY QUE CAMBIAR POR LA CLASE DEL LISTADO DE CADA UNO
+                              MaterialPageRoute(builder: (context) => PecesListScreen())); //ACA HAY QUE CAMBIAR POR LA CLASE DEL LISTADO DE CADA UNO
                           },
                           child: const Text('Ver listado'),
                         ),
