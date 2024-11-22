@@ -23,23 +23,22 @@ class ProfileDetailScreen extends StatefulWidget {
 
 class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   final TextEditingController feedbackController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
 
   @override
-  void initState() {
-    super.initState();
-    feedbackController.text = '';
+  void dispose() {
+    feedbackController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
     final isLightTheme = themeProvider.temaActual == DefaultTheme.lightTheme;
 
+    // Colores según el tema
     const titleColor = Colors.white;
     final textColor = isLightTheme ? Colors.black : Colors.white;
-    final inputBorderColor = isLightTheme ? Colors.black : Colors.white;
+    final inputBorderColor = isLightTheme ? Colors.black54 : Colors.white70;
     final iconColor = isLightTheme ? Colors.black : Colors.white;
     final backgroundColor = isLightTheme ? Colors.white : Colors.black87;
     final cardColor = isLightTheme ? Colors.grey.withOpacity(0.1) : Colors.grey.withOpacity(0.3);
@@ -52,7 +51,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         ),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-        iconTheme: IconThemeData(color: iconColor),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
@@ -64,14 +63,17 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
               child: Hero(
                 tag: 'avatar_${widget.perfil}',
                 child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 21, 100, 21),
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.green, // Borde verde
+                      width: 6, // Grosor del borde (ajustado a 6)
+                    ),
                   ),
                   child: CircleAvatar(
                     radius: 80,
                     backgroundImage: AssetImage(widget.imagen),
+                    backgroundColor: Colors.green[200],
                   ),
                 ),
               ),
@@ -91,84 +93,91 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                 color: iconColor,
               ),
             ),
-            const SizedBox(height: 10),
-            ProfileDetailCard(
-              icon: Icons.person,
-              label: 'Nombre',
-              value: '${profileData[widget.perfil]!['nombre']} ${profileData[widget.perfil]!['apellido']}',
-              textColor: textColor,
-              iconColor: iconColor,
-              cardColor: cardColor,
-            ),
-            const SizedBox(height: 10),
-            ProfileDetailCard(
-              icon: Icons.email,
-              label: 'Email',
-              value: profileData[widget.perfil]!['email']!,
-              textColor: textColor,
-              iconColor: iconColor,
-              cardColor: cardColor,
-            ),
-            const SizedBox(height: 10),
-            ProfileDetailCard(
-              icon: Icons.phone,
-              label: 'Teléfono',
-              value: profileData[widget.perfil]!['telefono']!,
-              textColor: textColor,
-              iconColor: iconColor,
-              cardColor: cardColor,
-            ),
-            const SizedBox(height: 10),
-            ProfileDetailCard(
-              icon: Icons.credit_card,
-              label: 'DNI',
-              value: profileData[widget.perfil]!['dni']!,
-              textColor: textColor,
-              iconColor: iconColor,
-              cardColor: cardColor,
-            ),
-            const SizedBox(height: 10),
-            ProfileDetailCard(
-              icon: Icons.info,
-              label: 'Sobre Nosotros',
-              value: profileData[widget.perfil]!['sobreNosotros']!,
-              textColor: textColor,
-              iconColor: iconColor,
-              cardColor: cardColor,
-            ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: feedbackController,
-                focusNode: _focusNode,
-                maxLines: 3,
-                style: TextStyle(color: textColor),
-                decoration: InputDecoration(
-                  labelText: '¿Qué le pareció nuestra app?',
-                  labelStyle: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: inputBorderColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: textColor),
-                  ),
+            ...[
+              ProfileDetailCard(
+                icon: Icons.person,
+                label: 'Nombre',
+                value:
+                    '${profileData[widget.perfil]!['nombre']} ${profileData[widget.perfil]!['apellido']}',
+                textColor: textColor,
+                iconColor: iconColor,
+                cardColor: cardColor,
+              ),
+              ProfileDetailCard(
+                icon: Icons.email,
+                label: 'Email',
+                value: profileData[widget.perfil]!['email']!,
+                textColor: textColor,
+                iconColor: iconColor,
+                cardColor: cardColor,
+              ),
+              ProfileDetailCard(
+                icon: Icons.phone,
+                label: 'Teléfono',
+                value: profileData[widget.perfil]!['telefono']!,
+                textColor: textColor,
+                iconColor: iconColor,
+                cardColor: cardColor,
+              ),
+              ProfileDetailCard(
+                icon: Icons.credit_card,
+                label: 'DNI',
+                value: profileData[widget.perfil]!['dni']!,
+                textColor: textColor,
+                iconColor: iconColor,
+                cardColor: cardColor,
+              ),
+              ProfileDetailCard(
+                icon: Icons.info,
+                label: 'Sobre Nosotros',
+                value: profileData[widget.perfil]!['sobreNosotros']!,
+                textColor: textColor,
+                iconColor: iconColor,
+                cardColor: cardColor,
+              ),
+            ].expand((card) => [card, const SizedBox(height: 10)]),
+            TextField(
+              controller: feedbackController,
+              maxLines: 3,
+              style: TextStyle(color: textColor),
+              decoration: InputDecoration(
+                labelText: '¿Qué le pareció nuestra app?',
+                labelStyle: TextStyle(color: inputBorderColor),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: inputBorderColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: textColor),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                String opinion = feedbackController.text;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Opinión guardada: $opinion')),
-                );
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 21, 100, 21)),
-                foregroundColor: MaterialStateProperty.all(Colors.white),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  final opinion = feedbackController.text.trim();
+                  if (opinion.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Por favor, ingrese su opinión.'),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Opinión guardada: $opinion'),
+                      ),
+                    );
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 21, 100, 21)),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                ),
+                child: const Text('Guardar Opinión'),
               ),
-              child: const Text('Guardar Opinión'),
             ),
           ],
         ),
