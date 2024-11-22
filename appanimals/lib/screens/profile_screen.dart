@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:appanimals/provider/theme_provider.dart';
 import 'package:appanimals/screens/profile_detail_screen.dart';
-import 'package:appanimals/themes/default_theme.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class ProfilesScreen extends StatelessWidget {
-  ProfilesScreen({super.key});
+  final GlobalKey<BotoneraNavigationState> botoneraKey;
+
+  ProfilesScreen({super.key, required this.botoneraKey});
 
   final List<String> nombres = [
     'Matías Emanuel Coronel Dittler',
@@ -24,16 +23,15 @@ class ProfilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isLightTheme = themeProvider.temaActual == DefaultTheme.lightTheme;
-
-    final arrowColor = isLightTheme ? Colors.black : Colors.white;
-    final titleColor = isLightTheme ? Colors.black : Colors.white;
+    // Obtener el tema actual para aplicar el estilo adecuado
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
     final borderColor = isLightTheme ? Colors.black : Colors.white;
+    final shadowColor = isLightTheme ? Colors.black45 : Colors.white54;
+    final arrowColor = isLightTheme ? Colors.black : Colors.white;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfiles', style: TextStyle(color: Colors.white)),
+        title: const Text('Perfiles'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
       ),
@@ -52,35 +50,30 @@ class ProfilesScreen extends StatelessWidget {
                 ),
               ),
               elevation: 5,
-              shadowColor: isLightTheme ? Colors.black45 : Colors.white54,
+              shadowColor: shadowColor,
               child: ListTile(
                 contentPadding: const EdgeInsets.all(16),
                 leading: CircleAvatar(
                   backgroundImage: AssetImage(imagenes[index]),
                 ),
-                title: Text(nombres[index], style: TextStyle(color: titleColor)),
+                title: Text(nombres[index], style: TextStyle(color: isLightTheme ? Colors.black : Colors.white)),
                 trailing: Icon(
                   Icons.arrow_forward,
-                  color: arrowColor,
+                  color: arrowColor, // Aquí se aplica el color de la flecha
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => ProfileDetailScreen(
+                    MaterialPageRoute(
+                      builder: (_) => ProfileDetailScreen(
                         perfil: index + 1,
                         name: nombres[index],
                         imagen: imagenes[index],
                       ),
-                      transitionsBuilder: (_, anim, __, child) {
-                        return FadeTransition(
-                          opacity: anim,
-                          child: child,
-                        );
-                      },
                     ),
                   ).then((_) {
-                    Navigator.popUntil(context, ModalRoute.withName('/home'));
+                    // Después de regresar, actualizamos el índice del BottomNavigationBar
+                    botoneraKey.currentState?.cambiarPagina(2); // Índice de "Perfiles"
                   });
                 },
               ),

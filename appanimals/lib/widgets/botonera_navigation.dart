@@ -4,18 +4,25 @@ class BotoneraNavigation extends StatefulWidget {
   const BotoneraNavigation({super.key});
 
   @override
-  _BotoneraNavigationState createState() => _BotoneraNavigationState();
+  BotoneraNavigationState createState() => BotoneraNavigationState();
 }
 
-class _BotoneraNavigationState extends State<BotoneraNavigation> {
+class BotoneraNavigationState extends State<BotoneraNavigation> {
   int _paginaActual = 0;
+
+  // Método público para actualizar _paginaActual
+  void cambiarPagina(int nuevaPagina) {
+    setState(() {
+      _paginaActual = nuevaPagina;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),  // Duración de la animación
+      duration: const Duration(milliseconds: 300),
       child: BottomNavigationBar(
-        key: ValueKey<int>(_paginaActual), // Establece una clave para el BottomNavigationBar
+        key: ValueKey<int>(_paginaActual),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         currentIndex: _paginaActual,
         elevation: 10,
@@ -26,13 +33,11 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
             _paginaActual = value;
           });
 
-          // Navegar según la página seleccionada
           switch (value) {
             case 0:
               Navigator.pushNamed(context, '/home');
               break;
             case 1:
-              // Ejemplo para Buscar
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Buscar: Página no implementada aún')),
               );
