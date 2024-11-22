@@ -30,16 +30,13 @@ class HomeScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/portada.png', // Ruta de tu imagen
-                width: double
-                    .infinity, // El ancho de la imagen ocupa todo el ancho de la pantalla
-                height:
-                    450, // Altura de la imagen, ajusta según tus necesidades
                 fit: BoxFit
-                    .cover, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
+                    .contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
               ),
               const SizedBox(height: 20),
               const Text(
-                'Bienvenido a la aplicación de animales "Amor Salvaje"💖.\n\nAutores: Miqueas Correa, Wanda Suarez, Matias Hittler, Brenda Yañez.',
+                '🐾 ¡Bienvenido a Amor Salvaje! 🐾.\n'
+                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales.¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
