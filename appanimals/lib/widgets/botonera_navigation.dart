@@ -12,52 +12,56 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-      currentIndex: _paginaActual,
-      elevation: 10,
-      unselectedItemColor: Colors.grey,
-      selectedItemColor: Colors.white,
-      onTap: (value) {
-        setState(() {
-          _paginaActual = value;
-        });
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),  // Duración de la animación
+      child: BottomNavigationBar(
+        key: ValueKey<int>(_paginaActual), // Establece una clave para el BottomNavigationBar
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        currentIndex: _paginaActual,
+        elevation: 10,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.white,
+        onTap: (value) {
+          setState(() {
+            _paginaActual = value;
+          });
 
-        // Navegar según la página seleccionada
-        switch (value) {
-          case 0:
-            Navigator.pushNamed(context, '/home');
-            break;
-          case 1:
-            // Ejemplo para Buscar
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Buscar: Página no implementada aún')),
-            );
-            break;
-          case 2:
-            Navigator.pushNamed(context, '/profiles');
-            break;
-          default:
-            break;
-        }
-      },
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-          activeIcon: Icon(Icons.home_filled),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Buscar',
-          activeIcon: Icon(Icons.search_rounded),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Perfiles',
-          activeIcon: Icon(Icons.person_outline),
-        ),
-      ],
+          // Navegar según la página seleccionada
+          switch (value) {
+            case 0:
+              Navigator.pushNamed(context, '/home');
+              break;
+            case 1:
+              // Ejemplo para Buscar
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Buscar: Página no implementada aún')),
+              );
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/profiles');
+              break;
+            default:
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            activeIcon: Icon(Icons.home_filled),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Buscar',
+            activeIcon: Icon(Icons.search_rounded),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Perfiles',
+            activeIcon: Icon(Icons.person_outline),
+          ),
+        ],
+      ),
     );
   }
 }

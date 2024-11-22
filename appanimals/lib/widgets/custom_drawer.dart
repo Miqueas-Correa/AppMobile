@@ -1,3 +1,4 @@
+import 'package:appanimals/screens/news_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/acerca_de_.dart';
 import 'package:appanimals/screens/animals_screen.dart';
@@ -52,6 +53,14 @@ class CustomDrawer extends StatelessWidget {
                   builder: (context) => const ExplorarScreen(),
                 ),
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.newspaper_sharp),
+            title: const Text('Noticias'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const NewsScreen()));
             },
           ),
           ListTile(

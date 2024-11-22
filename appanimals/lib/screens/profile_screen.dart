@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // Asegúrate de tener provider importado
+import 'package:provider/provider.dart';
 import 'package:appanimals/provider/theme_provider.dart';
 import 'package:appanimals/screens/profile_detail_screen.dart';
-import 'package:appanimals/themes/default_theme.dart'; // Asegúrate de tener este archivo
+import 'package:appanimals/themes/default_theme.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class ProfilesScreen extends StatelessWidget {
   ProfilesScreen({super.key});
@@ -23,24 +24,18 @@ class ProfilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Obtener el tema actual
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isLightTheme = themeProvider.temaActual == DefaultTheme.lightTheme;
 
-    // Definir los colores para los bordes, sombras y texto según el tema
-    final borderColor = isLightTheme ? Colors.black : Colors.white;  // Borde negro en modo claro, blanco en modo oscuro
-    final shadowColor = isLightTheme ? Colors.black.withOpacity(0.2) : Colors.white.withOpacity(0.2);
-    final titleColor = isLightTheme ? Colors.black : Colors.white;
     final arrowColor = isLightTheme ? Colors.black : Colors.white;
+    final titleColor = isLightTheme ? Colors.black : Colors.white;
+    final borderColor = isLightTheme ? Colors.black : Colors.white;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Perfiles',
-          style: const TextStyle(color: Colors.white),
-        ),
+        title: Text('Perfiles', style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 21, 100, 21), // Barra verde
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
       ),
       body: ListView.builder(
         itemCount: nombres.length,
@@ -48,22 +43,25 @@ class ProfilesScreen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: Card(
-              color: isLightTheme ? Colors.white : Colors.black54, // Fondo de la tarjeta
+              color: isLightTheme ? Colors.white : Colors.black54,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: borderColor, width: 2), // Borde dinámico
+                side: BorderSide(
+                  color: borderColor,
+                  width: 2,
+                ),
               ),
-              elevation: 8, // Mayor sombra para dar el efecto de profundidad
-              shadowColor: shadowColor, // Sombra según el tema
+              elevation: 5,
+              shadowColor: isLightTheme ? Colors.black45 : Colors.white54,
               child: ListTile(
                 contentPadding: const EdgeInsets.all(16),
                 leading: CircleAvatar(
-                  backgroundImage: AssetImage(imagenes[index]), // Imagen del perfil
+                  backgroundImage: AssetImage(imagenes[index]),
                 ),
                 title: Text(nombres[index], style: TextStyle(color: titleColor)),
                 trailing: Icon(
                   Icons.arrow_forward,
-                  color: arrowColor, // Aquí cambiamos el color de la flecha
+                  color: arrowColor,
                 ),
                 onTap: () {
                   Navigator.push(
@@ -81,13 +79,16 @@ class ProfilesScreen extends StatelessWidget {
                         );
                       },
                     ),
-                  );
+                  ).then((_) {
+                    Navigator.popUntil(context, ModalRoute.withName('/home'));
+                  });
                 },
               ),
             ),
           );
         },
       ),
+      bottomNavigationBar: const BotoneraNavigation(),
     );
   }
 }

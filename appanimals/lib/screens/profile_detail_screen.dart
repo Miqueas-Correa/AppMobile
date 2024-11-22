@@ -4,6 +4,7 @@ import 'package:appanimals/data/profile_data.dart';
 import 'package:appanimals/provider/theme_provider.dart';
 import 'package:appanimals/themes/default_theme.dart';
 import 'package:appanimals/widgets/profile_detail_card.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart'; // Asegúrate de importar la botonera
 
 class ProfileDetailScreen extends StatefulWidget {
   final int perfil;
@@ -182,6 +183,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: const BotoneraNavigation(), // Aquí se agrega la botonera
     );
   }
 }

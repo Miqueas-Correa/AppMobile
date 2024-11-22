@@ -1,4 +1,3 @@
-// import 'dart:developer';
 import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:appanimals/widgets/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
@@ -30,18 +29,16 @@ class HomeScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/portada.png', // Ruta de tu imagen
-                fit: BoxFit
-                    .contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
+                fit: BoxFit.contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
               ),
               const SizedBox(height: 20),
               const Text(
                 '🐾 ¡Bienvenido a Amor Salvaje! 🐾.\n'
-                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales.¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
+                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales. ¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                  height: 40), // Espaciado antes del scroll horizontal
+              const SizedBox(height: 40), // Espaciado antes del scroll horizontal
               // Scroll horizontal de tarjetas
               HorizontalScroll(
                 imagePaths: List.generate(
@@ -55,7 +52,17 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BotoneraNavigation(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        child: const Icon(
+          Icons.help,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          // Acción del botón flotante (puedes agregar lo que necesites aquí)
+        },
+      ),
+      bottomNavigationBar: const BotoneraNavigation(), // Coloca la BotoneraNavigation correctamente
     );
   }
 }
