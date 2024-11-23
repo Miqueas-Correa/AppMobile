@@ -20,8 +20,9 @@ class AnimalDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        centerTitle: true,
         title: const Text('Historia del animal'),
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
       ),
       body: Stack(

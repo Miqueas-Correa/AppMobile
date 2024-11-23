@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:appanimals/screens/peces/peces_list_item.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +52,8 @@ class _PecesListScreenState extends State<PecesListScreen> {
       top: true,
       child: Scaffold(
           appBar: AppBar(
-            title: const Center(
-              child: Text('Listado de Peces')
-            ),
+            centerTitle: true,
+            title: Text('Listado de Peces'),
             backgroundColor: const Color.fromARGB(255, 21, 100, 21),
             foregroundColor: Colors.white,
           ),
@@ -75,15 +75,21 @@ class _PecesListScreenState extends State<PecesListScreen> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, 'custom_list_item',
-                  arguments: <String, dynamic>{
-                    'avatar': elements[index][0],
-                    'name': elements[index][1],
-                    'especie': elements[index][2],
-                    'color': elements[index][3],
-                    'stars': elements[index][4],
-                    'favorite': elements[index][5],
-                  });
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) => PecesListItem(),
+                  settings: RouteSettings(
+                    arguments: <String, dynamic>{
+                      'avatar': elements[index][0],
+                      'name': elements[index][1],
+                      'especie': elements[index][2],
+                      'color': elements[index][3],
+                      'stars': elements[index][4],
+                      'favorite': elements[index][5],}
+                  ),
+                )
+              );
               FocusManager.instance.primaryFocus?.unfocus();
             },
             onLongPress: () {
