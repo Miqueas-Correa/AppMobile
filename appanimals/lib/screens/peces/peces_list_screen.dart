@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:appanimals/widgets/botonera_navigation.dart';
+import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/mocks/fishes_mock.dart' show elements;
 
@@ -48,13 +50,23 @@ class _PecesListScreenState extends State<PecesListScreen> {
     return SafeArea(
       top: true,
       child: Scaffold(
+          appBar: AppBar(
+            title: const Center(
+              child: Text('Listado de Peces')
+            ),
+            backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+            foregroundColor: Colors.white,
+          ),
+          drawer: CustomDrawer(),
           body: Column(children: [
-        searchArea(),
-        listItemsArea(),
-      ])),
+              searchArea(),
+              listItemsArea(),
+            ]),
+          bottomNavigationBar: BotoneraNavigation(),
+        ),
     );
   }
-
+  
   Expanded listItemsArea() {
     return Expanded(
       child: ListView.builder(
@@ -82,14 +94,19 @@ class _PecesListScreenState extends State<PecesListScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(31, 206, 219, 246),
-                        blurRadius: 0,
-                        spreadRadius: 3,
-                        offset: Offset(0, 6))
-                  ]),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(54, 187, 189, 196),
+                    blurRadius: 0,
+                    spreadRadius: 1,
+                    offset: Offset(0, 0))
+                  ],
+                border: Border.all(
+                  color: Colors.black.withOpacity(0.1),
+                  width: 1,
+                )
+              ),
               child: Row(
                 children: [
                   Image.asset(

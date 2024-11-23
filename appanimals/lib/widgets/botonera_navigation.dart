@@ -29,7 +29,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
     return BottomNavigationBar(
           backgroundColor: const Color.fromARGB(255, 21, 100, 21),
           elevation: 10, //sombra
-          unselectedItemColor: Colors.grey, //color de los no seleccionados
+          unselectedItemColor: Colors.white, //color de los no seleccionados
           selectedItemColor: Colors.white, //color cuando esta seleccionado el icono
           currentIndex: _paginaActual,
           onTap: (value) {
@@ -58,19 +58,16 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
           },
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.home, color: Colors.white),
               label: 'Home',
-              activeIcon: Icon(Icons.home_filled), 
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.search, color: Colors.white),
               label: 'Buscar',
-              activeIcon: Icon(Icons.search_rounded), 
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.person, color: Colors.white),
               label: 'Perfiles',
-              activeIcon: Icon(Icons.person_outline),
             ),
           ],
         );
