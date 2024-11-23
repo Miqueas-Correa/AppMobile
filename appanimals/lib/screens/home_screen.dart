@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
