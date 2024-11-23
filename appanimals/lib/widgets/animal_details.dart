@@ -8,13 +8,13 @@ class AnimalDetails extends StatelessWidget {
   final Color titleColor;
 
   // Constructor
-  AnimalDetails({
-    Key? key,
+  const AnimalDetails({
+    super.key,
     required this.imagePath,
     required this.text,
     required this.title,
     required this.titleColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
