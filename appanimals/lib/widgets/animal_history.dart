@@ -33,27 +33,36 @@ class AnimalHistory extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Título del animal
-                SizedBox(height: 50),
+                SizedBox(height: 60),
                 Text(
                   title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 48, 46, 46),
+                    color: /* const Color.fromARGB(255, 48, 46, 46), */const Color.fromARGB(255, 21, 100, 21),
                     wordSpacing: 4,
                     height: 1.5,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 35,
                   ),
                 ),
                 // Texto adicional sobre el animal
-                SizedBox(height: 60),
-                Text(
-                  text,
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 32, 32, 32),
-                    wordSpacing: 4,
-                    height: 1.5,
+                SizedBox(height: 50),
+                Card(
+                  elevation: 10,
+                  color: const Color.fromARGB(255, 21, 100, 21),
+                  margin: EdgeInsets.all(5),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                    child: Text(
+                      text,
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        color: Colors.white,
+                        wordSpacing: 4,
+                        height: 1.5,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
                   ),
                 ),
                 // Botones de acción

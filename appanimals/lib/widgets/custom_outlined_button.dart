@@ -18,7 +18,7 @@ class CustomOutlinedButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           textStyle: TextStyle(
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w500,
             wordSpacing: 5,
           ),
           backgroundColor: const Color.fromARGB(255, 21, 100, 21),

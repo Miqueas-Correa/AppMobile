@@ -1,3 +1,4 @@
+import 'package:appanimals/screens/buscar_screen.dart';
 import 'package:appanimals/screens/home_screen.dart';
 import 'package:appanimals/screens/peces/peces_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
   //Lista de widgets de las páginas que se mostrarán
   final List<Widget> screens = [
     HomeScreen(),
-    //RutaWanda() --> ACA VA LA RUTA DEL BUSCAR ---> WANDA
+    BuscarScreen(),
     //RutaMatias --> ACA VA LA RUTA DE PERFILES --> MATIAS
     PecesListScreen(),
   ];
@@ -44,10 +45,10 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
               );
             } else if (_paginaActual != 0 && _paginaActual !=2 ) {
               //aca ruta wanda
-              // Navigator.push(
-              //   context, 
-              //   MaterialPageRoute(builder: (context) => rutabuscar()),
-              // );
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => BuscarScreen()),
+              );
             } else if (_paginaActual !=0 && _paginaActual != 1) {
               //aca ruta matias
               Navigator.push(
