@@ -16,7 +16,9 @@ class PecesListItem extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('PecesListItem'),
+        title: const Text('Perfil del pez'),
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        foregroundColor: Colors.white,
         elevation: 10,
       ),
       body: SingleChildScrollView(
@@ -60,7 +62,7 @@ class BodyProfileCustomItem extends StatelessWidget {
             style: const TextStyle(fontSize: 18),
             initialValue: args['especie'] ?? '',
             decoration: decorationInput(
-                label: 'Especie', helperText: 'Ingresar número sin 0 ni 15')),
+                label: 'Especie:', helperText: 'Ingrese el nombre de la especie del pez')),
         const SizedBox(
           height: 15,
         ),
@@ -69,7 +71,25 @@ class BodyProfileCustomItem extends StatelessWidget {
             style: const TextStyle(fontSize: 18),
             initialValue: args['name'] ?? '',
             keyboardType: TextInputType.text,
-            decoration: decorationInput(label: 'Nombre')),
+            decoration: decorationInput(label: 'Nombre:', helperText: "Ingrese el nombre del pez")),
+        const SizedBox(
+          height: 15,
+        ),
+        TextFormField(
+            onChanged: (value) {},
+            style: const TextStyle(fontSize: 18),
+            initialValue: args['color'] ?? '',
+            keyboardType: TextInputType.text,
+            decoration: decorationInput(label: 'Color: ')),
+        const SizedBox(
+          height: 15,
+        ),
+        TextFormField(
+            onChanged: (value) {},
+            style: const TextStyle(fontSize: 18),
+            initialValue: args['id'] ?? '',
+            keyboardType: TextInputType.text,
+            decoration: decorationInput(label: 'N° de ID:', helperText: "FIJATE PORQUE NO SE MUESTRA")),
         const SizedBox(
           height: 15,
         ),
@@ -114,7 +134,7 @@ class HeaderProfileCustomItem extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.40,
-      color: const Color(0xff2d3e4f),
+      color:  const Color.fromARGB(216, 21, 100, 21),
       child: Center(
         child: CircleAvatar(
           radius: 100,

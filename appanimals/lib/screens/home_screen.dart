@@ -11,16 +11,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
+        centerTitle: true,
+        title: const Text(
             'Amor Salvaje',
             style: TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
+          backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         // Hace que el contenido sea desplazable
