@@ -1,3 +1,4 @@
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/animal_pair.dart';
 
@@ -47,6 +48,7 @@ class AnimalScreen extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: BotoneraNavigation(),
     );
   }
 }
