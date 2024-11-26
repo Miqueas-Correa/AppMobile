@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class LoadingAnimation extends StatefulWidget {
   final Duration duration;
 
-  const LoadingAnimation({Key? key, this.duration = const Duration(seconds: 2)}) : super(key: key);
+  const LoadingAnimation(
+      {super.key, this.duration = const Duration(seconds: 2)});
 
   @override
   _LoadingAnimationState createState() => _LoadingAnimationState();
 }
 
-class _LoadingAnimationState extends State<LoadingAnimation> with TickerProviderStateMixin {
+class _LoadingAnimationState extends State<LoadingAnimation>
+    with TickerProviderStateMixin {
   late AnimationController _rotationController;
   late AnimationController _colorController;
   bool _showAnimation = true;
@@ -17,7 +19,7 @@ class _LoadingAnimationState extends State<LoadingAnimation> with TickerProvider
   @override
   void initState() {
     super.initState();
-    
+
     // Controlador para la rotación
     _rotationController = AnimationController(
       duration: const Duration(seconds: 2),
@@ -55,13 +57,16 @@ class _LoadingAnimationState extends State<LoadingAnimation> with TickerProvider
               animation: _rotationController,
               builder: (context, child) {
                 return Transform.rotate(
-                  angle: _rotationController.value * 2.0 * 3.14159, // Completa una rotación
+                  angle: _rotationController.value *
+                      2.0 *
+                      3.14159, // Completa una rotación
                   child: AnimatedBuilder(
                     animation: _colorController,
                     builder: (context, child) {
                       return CustomPaint(
                         size: Size(100, 100),
-                        painter: _LoadingPainter(progress: _colorController.value),
+                        painter:
+                            _LoadingPainter(progress: _colorController.value),
                       );
                     },
                   ),
@@ -89,14 +94,23 @@ class _LoadingPainter extends CustomPainter {
       ..shader = RadialGradient(
         colors: [Colors.blue, Colors.green],
         stops: [0.3, 1.0],
-      ).createShader(Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: size.width / 2))
+      ).createShader(Rect.fromCircle(
+          center: Offset(size.width / 2, size.height / 2),
+          radius: size.width / 2))
       ..strokeWidth = 8
       ..style = PaintingStyle.stroke;
 
-    canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.width / 2, paintBackground);
+    canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.width / 2,
+        paintBackground);
     double sweepAngle = 2 * 3.14159 * progress;
-    canvas.drawArc(Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: size.width / 2),
-        -3.14159 / 2, sweepAngle, false, paintProgress);
+    canvas.drawArc(
+        Rect.fromCircle(
+            center: Offset(size.width / 2, size.height / 2),
+            radius: size.width / 2),
+        -3.14159 / 2,
+        sweepAngle,
+        false,
+        paintProgress);
   }
 
   @override
