@@ -1,19 +1,29 @@
-import 'package:appanimals/screens/buscar_screen.dart';
+/* import 'package:appanimals/screens/peces/fishes_screen.dart'; */
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
 import 'package:appanimals/screens/home_screen.dart';
+import 'package:appanimals/screens/buscar_screen.dart';
 import 'package:appanimals/screens/animals_screen.dart';
-import 'package:appanimals/providers/fishes_provider.dart';
-/* import 'package:appanimals/screens/peces/peces_list_screen.dart'; */
-import 'package:appanimals/screens/peces/peces_list_item.dart';
+import 'package:appanimals/providers/peces/fishes_provider.dart';
+/* import 'package:appanimals/screens/peces/peces_list_item.dart'; */
+import 'package:appanimals/models/peces/listview_separated_fishes.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => FishesProvider(),
-      child: const MyApp(),
-    ),
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //await Preferences.initShared();
+  await dotenv.load(fileName: ".env");
+
+  runApp(MultiProvider(
+    providers: [
+  
+      ChangeNotifierProvider<FishesProvider>(
+        create: (_) => FishesProvider(),
+        lazy: false,
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 // StatelessWidget: pagina estatica. StatefullWidget: dinamico.
@@ -28,13 +38,10 @@ class MyApp extends StatelessWidget {
       /* initialRoute: '/home', */
       title: 'App Animals',
       routes: {
-        /* '/home': (context) => HomeScreen(), */
         '/buscar': (context) => BuscarScreen(),  // Define otras rutas
-        '/perfiles': (context) => PecesListItem(),
+        '/perfiles': (context) => ListViewSeparatedScreen(),
         '/animals': (context) => const AnimalScreen(),
-        '/list_fishes': (context) => const PecesListItem(),
-
-        //'profile': (context) => const ProfileScreen(),
+        '/list_fishes': (context) => const ListViewSeparatedScreen(),
       },
     );
   }
