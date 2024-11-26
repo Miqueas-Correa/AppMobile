@@ -12,6 +12,7 @@ class AnimalDetailScreen extends StatelessWidget { // -> patanlla no tiene estad
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(animal.title),
         backgroundColor: Colors.green,
       ),
