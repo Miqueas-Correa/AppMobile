@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/profile_detail_screen.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
+import 'package:provider/provider.dart';
+import 'package:appanimals/providers/theme_provider.dart';
 
 class ProfilesScreen extends StatelessWidget {
-  final GlobalKey<BotoneraNavigationState> botoneraKey;
-
-  ProfilesScreen({super.key, required this.botoneraKey});
+  ProfilesScreen({super.key});
 
   final List<String> nombres = [
     'Matías Emanuel Coronel Dittler',
@@ -34,6 +34,16 @@ class ProfilesScreen extends StatelessWidget {
         title: const Text('Perfiles'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        actions: [
+          // IconButton para cambiar entre temas
+          IconButton(
+            icon: Icon(isLightTheme ? Icons.wb_sunny : Icons.nightlight_round), // Cambiar ícono según el tema
+            onPressed: () {
+              // Cambiar entre temas claro y oscuro
+              context.read<ThemeProvider>().toggleTheme();
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: nombres.length,
@@ -71,10 +81,7 @@ class ProfilesScreen extends StatelessWidget {
                         imagen: imagenes[index],
                       ),
                     ),
-                  ).then((_) {
-                    // Después de regresar, actualizamos el índice del BottomNavigationBar
-                    botoneraKey.currentState?.cambiarPagina(2); // Índice de "Perfiles"
-                  });
+                  );
                 },
               ),
             ),

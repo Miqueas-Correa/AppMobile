@@ -2,13 +2,21 @@ import 'package:appanimals/screens/news_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/acerca_de_.dart';
 import 'package:appanimals/screens/animals_screen.dart';
-import 'package:appanimals/screens/explorar_screen.dart'; // Importar la nueva pantalla Explorar
+import 'package:appanimals/screens/explorar_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:appanimals/providers/theme_provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isLightTheme = themeProvider.currentTheme == ThemeData.light();
+
+    // Establecemos el color de los iconos según el tema
+    final iconColor = isLightTheme ? Colors.white : Colors.black;
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -18,45 +26,30 @@ class CustomDrawer extends StatelessWidget {
               color: Color.fromARGB(255, 21, 100, 21),
             ),
             child: Center(
-              child: Text(
-                'A n i m a l s \n   M e n u',
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-            ),
+                child: Text(
+              'A n i m a l s \n   M e n u',
+              style: TextStyle(fontSize: 30, color: Colors.white),
+            )),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
+            leading: Icon(Icons.home, color: iconColor),
             title: const Text('Home'),
             onTap: () {
               Navigator.pushNamed(context, '/');
             },
           ),
           ListTile(
-            leading: const Icon(Icons.pets),
+            leading: Icon(Icons.pets, color: iconColor),
             title: const Text('Animales'),
             onTap: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AnimalScreen(),
-                ),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AnimalScreen()));
             },
           ),
           ListTile(
-            leading: const Icon(Icons.explore),
-            title: const Text('Explorar'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ExplorarScreen(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.newspaper_sharp),
+            leading: Icon(Icons.newspaper_sharp, color: iconColor),
             title: const Text('Noticias'),
             onTap: () {
               Navigator.push(context,
@@ -64,14 +57,22 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.info),
+            leading: Icon(Icons.explore, color: iconColor),
+            title: const Text('Explorar'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ExplorarScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info, color: iconColor),
             title: const Text('Acerca de'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const AcercaDePage(),
-                ),
+                MaterialPageRoute(builder: (context) => const AcercaDePage()),
               );
             },
           ),

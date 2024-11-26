@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:appanimals/data/profile_data.dart';
-import 'package:appanimals/provider/theme_provider.dart';
+import 'package:appanimals/providers/theme_provider.dart';
 import 'package:appanimals/themes/default_theme.dart';
 import 'package:appanimals/widgets/profile_detail_card.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart'; // Asegúrate de importar la botonera
@@ -34,7 +34,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    final isLightTheme = themeProvider.temaActual == DefaultTheme.lightTheme;
+    final isLightTheme = themeProvider.currentTheme == DefaultTheme.lightTheme;
 
     // Colores según el tema
     const titleColor = Colors.white;

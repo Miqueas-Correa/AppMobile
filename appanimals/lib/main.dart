@@ -1,28 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:appanimals/screens/home_screen.dart';
-import 'package:appanimals/screens/profile_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:appanimals/provider/theme_provider.dart';
 import 'package:appanimals/screens/animals_screen.dart';
-import 'package:appanimals/provider/fishes_provider.dart';
-import 'package:appanimals/screens/peces/list_fishes.dart';
-import 'package:appanimals/screens/news_screen.dart';
-import 'package:appanimals/widgets/botonera_navigation.dart';
-import 'package:appanimals/helpers/preferences.dart';
+import 'package:appanimals/screens/buscar_screen.dart';
+import 'package:appanimals/screens/peces/peces_list_item.dart';
+import 'package:appanimals/screens/profile_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Preferences.initShared();
-  
+import 'screens/home_screen.dart';
+import 'providers/theme_provider.dart';
+import 'providers/loading_provider.dart';
+import 'providers/fishes_provider.dart';
+import 'observers/loading_observer.dart';
+import 'widgets/loading_overlay.dart';
+
+void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<ThemeProvider>(
-          create: (_) => ThemeProvider(isLightMode: Preferences.lightmode),
-        ),
-        ChangeNotifierProvider<FishesProvider>(
-          create: (_) => FishesProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => FishesProvider()),
+        ChangeNotifierProvider(create: (_) => LoadingProvider()),
       ],
       child: const MyApp(),
     ),
@@ -34,28 +30,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Usa el nombre correcto de la clase BotoneraNavigationState
-    final GlobalKey<BotoneraNavigationState> _botoneraKey = GlobalKey<BotoneraNavigationState>();
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
-    final tema = Provider.of<ThemeProvider>(context, listen: true);
     return MaterialApp(
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('App Animals'),
-        ),
-        body: const HomeScreen(),
-        bottomNavigationBar: BotoneraNavigation(key: _botoneraKey),
-      ),
-      initialRoute: '/home',
       title: 'App Animals',
-      theme: tema.temaActual,
+      theme: themeProvider.currentTheme,
       routes: {
-        '/home': (context) => const HomeScreen(),
-        '/profiles': (context) => ProfilesScreen(botoneraKey: _botoneraKey),
+        '/buscar': (context) => BuscarScreen(),
+        '/perfiles': (context) => ProfilesScreen(),
         '/animals': (context) => const AnimalScreen(),
-        '/list_fishes': (context) => const ListFishesScreen(),
-        '/noticias': (context) => const NewsScreen(),
+        '/list_fishes': (context) => const PecesListItem(),
+      },
+      navigatorObservers: [
+        LoadingObserver((isLoading) {
+          final loadingProvider =
+              Provider.of<LoadingProvider>(context, listen: false);
+          loadingProvider.setLoading(isLoading);
+        }),
+      ],
+      builder: (context, child) {
+        return LoadingOverlay(child: child!);
       },
     );
   }
