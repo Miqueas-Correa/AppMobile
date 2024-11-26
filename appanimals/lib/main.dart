@@ -1,3 +1,4 @@
+import 'package:appanimals/screens/buscar_screen.dart';
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
 import 'package:appanimals/screens/home_screen.dart';
 import 'package:appanimals/screens/animals_screen.dart';
@@ -22,18 +23,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:  HomeScreen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
       /* initialRoute: '/home', */
       title: 'App Animals',
       routes: {
-        /* '/home': (context) => HomeScreen(), */
-        // '/buscar': (context) => const OtherScreen(),  // Define otras rutas
-        '/perfiles': (context) => PecesListItem(),
-        '/animals': (context) => const AnimalScreen(),
-        '/list_fishes': (context) => const PecesListItem(),
-
-        //'profile': (context) => const ProfileScreen(),
+        // '/home': (context) => HomeScreen(),
+        '/buscar': (context) => BuscarScreen(), // Define otras rutas
+        '/perfiles': (context) => PecesListItem(), // aca va la ruta de mati
+        '/animals': (context) => AnimalScreen(),
+        '/list_fishes': (context) => PecesListItem(),
       },
     );
   }
