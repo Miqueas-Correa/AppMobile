@@ -11,12 +11,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Amor Salvaje',
-            style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
+        centerTitle: true,
+        title: const Text(
+          'Amor Salvaje',
+          style: TextStyle(
+              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -36,7 +35,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 20),
               const Text(
                 '🐾 ¡Bienvenido a Amor Salvaje! 🐾.\n'
-                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales.¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
+                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales. ¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),

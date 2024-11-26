@@ -1,9 +1,8 @@
 import 'package:appanimals/screens/buscar_screen.dart';
 import 'package:appanimals/screens/home_screen.dart';
+import 'package:appanimals/screens/profile_screen.dart';
 import 'package:appanimals/screens/peces/peces_list_screen.dart';
 import 'package:flutter/material.dart';
-/* import 'package:appanimals/screens/home_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_screen.dart'; */
 
 class BotoneraNavigation extends StatefulWidget {
   const BotoneraNavigation({
@@ -22,7 +21,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
   final List<Widget> screens = [
     HomeScreen(),
     BuscarScreen(),
-    //RutaMatias --> ACA VA LA RUTA DE PERFILES --> MATIAS
+    ProfilesScreen(),
     PecesListScreen(),
   ];
 
@@ -31,7 +30,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
     return BottomNavigationBar(
       backgroundColor: const Color.fromARGB(255, 21, 100, 21),
       elevation: 10, //sombra
-      unselectedItemColor: Colors.grey, //color de los no seleccionados
+      unselectedItemColor: Colors.white, //color de los no seleccionados
       selectedItemColor: Colors.white, //color cuando esta seleccionado el icono
       currentIndex: _paginaActual,
       onTap: (value) {
@@ -45,6 +44,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
             MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         } else if (_paginaActual != 0 && _paginaActual != 2) {
+          //aca ruta wanda
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => BuscarScreen()),
@@ -53,25 +53,22 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
           //aca ruta matias
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PecesListScreen()),
+            MaterialPageRoute(builder: (context) => ProfilesScreen()),
           );
         }
       },
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home, color: Colors.white),
           label: 'Home',
-          activeIcon: Icon(Icons.home_filled),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.search, color: Colors.white),
           label: 'Buscar',
-          activeIcon: Icon(Icons.search_rounded),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.person, color: Colors.white),
           label: 'Perfiles',
-          activeIcon: Icon(Icons.person_outline),
         ),
       ],
     );
