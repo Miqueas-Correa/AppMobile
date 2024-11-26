@@ -8,10 +8,10 @@ class ProfilesScreen extends StatelessWidget {
   ProfilesScreen({super.key});
 
   final List<String> nombres = [
-    'Matías Emanuel Coronel Dittler',
+    'Matías Emanuel Coronel Hittler',
     'Mikeas Hugo Ezequiel Correa',
-    'Wanda Yazmin Suares',
-    'Brenda Anabela Yañez Wagner'
+    'Wanda Yasmin Suarez',
+    'Brenda Anabella Yañez Wagner'
   ];
 
   final List<String> imagenes = [
