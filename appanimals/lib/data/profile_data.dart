@@ -1,6 +1,6 @@
 final Map<int, Map<String, String>> profileData = {
   1: {
-    'nombre': 'Matías Emanuel',
+    'nombre': 'Matías',
     'apellido': 'Coronel Dittler',
     'email': 'dittler_matías@yahoo.com',
     'telefono': '2914126170',
@@ -8,7 +8,7 @@ final Map<int, Map<String, String>> profileData = {
     'sobreNosotros': 'Un texto cualquiera',
   },
   2: {
-    'nombre': 'Mikeas Hugo Ezequiel',
+    'nombre': 'Miqueas',
     'apellido': 'Correa',
     'email': 'miki.mate.tizi@gmail.com',
     'telefono': '2914444345',
@@ -16,7 +16,7 @@ final Map<int, Map<String, String>> profileData = {
     'sobreNosotros': 'Un texto cualquiera',
   },
   3: {
-    'nombre': 'Wanda Yasmin',
+    'nombre': 'Wanda',
     'apellido': 'Suarez',
     'email': 'suarezwanda00@gmail.com',
     'telefono': '2915120941',
@@ -24,7 +24,7 @@ final Map<int, Map<String, String>> profileData = {
     'sobreNosotros': 'Un texto cualquiera',
   },
   4: {
-    'nombre': 'Brenda Anabela',
+    'nombre': 'Brenda',
     'apellido': 'Yañez Wagner',
     'email': 'brendayw97@gmail.com',
     'telefono': '2914865326',

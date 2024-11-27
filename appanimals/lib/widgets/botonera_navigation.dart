@@ -1,5 +1,6 @@
 import 'package:appanimals/screens/buscar_screen.dart';
-import 'package:appanimals/screens/home_screen.dart';
+import 'package:appanimals/screens/home/home_screen.dart';
+import 'package:appanimals/screens/profile_screen.dart';
 import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
   final List<Widget> screens = [
     HomeScreen(),
     BuscarScreen(),
-    //RutaMatias --> ACA VA LA RUTA DE PERFILES --> MATIAS
+    ProfilesScreen(),
     FishesListScreen(),
   ];
 

@@ -8,17 +8,17 @@ class ProfilesScreen extends StatelessWidget {
   ProfilesScreen({super.key});
 
   final List<String> nombres = [
-    'Matías Emanuel Coronel Dittler',
+    'Matías Emanuel Coronel Hittler',
     'Miqueas Hugo Ezequiel Correa',
-    'Wanda Yazmin Suares',
-    'Brenda Anabela Yañez Wagner'
+    'Wanda Yasmin Nara Suarez',
+    'Brenda Anabella Yañez Wagner'
   ];
 
   final List<String> imagenes = [
-    'assets/images/Matias.jpeg',
-    'assets/images/Mikeas.jpeg',
-    'assets/images/wanda.jpeg',
-    'assets/images/Brenda.jpeg'
+    'assets/images/profiles/Matias.jpeg',
+    'assets/images/profiles/Mikeas.jpeg',
+    'assets/images/profiles/wanda.jpeg',
+    'assets/images/profiles/Brenda.jpeg'
   ];
 
   @override

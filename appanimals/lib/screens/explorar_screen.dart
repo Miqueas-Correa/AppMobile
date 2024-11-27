@@ -37,11 +37,15 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
     setState(() {});
 
     if (scrollController.position.pixels + 100 <=
-        scrollController.position.maxScrollExtent) return;
+        scrollController.position.maxScrollExtent) { 
+        return ;
+      }
 
-    scrollController.animateTo(scrollController.position.pixels + 120,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.fastOutSlowIn);
+    scrollController.animateTo(
+      scrollController.position.pixels + 120,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn
+    );
   }
 
   void add5() {

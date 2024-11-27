@@ -29,12 +29,15 @@ class AnimalCard extends StatelessWidget {
         } else if (text == 'Perros') {
           title = "Época Prehistórica";
           description = 'Los perros domesticados descienden de los lobos, su domesticación comenzó hace 20.000-40.000 años. \nA lo largo de los milenios, los lobos más dóciles y amigables se fueron uniendo a las tribus humanas, desarrollándose gradualmente en los perros que conocemos hoy. \nLos perros desempeñaron un papel crucial en la caza, el pastoreo y la protección, y se fueron adaptando a las necesidades humanas, evolucionando en una gran variedad de razas.';
+          animalType = "perros";
         } else if (text == 'Peces') {
           title = "Época Prehistórica";
-          description = 'Los peces son uno de los grupos de animales más antiguos que existen. \nLos primeros vertebrados acuáticos aparecieron hace más de 500 millones de años, durante el período Cámbrico. \nEn esa época, los peces eran simples y sin mandíbulas, pero con el tiempo evolucionaron, dando lugar a formas más complejas, como los peces con mandíbulas y, eventualmente, a los peces cartilaginosos (como los tiburones) y los peces óseos que dominan los océanos y ríos actuales.'; 
+          description = 'Los peces son uno de los grupos de animales más antiguos que existen. \nLos primeros vertebrados acuáticos aparecieron hace más de 500 millones de años, durante el período Cámbrico. \nEn esa época, los peces eran simples y sin mandíbulas, pero con el tiempo evolucionaron, dando lugar a formas más complejas, como los peces con mandíbulas y, eventualmente, a los peces cartilaginosos (como los tiburones) y los peces óseos que dominan los océanos y ríos actuales.';
+          animalType = "peces";
         } else if (text == 'Cocodrilos') {
           title = "Época Prehistórica";
           description = 'Los cocodrilos han existido desde hace más de 200 millones de años, y pertenecen al grupo de los arcosaurios. \nEn la prehistoria, vivían en ambientes acuáticos similares a los actuales, pero en un entorno con especies de animales y plantas que ya no existen. \nHoy en día, los cocodrilos siguen siendo considerados "fósiles vivientes", ya que su anatomía es prácticamente la misma que hace millones de años.';
+          animalType = "cocodrilos";
         }
 
         // Navegar a la pantalla AnimalDetails
@@ -44,9 +47,9 @@ class AnimalCard extends StatelessWidget {
             builder: (context) => AnimalDetails(
               imagePath: detailedImage,
               text: description,
-              title: title,  // Pasar título
-              titleColor: titleColor, // Pasar color del título
-              animalType: animalType,
+              title: title,
+              titleColor: titleColor,
+              animalType: animalType, 
             ),
           ),
         );

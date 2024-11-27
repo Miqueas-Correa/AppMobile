@@ -34,7 +34,8 @@ class AnimalScreen extends StatelessWidget {
               detailedImage1: 'assets/images/animals_details/perro_details.jpg',
               image2: 'assets/images/animals_screen/cocodrile.png',
               text2: 'Cocodrilos',
-              detailedImage2: 'assets/images/animals_details/cocodrilo_detail.jpg',
+              detailedImage2:
+                  'assets/images/animals_details/cocodrilo_detail.jpg',
             ),
             SizedBox(height: 10),
             AnimalPair(

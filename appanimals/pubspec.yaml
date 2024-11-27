@@ -68,8 +68,10 @@ flutter:
   assets:
     # aca se agregan todo lo que es imagen/videos
     - assets/images/
-    # portada home
+    # portada general
     - assets/images/portada.png
+    - assets/images/logo.jpeg
+    - assets/images/loading.gif
     # acerca de
     - assets/images/acerca_de_screens/exintos_acerca_De.png
     - assets/images/buscar_page/cocodriloo_2.jpg
@@ -98,7 +100,6 @@ flutter:
     - assets/images/scroll_horizontal/animal_4.jpg
     - assets/images/scroll_horizontal/animal_5.jpg
     #avatars listado de animales
-<<<<<<< HEAD
     - assets/images/avatars_peces/
     - assets/images/avatars_peces/avatar1.png
     - assets/images/avatars_peces/avatar2.png
@@ -106,33 +107,19 @@ flutter:
     - assets/images/avatars_peces/avatar4.png
     - assets/images/avatars_peces/avatar5.png
     - assets/images/avatars_peces/avatar6.png
-    - assets/images//avatars_peces/avatar7.png
+    - assets/images/avatars_peces/avatar7.png
     - assets/images/avatars_peces/avatar8.png
     - assets/images/avatars_peces/avatar9.png
     - assets/images/avatars_peces/avatar10.png
-=======
-    - assets/avatars_peces/
-    - assets/avatars_peces/avatar1.png
-    - assets/avatars_peces/avatar2.png
-    - assets/avatars_peces/avatar3.png
-    - assets/avatars_peces/avatar4.png
-    - assets/avatars_peces/avatar5.png
-    - assets/avatars_peces/avatar6.png
-    - assets/avatars_peces/avatar7.png
-    - assets/avatars_peces/avatar8.png
-    - assets/avatars_peces/avatar9.png
-    - assets/avatars_peces/avatar10.png
-    - assets/images/Matias.jpeg
-    - assets/images/Mikeas.jpeg
-    - assets/images/Wanda.jpeg
-    - assets/images/Brenda.jpeg
-    - assets/images/loading.gif
->>>>>>> dc0fed56cf2227efb621aa7413160aa69d6c8372
-
+    # perfiles
+    - assets/images/profiles/
+    - assets/images/profiles/Matias.jpeg
+    - assets/images/profiles/Mikeas.jpeg
+    - assets/images/profiles/Wanda.jpeg
+    - assets/images/profiles/Brenda.jpeg
     #.env
     - .env
 
-    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

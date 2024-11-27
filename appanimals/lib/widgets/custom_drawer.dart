@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:appanimals/screens/news/news_screen.dart';
 import 'package:appanimals/screens/drawer_menu/animals_screen.dart';
 import 'package:appanimals/screens/drawer_menu/news_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:appanimals/screens/drawer_menu/acerca_de_.dart';
 
 
@@ -9,11 +10,8 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final themeProvider = Provider.of<ThemeProvider>(context);
-    //final isLightTheme = themeProvider.currentTheme == ThemeData.light();
-
-    // Establecemos el color de los iconos según el tema
-    // final iconColor = isLightTheme ? Colors.white : Colors.black;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isLightTheme = themeProvider.currentTheme == ThemeData.light();
 
     return Drawer(
       child: ListView(
@@ -47,7 +45,8 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.newspaper_sharp, color: Color.fromARGB(255, 21, 100, 21)),
+            leading: Icon(Icons.newspaper_sharp,
+                color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Noticias'),
             onTap: () {
               Navigator.push(context,
@@ -55,13 +54,14 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.explore, color: Color.fromARGB(255, 21, 100, 21)),
+            leading:
+                Icon(Icons.explore, color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Explorar'),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const ExplorarScreen()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ExplorarScreen()),
+              );
             },
           ),
           ListTile(
