@@ -12,7 +12,7 @@ import 'providers/theme_provider.dart';
 import 'providers/loading_provider.dart';
 import 'providers/fishes_provider.dart';
 import 'observers/loading_observer.dart';
-import 'widgets/widgets_matias/loading_overlay.dart';
+import 'widgets/loading_overlay.dart';
 
 void main() {
   runApp(
