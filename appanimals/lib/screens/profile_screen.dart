@@ -8,10 +8,10 @@ class ProfilesScreen extends StatelessWidget {
   ProfilesScreen({super.key});
 
   final List<String> nombres = [
-    'Matías Emanuel Coronel Dittler',
-    'Mikeas Hugo Ezequiel Correa',
-    'Wanda Yazmin Suares',
-    'Brenda Anabela Yañez Wagner'
+    'Matías Emanuel Coronel Hittler',
+    'Miqueas Hugo Ezequiel Correa',
+    'Wanda Yasmin Nara Suarez',
+    'Brenda Anabella Yañez Wagner'
   ];
 
   final List<String> imagenes = [
@@ -26,7 +26,7 @@ class ProfilesScreen extends StatelessWidget {
     // Obtener el tema actual para aplicar el estilo adecuado
     final isLightTheme = Theme.of(context).brightness == Brightness.light;
     final borderColor = isLightTheme ? Colors.black : Colors.white;
-    final shadowColor = isLightTheme ? Colors.black45 : Colors.white54;
+    final shadowColor = isLightTheme ? Colors.black : Colors.white;
     final arrowColor = isLightTheme ? Colors.black : Colors.white;
 
     return Scaffold(

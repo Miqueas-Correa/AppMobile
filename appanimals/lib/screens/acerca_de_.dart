@@ -1,3 +1,4 @@
+import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class AcercaDePage extends StatelessWidget {
@@ -11,9 +12,7 @@ class AcercaDePage extends StatelessWidget {
     // Colores según el tema
     final backgroundColor = isLightTheme ? Colors.white : Colors.black;
     final textColor = isLightTheme ? Colors.black : Colors.white;
-    final buttonColor = isLightTheme
-        ? const Color.fromARGB(255, 21, 100, 21)
-        : Colors.greenAccent;
+    final buttonColor = isLightTheme ? const Color.fromARGB(255, 21, 100, 21) : Colors.green;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -27,7 +26,7 @@ class AcercaDePage extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
-      ),
+      ), drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -112,7 +111,7 @@ class AcercaDePage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Cerrar'),
+                                child: const Text('Cerrar', selectionColor: Colors.black,),
                               ),
                             ],
                           );
@@ -122,7 +121,7 @@ class AcercaDePage extends StatelessWidget {
                     backgroundColor: buttonColor,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('Mas Info', style: TextStyle(fontSize: 18)),
+                  child: const Text('Mas Info', style: TextStyle(fontSize: 18), selectionColor: Colors.green,),
                 ),
               ),
               const SizedBox(height: 10),
