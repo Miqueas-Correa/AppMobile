@@ -5,7 +5,7 @@ import 'package:appanimals/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/home_screen.dart';
+import 'screens/home/home_screen.dart';
 import 'providers/theme_provider.dart';
 import 'providers/loading_provider.dart';
 import 'providers/fishes_provider.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      title: 'App Animals',
+      title: 'Animals',
       theme: themeProvider.currentTheme,
       routes: {
         '/buscar': (context) => BuscarScreen(),

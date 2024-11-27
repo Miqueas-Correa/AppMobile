@@ -1,6 +1,6 @@
 import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/home_screen.dart';
+import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/peces/peces_list_screen.dart';
 import 'package:appanimals/widgets/custom_outlined_button.dart';
 
@@ -37,7 +37,8 @@ class AnimalHistory extends StatelessWidget {
                   title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: /* const Color.fromARGB(255, 48, 46, 46), */const Color.fromARGB(255, 21, 100, 21),
+                    color: /* const Color.fromARGB(255, 48, 46, 46), */
+                        const Color.fromARGB(255, 21, 100, 21),
                     wordSpacing: 4,
                     height: 1.5,
                     fontWeight: FontWeight.bold,
@@ -51,18 +52,18 @@ class AnimalHistory extends StatelessWidget {
                   color: const Color.fromARGB(255, 21, 100, 21),
                   margin: EdgeInsets.all(5),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-                    child: Text(
-                      text,
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(
-                        color: Colors.white,
-                        wordSpacing: 4,
-                        height: 1.5,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                      child: Text(
+                        text,
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          color: Colors.white,
+                          wordSpacing: 4,
+                          height: 1.5,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )),
                 ),
                 // Botones de acción
                 SizedBox(height: 50),
@@ -70,7 +71,7 @@ class AnimalHistory extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     CustomOutlinedButton(
-                      text: 'Ir al inicio',                     
+                      text: 'Ir al inicio',
                       onPressed: () {
                         Navigator.pop(context);
                         Navigator.push(
@@ -84,7 +85,8 @@ class AnimalHistory extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PecesListScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => PecesListScreen()),
                         );
                       },
                     ),
@@ -96,6 +98,6 @@ class AnimalHistory extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BotoneraNavigation(),
-    );      
+    );
   }
 }
