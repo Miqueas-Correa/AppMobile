@@ -5,12 +5,22 @@ class AcercaDePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtiene el tema actual
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+
+    // Colores según el tema
+    final backgroundColor = isLightTheme ? Colors.white : Colors.black;
+    final textColor = isLightTheme ? Colors.black : Colors.white;
+    final buttonColor = isLightTheme
+        ? const Color.fromARGB(255, 21, 100, 21)
+        : Colors.greenAccent;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         title: const Text('Acerca de'),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), // flecha q vuelve para atras
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -30,55 +40,60 @@ class AcercaDePage extends StatelessWidget {
                 child: Center(
                   child: Image.asset(
                     'assets/images/acerca_de_screens/exintos_acerca_De.png',
-                    fit: BoxFit.contain, // Ajusta la imagen sin deformarla
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
 
-              //DESCRIPCION APP+ANIMACIONES
-              const AnimatedOpacity(
+              //DESCRIPCION APP
+              AnimatedOpacity(
                 opacity: 1.0,
-                duration: Duration(seconds: 5),
+                duration: const Duration(seconds: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Descripcion de la App:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: textColor,
+                      ),
                     ),
                     Text(
                       'Esta aplicacion tiene como objetivo informar sobre los animales en la fauna que esta en peligro de extincion.',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18, color: textColor),
                     ),
-                  ],
-                ),
-              ),
-              // SOBRE NOSOTROSSSSSSSSSSSS
-              const AnimatedOpacity(
-                opacity: 1.0,
-                duration: Duration(seconds: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      'Sobre Nosotros:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                    ),
-                    Text(
-                      'Somos un grupo de desarrolladores que decidimos crear esta aplicacion para concientizar a las personas sobre la importancia de proteger las especies en peligro.',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(height: 20),
                   ],
                 ),
               ),
 
-              // BOTON DE MAS INFOOOOO
+              // SOBRE NOSOTROS
+              AnimatedOpacity(
+                opacity: 1.0,
+                duration: const Duration(seconds: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    Text(
+                      'Sobre Nosotros:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: textColor,
+                      ),
+                    ),
+                    Text(
+                      'Somos un grupo de desarrolladores que decidimos crear esta aplicacion para concientizar a las personas sobre la importancia de proteger las especies en peligro.',
+                      style: TextStyle(fontSize: 18, color: textColor),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
+
+              // BOTON DE MAS INFO
               AnimatedScale(
                 scale: 1.0,
                 duration: const Duration(milliseconds: 200),
@@ -104,7 +119,7 @@ class AcercaDePage extends StatelessWidget {
                         });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+                    backgroundColor: buttonColor,
                     foregroundColor: Colors.white,
                   ),
                   child: const Text('Mas Info', style: TextStyle(fontSize: 18)),
@@ -112,29 +127,35 @@ class AcercaDePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              //SECIION DE CONTACTOOOO
-              const AnimatedOpacity(
+              // SECCION DE CONTACTO
+              AnimatedOpacity(
                 opacity: 1.0,
-                duration: Duration(seconds: 20),
+                duration: const Duration(seconds: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Contacto:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: textColor,
+                      ),
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                     Text(
                       'Suarezwanda00@gmail.com \nmiki.mate.tizi@gmail.com \nbrendayw97@gmail.com \nDittler_matias@yahoo.com ',
                       style: TextStyle(
-                          fontSize: 18,
-                          color: Color.fromARGB(255, 40, 243, 33)),
+                        fontSize: 18,
+                        color: isLightTheme
+                            ? const Color.fromARGB(255, 40, 243, 33)
+                            : Colors.greenAccent,
+                      ),
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
