@@ -34,6 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  shared_preferences: ^2.3.2
   provider: ^6.1.2
   flutter_dotenv: ^5.0.2
   http: ^1.2.2
@@ -76,18 +77,18 @@ flutter:
     - assets/images/buscar_page/pez_2.jpg
 
     # categorias animales
-    - assets/animals_screen/
-    - assets/animals_screen/cat.jpg
-    - assets/animals_screen/cocodrile.png
-    - assets/animals_screen/dog.jpg
-    - assets/animals_screen/fish.png
-    - assets/animals_screen/fox.webp
-    - assets/animals_screen/penguin.jpg
-    - assets/animals_details/
-    - assets/animals_details/gato_detail.jpg
-    - assets/animals_details/perro_details.jpg
-    - assets/animals_details/peces_details.jpg
-    - assets/animals_details/cocodrilo_detail.jpg
+    - assets/images/animals_screen/
+    - assets/images/animals_screen/cat.jpg
+    - assets/images/animals_screen/cocodrile.png
+    - assets/images/animals_screen/dog.jpg
+    - assets/images/animals_screen/fish.png
+    - assets/images/animals_screen/fox.webp
+    - assets/images/animals_screen/penguin.jpg
+    - assets/images/animals_details/
+    - assets/images/animals_details/gato_detail.jpg
+    - assets/images/animals_details/perro_details.jpg
+    - assets/images/animals_details/peces_details.jpg
+    - assets/images/animals_details/cocodrilo_detail.jpg
     # scroll horizontal del home
     - assets/images/scroll_horizontal/
     - assets/images/scroll_horizontal/animal_1.jpg
@@ -96,17 +97,17 @@ flutter:
     - assets/images/scroll_horizontal/animal_4.jpg
     - assets/images/scroll_horizontal/animal_5.jpg
     #avatars listado de animales
-    - assets/avatars_peces/
-    - assets/avatars_peces/avatar1.png
-    - assets/avatars_peces/avatar2.png
-    - assets/avatars_peces/avatar3.png
-    - assets/avatars_peces/avatar4.png
-    - assets/avatars_peces/avatar5.png
-    - assets/avatars_peces/avatar6.png
-    - assets/avatars_peces/avatar7.png
-    - assets/avatars_peces/avatar8.png
-    - assets/avatars_peces/avatar9.png
-    - assets/avatars_peces/avatar10.png
+    - assets/images/avatars_peces/
+    - assets/images/avatars_peces/avatar1.png
+    - assets/images/avatars_peces/avatar2.png
+    - assets/images/avatars_peces/avatar3.png
+    - assets/images/avatars_peces/avatar4.png
+    - assets/images/avatars_peces/avatar5.png
+    - assets/images/avatars_peces/avatar6.png
+    - assets/images//avatars_peces/avatar7.png
+    - assets/images/avatars_peces/avatar8.png
+    - assets/images/avatars_peces/avatar9.png
+    - assets/images/avatars_peces/avatar10.png
 
     #.env
     - .env

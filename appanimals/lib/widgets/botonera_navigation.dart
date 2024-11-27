@@ -1,9 +1,7 @@
 import 'package:appanimals/screens/buscar_screen.dart';
 import 'package:appanimals/screens/home_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_screen.dart';
+import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'package:flutter/material.dart';
-/* import 'package:appanimals/screens/home_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_screen.dart'; */
 
 class BotoneraNavigation extends StatefulWidget {
   
@@ -22,7 +20,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
     HomeScreen(),
     BuscarScreen(),
     //RutaMatias --> ACA VA LA RUTA DE PERFILES --> MATIAS
-    PecesListScreen(),
+    FishesListScreen(),
   ];
 
   @override
@@ -53,7 +51,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
               //aca ruta matias
               Navigator.push(
                 context, 
-                MaterialPageRoute(builder: (context) => PecesListScreen()),
+                MaterialPageRoute(builder: (context) => FishesListScreen()),
               );
             }
           },

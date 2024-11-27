@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/animal_details.dart';
+import 'package:appanimals/widgets/animals_drawer_menu/animal_details.dart';
 
 class AnimalCard extends StatelessWidget {
   final String image;
@@ -20,6 +20,7 @@ class AnimalCard extends StatelessWidget {
         String description = "";
         String title = "";
         Color titleColor = Colors.white;
+        String animalType = "";
 
         // Lógica para definir el título y la descripción del animal
         if (text == 'Gatos') {
@@ -45,6 +46,7 @@ class AnimalCard extends StatelessWidget {
               text: description,
               title: title,  // Pasar título
               titleColor: titleColor, // Pasar color del título
+              animalType: animalType,
             ),
           ),
         );

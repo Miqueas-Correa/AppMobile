@@ -1,17 +1,19 @@
-import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/home_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_screen.dart';
-import 'package:appanimals/widgets/custom_outlined_button.dart';
+import 'package:appanimals/screens/peces/fishes_list_screen.dart';
+import 'package:appanimals/widgets/animals_drawer_menu/custom_outlined_button.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class AnimalHistory extends StatelessWidget {
   final String title;
   final String text;
+  final String selectedAnimal;
 
   const AnimalHistory({
     super.key,
     required this.title,
     required this.text,
+    required this.selectedAnimal,
   });
 
   @override
@@ -82,10 +84,27 @@ class AnimalHistory extends StatelessWidget {
                     CustomOutlinedButton(
                       text: 'Ver listado',
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PecesListScreen()),
-                        );
+                        if (selectedAnimal == 'peces') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FishesListScreen()),
+                          );
+                        } else if (selectedAnimal == 'cocodrilos') {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => CrocodilesListScreen()),
+                          // );
+                        } else if (selectedAnimal == 'perros') {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => PerrosListScreen()),
+                          // );
+                        } else if (selectedAnimal == 'gatos') {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => GatosListScreen()),
+                          // );
+                        }
                       },
                     ),
                   ],
