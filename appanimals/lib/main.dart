@@ -1,11 +1,17 @@
-import 'package:appanimals/screens/animals_screen.dart';
+/* import 'package:appanimals/screens/peces/fishes_screen.dart'; */
+import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
+import 'package:appanimals/screens/home_screen.dart';
 import 'package:appanimals/screens/buscar_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_item.dart';
-import 'package:appanimals/screens/profile_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:appanimals/screens/animals_screen.dart';
+import 'package:appanimals/providers/peces/fishes_provider.dart';
+/* import 'package:appanimals/screens/peces/peces_list_item.dart'; */
+import 'package:appanimals/models/peces/listview_separated_fishes.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/home_screen.dart';
+import 'package:appanimals/screens/peces/peces_list_item.dart';
+import 'package:appanimals/screens/profile_screen.dart';
+
 import 'providers/theme_provider.dart';
 import 'providers/loading_provider.dart';
 import 'providers/fishes_provider.dart';
@@ -39,9 +45,9 @@ class MyApp extends StatelessWidget {
       theme: themeProvider.currentTheme,
       routes: {
         '/buscar': (context) => BuscarScreen(),
-        '/perfiles': (context) => ProfilesScreen(),
         '/animals': (context) => const AnimalScreen(),
-        '/list_fishes': (context) => const PecesListItem(),
+        '/list_fishes': (context) => const ListViewSeparatedScreen(),
+        '/perfiles': (context) => ProfilesScreen(),
       },
       navigatorObservers: [
         LoadingObserver((isLoading) {
