@@ -9,6 +9,12 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final themeProvider = Provider.of<ThemeProvider>(context);
+    //final isLightTheme = themeProvider.currentTheme == ThemeData.light();
+
+    // Establecemos el color de los iconos según el tema
+    // final iconColor = isLightTheme ? Colors.white : Colors.black;
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -24,14 +30,14 @@ class CustomDrawer extends StatelessWidget {
             )),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
+            leading: Icon(Icons.home, color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Home'),
             onTap: () {
               Navigator.pushNamed(context, '/');
             },
           ),
           ListTile(
-            leading: const Icon(Icons.pets),
+            leading: Icon(Icons.pets, color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Animales'),
             onTap: () {
               Navigator.push(
@@ -41,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.newspaper_sharp),
+            leading: Icon(Icons.newspaper_sharp, color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Noticias'),
             onTap: () {
               Navigator.push(context,
@@ -49,7 +55,17 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.info),
+            leading: Icon(Icons.explore, color: Color.fromARGB(255, 21, 100, 21)),
+            title: const Text('Explorar'),
+            onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const ExplorarScreen()),
+              // );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info, color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Acerca de'),
             onTap: () {
               Navigator.push(

@@ -20,16 +20,18 @@ void main() async {
   ));
 }
 
-// StatelessWidget: pagina estatica. StatefullWidget: dinamico.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-      home:  HomeScreen(),
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
       title: 'App Animals',
+      //theme: themeProvider.currentTheme,
       routes: {
         '/buscar': (context) => BuscarScreen(), 
         //'/perfiles': (context) => FishesListScreen(),

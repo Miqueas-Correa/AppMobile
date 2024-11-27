@@ -4,8 +4,9 @@ import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class BotoneraNavigation extends StatefulWidget {
-  
-  const BotoneraNavigation({super.key,});
+  const BotoneraNavigation({
+    super.key,
+  });
 
   @override
   _BotoneraNavigationState createState() => _BotoneraNavigationState();
