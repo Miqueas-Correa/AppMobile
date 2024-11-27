@@ -11,8 +11,7 @@ import 'package:appanimals/providers/peces/fishes_provider.dart';
 import 'package:appanimals/models/peces/listview_separated_fishes.dart';
 import 'package:provider/provider.dart';
 
-import 'package:appanimals/screens/profile_screen.dart';
-
+import 'screens/home/home_screen.dart';
 import 'providers/theme_provider.dart';
 import 'providers/loading_provider.dart';
 import 'observers/loading_observer.dart';
@@ -42,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      title: 'App Animals',
+      title: 'Animals',
       theme: themeProvider.currentTheme,
       routes: {
         '/buscar': (context) => BuscarScreen(),

@@ -1,6 +1,6 @@
 // import 'dart:developer';
 import 'package:appanimals/widgets/custom_drawer.dart';
-import 'package:appanimals/widgets/scroll_horizontal.dart';
+import 'package:appanimals/widgets/home/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 
@@ -19,6 +19,20 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/logo.jpeg',
+                width: 40, // Ajusta el tamaño según lo necesario
+                height: 40,
+                fit: BoxFit
+                    .cover, // Asegura que la imagen se ajuste dentro del círculo
+              ),
+            ),
+          ),
+        ],
       ),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(

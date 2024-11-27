@@ -60,7 +60,8 @@ class _HorizontalScrollState extends State<HorizontalScroll> {
               width: 350, // Ancho específico de la tarjeta
               height: 350, // Altura específica de la tarjeta
               child: Card(
-                color: Colors.green, // Color verde para la tarjeta
+                color: Color.fromARGB(
+                    255, 21, 100, 21), // Color verde para la tarjeta
                 elevation: 5, // Sombra
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Bordes redondeados

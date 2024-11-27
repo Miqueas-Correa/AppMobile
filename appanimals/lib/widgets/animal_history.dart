@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/home_screen.dart';
+import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/peces/peces_list_screen.dart';
 import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
 // import 'package:appanimals/screens/perros/perros_list_screen.dart';

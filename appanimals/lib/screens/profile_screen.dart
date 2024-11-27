@@ -15,10 +15,10 @@ class ProfilesScreen extends StatelessWidget {
   ];
 
   final List<String> imagenes = [
-    'assets/images/profile_screens/Matias.jpeg',
-    'assets/images/profile_screens/Mikeas.jpeg',
-    'assets/images/profile_screens/wanda.jpeg',
-    'assets/images/profile_screens/Brenda.jpeg'
+    'assets/images/profiles/Matias.jpeg',
+    'assets/images/profiles/Mikeas.jpeg',
+    'assets/images/profiles/wanda.jpeg',
+    'assets/images/profiles/Brenda.jpeg'
   ];
 
   @override
