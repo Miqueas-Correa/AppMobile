@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:appanimals/data/profile_data.dart';
 import 'package:appanimals/providers/theme_provider.dart';
 import 'package:appanimals/themes/default_theme.dart';
-import 'package:appanimals/widgets/profile_detail_card.dart';
+import 'package:appanimals/widgets/widgets_matias/profile_detail_card.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart'; // Asegúrate de importar la botonera
 
 class ProfileDetailScreen extends StatefulWidget {
@@ -39,10 +39,12 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
     // Colores según el tema
     const titleColor = Colors.white;
     final textColor = isLightTheme ? Colors.black : Colors.white;
-    final inputBorderColor = isLightTheme ? Colors.black54 : Colors.white70;
+    final inputBorderColor = isLightTheme ? Colors.black : Colors.white;
     final iconColor = isLightTheme ? Colors.black : Colors.white;
-    final backgroundColor = isLightTheme ? Colors.white : Colors.black87;
-    final cardColor = isLightTheme ? Colors.grey.withOpacity(0.1) : Colors.grey.withOpacity(0.3);
+    final backgroundColor = isLightTheme ? Colors.white : Colors.black;
+    final cardColor = isLightTheme
+        ? Colors.grey.withOpacity(0.1)
+        : Colors.grey.withOpacity(0.3);
 
     return Scaffold(
       appBar: AppBar(
@@ -183,7 +185,8 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const BotoneraNavigation(), // Aquí se agrega la botonera
+      bottomNavigationBar:
+          const BotoneraNavigation(), // Aquí se agrega la botonera
     );
   }
 }

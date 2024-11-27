@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:appanimals/models/peces/fishes_model.dart';
 
-import 'package:appanimals/models/fishes_model.dart';
 
 List<Fishes> fishesFromJson(String str) =>
     List<Fishes>.from(json.decode(str).map((x) => Fishes.fromJson(x)));

@@ -1,14 +1,20 @@
-import 'package:appanimals/screens/animals_screen.dart';
-import 'package:appanimals/screens/buscar_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_item.dart';
+import 'package:appanimals/providers/crocodiles_provider.dart';
+import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
-import 'package:flutter/material.dart';
+/* import 'package:appanimals/screens/peces/fishes_screen.dart'; */
+import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
+import 'package:appanimals/screens/home_screen.dart';
+import 'package:appanimals/screens/buscar_screen.dart';
+import 'package:appanimals/screens/animals_screen.dart';
+import 'package:appanimals/providers/peces/fishes_provider.dart';
+/* import 'package:appanimals/screens/peces/peces_list_item.dart'; */
+import 'package:appanimals/models/peces/listview_separated_fishes.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/home_screen.dart';
+import 'package:appanimals/screens/profile_screen.dart';
+
 import 'providers/theme_provider.dart';
 import 'providers/loading_provider.dart';
-import 'providers/fishes_provider.dart';
 import 'observers/loading_observer.dart';
 import 'widgets/loading_overlay.dart';
 
@@ -19,6 +25,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => FishesProvider()),
         ChangeNotifierProvider(create: (_) => LoadingProvider()),
+        ChangeNotifierProvider(create: (_) => CrocodilesProvider()),
       ],
       child: const MyApp(),
     ),
@@ -39,9 +46,10 @@ class MyApp extends StatelessWidget {
       theme: themeProvider.currentTheme,
       routes: {
         '/buscar': (context) => BuscarScreen(),
-        '/perfiles': (context) => ProfilesScreen(),
         '/animals': (context) => const AnimalScreen(),
-        '/list_fishes': (context) => const PecesListItem(),
+        '/crocodile_profile': (context) => const CrocodilesListScreen(),
+        '/list_fishes': (context) => const ListViewSeparatedScreen(),
+        '/perfiles': (context) => ProfilesScreen(),
       },
       navigatorObservers: [
         LoadingObserver((isLoading) {

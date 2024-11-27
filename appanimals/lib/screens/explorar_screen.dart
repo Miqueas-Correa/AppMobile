@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/loading_icon.dart';
 
 class ExplorarScreen extends StatefulWidget {
-  const ExplorarScreen({Key? key}) : super(key: key);
+  const ExplorarScreen({super.key});
 
   @override
   State<ExplorarScreen> createState() => _ExplorarScreenState();
@@ -88,8 +88,7 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
                     width: double.infinity,
                     height: 300,
                     fit: BoxFit.cover,
-                    placeholder:
-                        const AssetImage('assets/images/loading.gif'),
+                    placeholder: const AssetImage('assets/images/loading.gif'),
                     image: NetworkImage(
                         'https://picsum.photos/500/300?image=${imagesIds[index]}'),
                   );

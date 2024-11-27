@@ -66,7 +66,7 @@ class AcercaDePage extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // SOBRE NOSOTROS
               AnimatedOpacity(
                 opacity: 1.0,
@@ -146,7 +146,9 @@ class AcercaDePage extends StatelessWidget {
                       'Suarezwanda00@gmail.com \nmiki.mate.tizi@gmail.com \nbrendayw97@gmail.com \nDittler_matias@yahoo.com ',
                       style: TextStyle(
                         fontSize: 18,
-                        color: isLightTheme ? const Color.fromARGB(255, 40, 243, 33) : Colors.greenAccent,
+                        color: isLightTheme
+                            ? const Color.fromARGB(255, 40, 243, 33)
+                            : Colors.greenAccent,
                       ),
                     ),
                     const SizedBox(height: 2),

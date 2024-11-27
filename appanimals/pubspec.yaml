@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
+  flutter_dotenv: ^5.0.2
   http: ^1.2.2
   shared_preferences: ^2.3.2
 
@@ -107,11 +108,14 @@ flutter:
     - assets/avatars_peces/avatar8.png
     - assets/avatars_peces/avatar9.png
     - assets/avatars_peces/avatar10.png
-    - assets/images/Matias.jpeg
-    - assets/images/Mikeas.jpeg
-    - assets/images/Wanda.jpeg
-    - assets/images/Brenda.jpeg
-    - assets/images/loading.gif
+    - assets/images/profile_screens/Matias.jpeg
+    - assets/images/profile_screens/Mikeas.jpeg
+    - assets/images/profile_screens/Wanda.jpeg
+    - assets/images/profile_screens/Brenda.jpeg
+    - assets/images/gifs/loading.gif
+
+    #.env
+    - .env
 
     
   # An image asset can refer to one or more resolution-specific "variants", see
