@@ -1,3 +1,6 @@
+import 'package:appanimals/providers/crocodiles_provider.dart';
+import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
+import 'package:appanimals/screens/profile_screen.dart';
 /* import 'package:appanimals/screens/peces/fishes_screen.dart'; */
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
 import 'package:appanimals/screens/home_screen.dart';
@@ -22,6 +25,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => FishesProvider()),
         ChangeNotifierProvider(create: (_) => LoadingProvider()),
+        ChangeNotifierProvider(create: (_) => CrocodilesProvider()),
       ],
       child: const MyApp(),
     ),
@@ -43,6 +47,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/buscar': (context) => BuscarScreen(),
         '/animals': (context) => const AnimalScreen(),
+        '/crocodile_profile': (context) => const CrocodilesListScreen(),
         '/list_fishes': (context) => const ListViewSeparatedScreen(),
         '/perfiles': (context) => ProfilesScreen(),
       },

@@ -108,11 +108,11 @@ flutter:
     - assets/avatars_peces/avatar8.png
     - assets/avatars_peces/avatar9.png
     - assets/avatars_peces/avatar10.png
-    - assets/images/Matias.jpeg
-    - assets/images/Mikeas.jpeg
-    - assets/images/Wanda.jpeg
-    - assets/images/Brenda.jpeg
-    - assets/images/loading.gif
+    - assets/images/profile_screens/Matias.jpeg
+    - assets/images/profile_screens/Mikeas.jpeg
+    - assets/images/profile_screens/Wanda.jpeg
+    - assets/images/profile_screens/Brenda.jpeg
+    - assets/images/gifs/loading.gif
 
     #.env
     - .env
