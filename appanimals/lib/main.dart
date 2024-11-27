@@ -3,7 +3,6 @@ import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
 /* import 'package:appanimals/screens/peces/fishes_screen.dart'; */
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
-import 'package:appanimals/screens/home_screen.dart';
 import 'package:appanimals/screens/buscar_screen.dart';
 import 'package:appanimals/screens/animals_screen.dart';
 import 'package:appanimals/providers/peces/fishes_provider.dart';
