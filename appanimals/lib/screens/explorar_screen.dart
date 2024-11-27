@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/loading_icon.dart';
+import '../widgets/widgets_matias/loading_icon.dart';
 
 class ExplorarScreen extends StatefulWidget {
   const ExplorarScreen({Key? key}) : super(key: key);
