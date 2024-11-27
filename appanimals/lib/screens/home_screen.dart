@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
-
-   const HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +13,13 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-            'Amor Salvaje',
-            style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-          iconTheme: const IconThemeData(color: Colors.white),
+          'Amor Salvaje',
+          style: TextStyle(
+              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         // Hace que el contenido sea desplazable
@@ -30,7 +29,8 @@ class HomeScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/portada.png', // Ruta de tu imagen
-                fit: BoxFit.contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
+                fit: BoxFit
+                    .contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
               ),
               const SizedBox(height: 20),
               const Text(
@@ -39,7 +39,8 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 40), // Espaciado antes del scroll horizontal
+              const SizedBox(
+                  height: 40), // Espaciado antes del scroll horizontal
               // Scroll horizontal de tarjetas
               HorizontalScroll(
                 imagePaths: List.generate(

@@ -9,7 +9,7 @@ class ProfilesScreen extends StatelessWidget {
 
   final List<String> nombres = [
     'Matías Emanuel Coronel Dittler',
-    'Mikeas Hugo Ezequiel Correa',
+    'Miqueas Hugo Ezequiel Correa',
     'Wanda Yazmin Suares',
     'Brenda Anabela Yañez Wagner'
   ];
@@ -26,7 +26,7 @@ class ProfilesScreen extends StatelessWidget {
     // Obtener el tema actual para aplicar el estilo adecuado
     final isLightTheme = Theme.of(context).brightness == Brightness.light;
     final borderColor = isLightTheme ? Colors.black : Colors.white;
-    final shadowColor = isLightTheme ? Colors.black45 : Colors.white54;
+    final shadowColor = isLightTheme ? Colors.black : Colors.white;
     final arrowColor = isLightTheme ? Colors.black : Colors.white;
 
     return Scaffold(
@@ -37,7 +37,9 @@ class ProfilesScreen extends StatelessWidget {
         actions: [
           // IconButton para cambiar entre temas
           IconButton(
-            icon: Icon(isLightTheme ? Icons.wb_sunny : Icons.nightlight_round), // Cambiar ícono según el tema
+            icon: Icon(isLightTheme
+                ? Icons.wb_sunny
+                : Icons.nightlight_round), // Cambiar ícono según el tema
             onPressed: () {
               // Cambiar entre temas claro y oscuro
               context.read<ThemeProvider>().toggleTheme();
@@ -49,7 +51,8 @@ class ProfilesScreen extends StatelessWidget {
         itemCount: nombres.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: Card(
               color: isLightTheme ? Colors.white : Colors.black54,
               shape: RoundedRectangleBorder(
@@ -66,7 +69,9 @@ class ProfilesScreen extends StatelessWidget {
                 leading: CircleAvatar(
                   backgroundImage: AssetImage(imagenes[index]),
                 ),
-                title: Text(nombres[index], style: TextStyle(color: isLightTheme ? Colors.black : Colors.white)),
+                title: Text(nombres[index],
+                    style: TextStyle(
+                        color: isLightTheme ? Colors.black : Colors.white)),
                 trailing: Icon(
                   Icons.arrow_forward,
                   color: arrowColor, // Aquí se aplica el color de la flecha

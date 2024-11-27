@@ -9,9 +9,11 @@ class AcercaDePage extends StatelessWidget {
     final isLightTheme = Theme.of(context).brightness == Brightness.light;
 
     // Colores según el tema
-    final backgroundColor = isLightTheme ? Colors.white : Colors.black87;
+    final backgroundColor = isLightTheme ? Colors.white : Colors.black;
     final textColor = isLightTheme ? Colors.black : Colors.white;
-    final buttonColor = isLightTheme ? const Color.fromARGB(255, 21, 100, 21) : Colors.greenAccent;
+    final buttonColor = isLightTheme
+        ? const Color.fromARGB(255, 21, 100, 21)
+        : Colors.greenAccent;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -65,7 +67,7 @@ class AcercaDePage extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // SOBRE NOSOTROS
               AnimatedOpacity(
                 opacity: 1.0,
@@ -145,7 +147,9 @@ class AcercaDePage extends StatelessWidget {
                       'Suarezwanda00@gmail.com \nmiki.mate.tizi@gmail.com \nbrendayw97@gmail.com \nDittler_matias@yahoo.com ',
                       style: TextStyle(
                         fontSize: 18,
-                        color: isLightTheme ? const Color.fromARGB(255, 40, 243, 33) : Colors.greenAccent,
+                        color: isLightTheme
+                            ? const Color.fromARGB(255, 40, 243, 33)
+                            : Colors.greenAccent,
                       ),
                     ),
                     const SizedBox(height: 2),

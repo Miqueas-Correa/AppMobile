@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
+  flutter_dotenv: ^5.0.2
   http: ^1.2.2
   shared_preferences: ^2.3.2
 
@@ -112,6 +113,9 @@ flutter:
     - assets/images/profile_screens/Wanda.jpeg
     - assets/images/profile_screens/Brenda.jpeg
     - assets/images/gifs/loading.gif
+
+    #.env
+    - .env
 
     
   # An image asset can refer to one or more resolution-specific "variants", see
