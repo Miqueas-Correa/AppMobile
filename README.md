@@ -20,4 +20,4 @@ aplicacion movil, echa con flutter y dart. conectada con la api de express
   - detalles del perfil: Creada por Matias.
  
 
-Proyecto dirigido por Miqueas Correa.
+Proyecto encabezado por Miqueas Correa.
