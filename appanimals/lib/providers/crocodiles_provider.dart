@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:appanimals/models/crocodiles_model.dart';
-import 'package:appanimals/services/crocodiles_service.dart';
+import 'package:appanimals/service/crocodiles_service.dart';
 
 class CrocodilesProvider with ChangeNotifier {
   List<Crocodile> _listCrocodiles = [];
