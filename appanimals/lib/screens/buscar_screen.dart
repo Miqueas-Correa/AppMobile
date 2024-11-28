@@ -1,56 +1,87 @@
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/models/categories_model.dart';
 import 'package:appanimals/widgets/category_card.dart';
 import 'package:appanimals/screens/animal_detail_screen.dart';
 
-class BuscarScreen extends StatelessWidget{
+class BuscarScreen extends StatelessWidget {
   BuscarScreen({super.key});
+
   final List<Category> categories = [
-    Category(title: 'Gato', imagePath: 'assets/images/buscar_page/gato_2.jpg', color: Colors.white),
-    Category(title: 'Perro', imagePath: 'assets/images/buscar_page/perro_2.jpg', color: Colors.white),
-    Category(title: 'Pez', imagePath: 'assets/images/buscar_page/pez_2.jpg', color: Colors.white),
-    Category(title: 'Cocodrilo', imagePath: 'assets/images/buscar_page/cocodriloo_2.jpg', color: Colors.white),
+    Category(
+        title: 'cats',
+        imagePath: 'assets/images/buscar_page/gato_2.jpg',
+        color: Colors.white),
+    Category(
+        title: 'dogs',
+        imagePath: 'assets/images/buscar_page/perro_2.jpg',
+        color: Colors.white),
+    Category(
+        title: 'peces',
+        imagePath: 'assets/images/buscar_page/pez_2.jpg',
+        color: Colors.white),
+    Category(
+        title: 'crocodriles',
+        imagePath: 'assets/images/buscar_page/cocodriloo_2.jpg',
+        color: Colors.white),
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
+    // Determina si el tema actual es claro u oscuro
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+
+    // Establece colores segun el tema
+    final backgroundColor = isLightTheme ? Colors.white : Colors.black;
+    final buttonColor = isLightTheme
+        ? const Color.fromARGB(255, 21, 100, 21)
+        : const Color.fromARGB(255, 21, 100, 21);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:
+          backgroundColor, // Uso el color de fondo basado en el tema
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Seleccione el animal que quiere buscar:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+        backgroundColor:
+            buttonColor, // Cambio el color del AppBar segun el tema
+        title: Text(
+          'Seleccione el animal que quiere buscar:',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white), // Texto adaptado al tema
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
           itemCount: categories.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount( // defino como se organizar las coulum y filas
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // 2 columnas
-            crossAxisSpacing: 10, // espacio entre elementos
-            mainAxisSpacing: 10, // espacio vertical
-          ), 
-          itemBuilder: (context, index) { // defino cm se construye cd celda de colum y row
-            final category = categories[index]; // obt categoria en el indice actual
-            return GestureDetector( // detecto los click del user en este caso un toke/click
+            crossAxisSpacing: 10, // Espacio horizontal entre celdas
+            mainAxisSpacing: 10, // Espacio vertical entre celdas
+          ),
+          itemBuilder: (context, index) {
+            final category =
+                categories[index]; // Obtiene la categoria en el iindice actual
+            return GestureDetector(
               onTap: () {
-                Navigator.push( // navego a la pantalla de detakkes de animal
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context)=> AnimalDetailScreen(animal: category), // paso la categoria seleccionada
-                  )
+                    builder: (context) => AnimalDetailScreen(
+                        animal: category), // Pasa la categoriia seleccionada
+                  ),
                 );
               },
-              child: CategoryCard( 
-                title: category.title, 
-                imagePath: category.imagePath, 
+              child: CategoryCard(
+                title: category.title,
+                imagePath: category.imagePath,
                 color: category.color,
               ),
             );
           },
         ),
       ),
+      bottomNavigationBar: const BotoneraNavigation(),
     );
   }
 }

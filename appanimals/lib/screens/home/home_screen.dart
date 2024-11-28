@@ -1,6 +1,6 @@
 // import 'dart:developer';
 import 'package:appanimals/widgets/custom_drawer.dart';
-import 'package:appanimals/widgets/scroll_horizontal.dart';
+import 'package:appanimals/widgets/home/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 
@@ -19,6 +19,20 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/logo.jpeg',
+                width: 40, // Ajusta el tamaño según lo necesario
+                height: 40,
+                fit: BoxFit
+                    .cover, // Asegura que la imagen se ajuste dentro del círculo
+              ),
+            ),
+          ),
+        ],
       ),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(
@@ -28,14 +42,15 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/portada.png', // Ruta de tu imagen
+                'assets/images/portada.jpeg', // Ruta de tu imagen
                 fit: BoxFit
                     .contain, // Ajusta la imagen para que ocupe todo el espacio disponible sin distorsionar
               ),
               const SizedBox(height: 20),
               const Text(
                 '🐾 ¡Bienvenido a Amor Salvaje! 🐾.\n'
-                'Descubre el fascinante mundo de los animales. Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales. ¡Gracias por ser parte de nuestra comunidad y ayudar a celebrar la diversidad de la vida en nuestro planeta! 🌎',
+                'Descubre el fascinante mundo de los animales.\n'
+                'Aquí podrás explorar información interesante, aprender sobre tus especies favoritas y disfrutar de herramientas diseñadas especialmente para los amantes de los animales. 🌎',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),

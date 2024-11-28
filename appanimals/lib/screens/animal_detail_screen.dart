@@ -1,19 +1,91 @@
+import 'package:appanimals/models/structs/dogs_struct.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:appanimals/models/categories_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class AnimalDetailScreen extends StatelessWidget { // -> patanlla no tiene estado mutable, se reconstruye cd vez q cambia su config
-  final Category animal; // declaro una var de tipo category para recinbir el animal a mostrt
-  AnimalDetailScreen({super.key, required this.animal}); // constructor
+class AnimalDetailScreen extends StatefulWidget {
+  final Category animal;
 
-  final TextEditingController _idController = TextEditingController(); // controlador pa manejar el text de campo de entreda id
+  const AnimalDetailScreen({super.key, required this.animal});
+
+  @override
+  State<AnimalDetailScreen> createState() => _AnimalDetailScreenState();
+}
+
+class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
+  final TextEditingController _idController = TextEditingController();
+  bool _isLoading = false;
+  Map<String, dynamic>? _animalData;
+  bool _isFavorite = false;
+
+  Future<void> _fetchAnimalData(String id) async {
+    final url =
+        'https://api-express-g17-tup-utn.onrender.com/api/v1/${widget.animal.title.toLowerCase()}/$id';
+    setState(() {
+      _isLoading = true;
+      _animalData = null;
+    });
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final decoded = json.decode(response.body);
+        if (decoded['msg'] == 'Ok' && decoded['data'] != null) {
+          setState(() {
+            _animalData = decoded['data'];
+          });
+        } else {
+          _showSnackBar('No se encontraron datos para este ID.');
+        }
+      } else {
+        _showSnackBar('Error al obtener datos. Código: ${response.statusCode}');
+      }
+    } catch (e) {
+      _showSnackBar('Error en la conexión: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Widget _buildAnimalCard() {
+    if (_animalData == null) return const SizedBox.shrink();
+
+    switch (widget.animal.title.toLowerCase()) {
+      case 'dogs':
+        return DogStruct(_animalData!, _isFavorite, () {
+          setState(() {
+            _isFavorite = !_isFavorite;
+          });
+        });
+      case 'cats':
+        // Aquí puedes agregar la estructura para cats
+        return const Text('Estructura para Cats no implementada.');
+      case 'crocodiles':
+        // Aquí puedes agregar la estructura para crocodiles
+        return const Text('Estructura para Crocodiles no implementada.');
+      case 'fish':
+        // Aquí puedes agregar la estructura para fish
+        return const Text('Estructura para Fish no implementada.');
+      default:
+        return const Text('Categoría no soportada.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(animal.title),
+        title: Text(widget.animal.title),
         backgroundColor: Colors.green,
       ),
       body: Padding(
@@ -23,11 +95,9 @@ class AnimalDetailScreen extends StatelessWidget { // -> patanlla no tiene estad
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Image.asset( // muesttro la img q reprenseta al animal
-                animal.imagePath,
-                width: MediaQuery.of(context).size.width * 0.7, 
-                height: MediaQuery.of(context).size.height * 0.5,
-                fit: BoxFit.cover,
+              child: Image.asset(
+                widget.animal.imagePath,
+                fit: BoxFit.contain, // ajusto la img
               ),
             ),
             const SizedBox(height: 20),
@@ -42,45 +112,41 @@ class AnimalDetailScreen extends StatelessWidget { // -> patanlla no tiene estad
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextField(
-                controller: _idController, // asocio el contralador del campo de text para obt el valor
-                keyboardType: TextInputType.number, // solo numeros a ingresar
+                controller: _idController,
+                keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   labelText: 'ID',
-                  border: InputBorder.none, // elimino el borde predeterminado del campo de text
+                  border: InputBorder.none,
                   contentPadding: EdgeInsets.all(10),
                 ),
-                inputFormatters: [ // creo una lista de formateadores d entrada pa validar el text ingresado
-                  FilteringTextInputFormatter.digitsOnly, // solo munn
-                  TextInputFormatter.withFunction((viejoValor, nuevoValor) // funcion pa valiadar el valor ingresado
-                  {
-                    if(nuevoValor.text.isEmpty){ // si esta vacio no hay cambios
-                      return nuevoValor;
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  TextInputFormatter.withFunction((oldValue, newValue) {
+                    if (newValue.text.isEmpty) return newValue;
+                    final int? value = int.tryParse(newValue.text);
+                    if (value == null || value < 1 || value > 50) {
+                      return oldValue;
                     }
-                    final int? value = int.tryParse(nuevoValor.text);// intenfo convertir el texto a num
-                    if (value == null || value < 1 || value > 50) { // si el num no es valido fuera de del rango 1-50
-                      return viejoValor; // retorno el calor ant si el num no es valido
-                    }
-                    return nuevoValor; // si esta adnetro del rango, perimito el nuevo valor
-                  })
+                    return newValue;
+                  }),
                 ],
               ),
             ),
-            const SizedBox(height: 20), // espacio entre el camp de text y boton
+            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: (){
-                String id = _idController.text; //obt el text ingresadp del controlador el id
-                if (id.isEmpty){ 
-                  ScaffoldMessenger.of(context).showSnackBar( // msj de advertencia
-                    const SnackBar(content: Text('Por favor ingrese un ID:')),
-                  );
-                }else{
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Buscando el id: $id')),
-                  );
+              onPressed: () {
+                final id = _idController.text;
+                if (id.isEmpty) {
+                  _showSnackBar('Por favor ingrese un ID.');
+                } else {
+                  _fetchAnimalData(id);
                 }
-              }, 
-              child: const Text('Buscar', selectionColor: Colors.green),
+              },
+              child: const Text('Buscar'),
             ),
+            const SizedBox(height: 20),
+            if (_isLoading) const CircularProgressIndicator(),
+            if (_animalData != null) _buildAnimalCard(),
           ],
         ),
       ),

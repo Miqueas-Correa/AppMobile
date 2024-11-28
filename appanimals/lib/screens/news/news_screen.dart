@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -71,6 +72,7 @@ class _NewsScreenState extends State<NewsScreen> {
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
+      drawer: const CustomDrawer(),
       // Verifica si los datos están cargando
       body: _isLoading
           ? const Center(
