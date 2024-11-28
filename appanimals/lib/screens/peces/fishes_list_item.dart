@@ -43,24 +43,25 @@ class FishesListItem extends StatelessWidget {
 class BodyProfileCustomItem extends StatelessWidget {
   final Map<String, dynamic> args;
 
-  const BodyProfileCustomItem({super.key, required this.args});
+  const BodyProfileCustomItem({
+    super.key, 
+    required this.args
+  });
 
   @override
 
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Favorito: Corazón que cambia de color
         IconButton(
           icon: Icon(
             args['favorito'] ? Icons.favorite : Icons.favorite_border,
-            color: args['favorito'] ? Colors.red : const Color.fromARGB(255, 21, 100, 21),
+            color: args['favorito'] ? const Color.fromARGB(255, 21, 100, 21) : Colors.grey,
           ),
           onPressed: () {
-            // Aquí deberías actualizar el estado del favorito en SharedPreferences o en el estado global
+            // actualizar el estado del favorito en SharedPreferences o en el estado global
           },
         ),
-        // Puntuación de estrellas: Mostrar estrellas según la calificación
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
@@ -148,7 +149,7 @@ class HeaderProfileCustomItem extends StatelessWidget {
           backgroundColor: Colors.white,
           child: avatar != ""
               ? Image.asset('assets/images/avatars_peces/$avatar.png')
-              : Image.asset('assets/images/peces.png'),
+              : Image.asset('assets/images/avatars_peces/avatar1.png'),
         ),
       ),
     );

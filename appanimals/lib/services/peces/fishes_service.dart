@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class FishesService {
   static const String apiUrl = 'https://66f21a344153791915530b67.mockapi.io/api/v1/peces';
@@ -22,10 +22,10 @@ class FishesService {
 
         return fishes;
       } else {
-        throw Exception('Falló al cargar peces');
+        throw Exception('Failed to load fishes');
       }
     } catch (e) {
-      throw Exception('Falló al cargar peces: $e');
+      throw Exception('Failed to load fishes: $e');
     }
   }
 }

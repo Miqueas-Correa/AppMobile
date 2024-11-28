@@ -1,5 +1,4 @@
 import 'package:appanimals/models/peces/fishes_model.dart';
-import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,7 +7,8 @@ class FishesDetailScreen extends StatefulWidget {
 
   const FishesDetailScreen({
     super.key, 
-    required this.fishes});
+    required this.fishes
+  });
 
   @override
   _FishesDetailScreenState createState() => _FishesDetailScreenState();
@@ -57,12 +57,11 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Perfil del Pez'),
+        title: const Text('Perfil del pez'),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
         elevation: 10,
       ),
-      drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -121,7 +120,7 @@ class BodyProfileCustomItem extends StatelessWidget {
               },
               child: Icon(
                 index < fishes.stars ? Icons.star : Icons.star_border,
-                color: const Color.fromARGB(255, 21, 100, 21), //cambiar
+                color: const Color.fromARGB(255, 21, 100, 21),
                 size: 40,
               ),
             );
@@ -141,11 +140,7 @@ class DataRow extends StatelessWidget {
   final String title;
   final String data;
 
-  const DataRow({
-    super.key, 
-    required this.title, 
-    required this.data
-  });
+  const DataRow({super.key, required this.title, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +204,7 @@ class HeaderProfileCustomItem extends StatelessWidget {
                     height: 200, // Asegura que la imagen ocupe todo el espacio disponible
                   )
                 : Image.asset(
-                    'assets/images/peces.png',
+                    'assets/images/avatars_peces/avatar1.png',
                     fit: BoxFit.cover,
                     width: 200,
                     height: 200,

@@ -39,8 +39,6 @@ class AnimalCard extends StatelessWidget {
           description = 'Los cocodrilos han existido desde hace más de 200 millones de años, y pertenecen al grupo de los arcosaurios. \nEn la prehistoria, vivían en ambientes acuáticos similares a los actuales, pero en un entorno con especies de animales y plantas que ya no existen. \nHoy en día, los cocodrilos siguen siendo considerados "fósiles vivientes", ya que su anatomía es prácticamente la misma que hace millones de años.';
           animalType = "cocodrilos";
         }
-
-        // Navegar a la pantalla AnimalDetails
         Navigator.push(
           context,
           MaterialPageRoute(

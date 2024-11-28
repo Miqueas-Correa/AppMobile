@@ -53,7 +53,7 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
               //aca ruta matias
               Navigator.push(
                 context, 
-                MaterialPageRoute(builder: (context) => FishesListScreen()),
+                MaterialPageRoute(builder: (context) => ProfilesScreen()),
               );
             }
           },

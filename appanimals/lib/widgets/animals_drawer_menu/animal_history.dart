@@ -1,3 +1,4 @@
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/peces/fishes_list_screen.dart';
@@ -27,7 +28,7 @@ class AnimalHistory extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
       ),
-      backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -36,11 +37,12 @@ class AnimalHistory extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Título del animal
+                SizedBox(height: 60),
                 Text(
                   title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 21, 100, 21),
                     wordSpacing: 4,
                     height: 1.5,
                     fontWeight: FontWeight.bold,
@@ -48,7 +50,7 @@ class AnimalHistory extends StatelessWidget {
                   ),
                 ),
                 // Texto adicional sobre el animal
-                const SizedBox(height: 30),
+                const SizedBox(height: 50),
                 Card(
                   elevation: 10,
                   color: const Color.fromARGB(255, 21, 100, 21),
@@ -116,6 +118,7 @@ class AnimalHistory extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BotoneraNavigation(),
     );
   }
 }

@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Preferences {
   static bool _lightmode = false;
 
-
   //agrega otras preferences
   static late SharedPreferences _prefs;
 

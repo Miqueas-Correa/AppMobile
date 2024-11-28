@@ -1,22 +1,19 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/peces/fishes_profile_screen.dart';
-import 'package:appanimals/services/fishes_services.dart';
+import 'package:appanimals/screens/peces/fishes_details_screen.dart';
+import 'package:appanimals/services/peces/fishes_service.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
-import 'package:appanimals/widgets/botonera_navigation.dart';
-import 'package:appanimals/widgets/custom_drawer.dart';
-
 
 class FishesListScreen extends StatefulWidget {
   const FishesListScreen({super.key});
 
   @override
-  State<FishesListScreen> createState() => _FishesListScreenState();
+  _FishesListScreenState createState() => _FishesListScreenState();
 }
 
 class _FishesListScreenState extends State<FishesListScreen> {
-  late Future<List<Fishes>> fishesFuture;
-  List<Fishes> _auxiliaarFishes = [];
+  late Future<List<Fishes>> _fishesFuture;
+  List<Fishes> _auxiliarFishes = [];
   String _searchQuery = '';
   bool _searchActive = false;
 
@@ -26,141 +23,130 @@ class _FishesListScreenState extends State<FishesListScreen> {
   @override
   void initState() {
     super.initState();
-    fishesFuture = FishesService.fetchFishes();
-
+    _fishesFuture = FishesService.fetchFishes();
   }
 
-
-  //actualiza la pagina
-  void _updateSearch(String query) {
+  void _updateSearch(String? query) {
     setState(() {
-      _searchQuery = query;
+      _searchQuery = query ?? '';
       if (_searchQuery.isEmpty) {
-        _auxiliaarFishes = _auxiliaarFishes;
+        _auxiliarFishes = _auxiliarFishes; // Restablecer al estado original
       } else {
-        _auxiliaarFishes = _auxiliaarFishes.where((fishes) {
+        _auxiliarFishes = _auxiliarFishes.where((fishes) {
           return fishes.nombre.toLowerCase().contains(_searchQuery.toLowerCase());
         }).toList();
-      } 
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      top: true,
       child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text('Listado de Peces'),
-            backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-            foregroundColor: Colors.white,
-          ),
-          drawer: CustomDrawer(),
-          body: Column(children: [
-              searchArea(),
-              listItemsArea(),
-            ]),
-          bottomNavigationBar: BotoneraNavigation(),
+        appBar: AppBar(
+          title: const Text('Listado de Peces'),
+          backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+          foregroundColor: Colors.white,
+          centerTitle: true,
         ),
-    );
-  }
-  
-  //aca se muestran los resultados de la bsuqueda
-  Expanded listItemsArea() {
-    return Expanded(
-      child: FutureBuilder<List<Fishes>>(
-        future: fishesFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } 
-          
-          final fishes = snapshot.data!;
-          _auxiliaarFishes = fishes;
+        body: Column(
+          children: [
+            _searchArea(),
+            Expanded(
+              child: FutureBuilder<List<Fishes>>(
+                future: _fishesFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-          return ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: _auxiliaarFishes.length,
-            itemBuilder: (context, index) {
-              final fishes = _auxiliaarFishes[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(
-                      builder: (context) => FishesDetailScreen(fishes: fishes),
-                    ),
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+
+                  final fishes = snapshot.data!;
+                  _auxiliarFishes = fishes;
+
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: _auxiliarFishes.length,
+                    itemBuilder: (context, index) {
+                      final fishes = _auxiliarFishes[index];
+                      return GestureDetector(
+                        onTap: () {
+                          // Navegar a la pantalla de detalles, pasando el objeto completo
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FishesDetailScreen(fishes: fishes),
+                            ),
+                          );
+                        },
+                        onLongPress: () {
+                          log('onLongPress $index');
+                        },
+                        child: Container(
+                          height: 100,
+                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(31, 206, 219, 246),
+                                blurRadius: 0,
+                                spreadRadius: 3,
+                                offset: Offset(0, 6),
+                              )
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(fishes.avatar),
+                                radius: 40,
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      fishes.nombre,
+                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                    ),
+                                    Text('Color: ${fishes.color}'),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  fishes.favorite ? Icons.favorite : Icons.favorite_border,
+                                  color: fishes.favorite ? Color.fromARGB(255, 21, 100, 21) : Colors.grey,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    fishes.favorite = !fishes.favorite;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
-                onLongPress: () {
-                  log('onLongPress $index');
-                },
-                child: Container(
-                  height: 100,
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromARGB(31, 206, 219, 246),
-                        blurRadius: 0,
-                        spreadRadius: 3,
-                        offset: Offset(0,6),
-                      )
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(fishes.avatar),
-                        radius: 40,
-                      ),
-                      const SizedBox(width:10),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              fishes.nombre,
-                              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                            ),
-                            Text('Color: ${fishes.color}'),
-                          ],
-                        ),
-                      ),
-                      //muestra el favorito
-                      IconButton(
-                        icon: Icon(
-                          fishes.favorite ? Icons.favorite : Icons.favorite_border,
-                          color: fishes.favorite ? Colors.red : Color.fromARGB(255, 21, 100, 21),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            fishes.favorite = !fishes.favorite;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        },
+              ),
+            ),
+          ],
+        ),
       ),
     );
-  }                        
+  }
 
-
-  // barra de busqueda
-  AnimatedSwitcher searchArea() {
+  AnimatedSwitcher _searchArea() {
     return AnimatedSwitcher(
       switchInCurve: Curves.bounceIn,
       switchOutCurve: Curves.bounceOut,
@@ -208,10 +194,11 @@ class _FishesListScreenState extends State<FishesListScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.keyboard_arrow_left_outlined)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.keyboard_arrow_left_outlined),
+                  ),
                   IconButton(
                     onPressed: () {
                       setState(() {
@@ -219,7 +206,7 @@ class _FishesListScreenState extends State<FishesListScreen> {
                       });
                       _focusNode.requestFocus();
                     },
-                    icon: const Icon(Icons.search)
+                    icon: const Icon(Icons.search),
                   ),
                 ],
               ),

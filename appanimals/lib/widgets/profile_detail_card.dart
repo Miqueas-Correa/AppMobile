@@ -20,13 +20,15 @@ class ProfileDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: textColor,
+          color: isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C),
           width: 2,
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:appanimals/providers/cocodrilos/crocodiles_provider.dart';
 import 'package:flutter/material.dart';
 import 'screens/home/home_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
@@ -9,7 +10,7 @@ import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'providers/theme_provider.dart';
 import 'providers/loading_provider.dart';
 import 'observers/loading_observer.dart';
-import 'widgets/loading_overlay.dart';
+import 'widgets/loading/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,7 +20,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => FishesProvider()),
         ChangeNotifierProvider(create: (_) => LoadingProvider()),
-        //ChangeNotifierProvider(create: (_) => CrocodilesProvider()),
+        ChangeNotifierProvider(create: (_) => CrocodilesProvider()),
       ],
       child: const MyApp(),
     ),
@@ -41,9 +42,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/buscar': (context) => BuscarScreen(),
         '/animals': (context) => AnimalScreen(),
+        '/perfiles': (context) => ProfilesScreen(),
         '/crocodile_profile': (context) => const CrocodilesListScreen(),
         '/list_fishes': (context) => const FishesListScreen(),
-        '/perfiles': (context) => ProfilesScreen(),
+        
       },
       navigatorObservers: [
         LoadingObserver((isLoading) {

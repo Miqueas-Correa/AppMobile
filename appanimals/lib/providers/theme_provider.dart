@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/themes/default_theme.dart';
 
 class ThemeProvider with ChangeNotifier {
-  bool _isLightMode = true; // Controla si es tema claro o oscuro
+  bool _isLightMode = true; 
 
-  // Getter para obtener el tema actual
+  // Getter que devuelve el tema según el valor de _isLightMode
   ThemeData get currentTheme {
-    return _isLightMode ? DefaultTheme.lightTheme : DefaultTheme.darkTheme;
+    return _isLightMode ? ThemeData.light() : ThemeData.dark();
   }
 
-  // Método para alternar entre temas
+  // Método para alternar entre tema claro y oscuro
   void toggleTheme() {
     _isLightMode = !_isLightMode;
-    notifyListeners(); // Notificar a los listeners (Widgets que están escuchando este cambio)
+    notifyListeners();  // Notifica a los listeners que el tema ha cambiado
   }
 
-  // Métodos para establecer directamente el tema claro u oscuro
+  // Métodos para establecer explícitamente el tema claro o oscuro
   void setLight() {
     _isLightMode = true;
     notifyListeners();
