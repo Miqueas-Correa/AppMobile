@@ -31,10 +31,10 @@ class AnimalHistory extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Título del animal
                 SizedBox(height: 60),
@@ -46,7 +46,7 @@ class AnimalHistory extends StatelessWidget {
                     wordSpacing: 4,
                     height: 1.5,
                     fontWeight: FontWeight.bold,
-                    fontSize: 35,
+                    fontSize: 25,
                   ),
                 ),
                 // Texto adicional sobre el animal
@@ -65,7 +65,6 @@ class AnimalHistory extends StatelessWidget {
                         wordSpacing: 4,
                         height: 1.5,
                         fontWeight: FontWeight.w500,
-                        fontSize: 18,
                       ),
                     ),
                   ),

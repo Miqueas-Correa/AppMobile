@@ -49,9 +49,10 @@ class MyApp extends StatelessWidget {
       },
       navigatorObservers: [
         LoadingObserver((isLoading) {
-          final loadingProvider =
-              Provider.of<LoadingProvider>(context, listen: false);
-          loadingProvider.setLoading(isLoading);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+            loadingProvider.setLoading(isLoading);
+          });
         }),
       ],
       builder: (context, child) {

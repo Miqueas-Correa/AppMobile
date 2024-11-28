@@ -25,7 +25,7 @@ final Map<int, Map<String, String>> profileData = {
   },
   4: {
     'nombre': 'Brenda',
-    'apellido': 'Yañez Wagner',
+    'apellido': 'Yañez',
     'email': 'brendayw97@gmail.com',
     'telefono': '2914865326',
     'dni': '40862002',

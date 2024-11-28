@@ -14,7 +14,7 @@ class CustomDrawer extends StatelessWidget {
     //final themeProvider = Provider.of<ThemeProvider>(context);
     //final isLightTheme = themeProvider.currentTheme == ThemeData.light();
 
-    return Drawer(
+    return Drawer(     
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -23,6 +23,7 @@ class CustomDrawer extends StatelessWidget {
               final isLightTheme = themeProvider.currentTheme == ThemeData.light();
 
               return Container(
+                padding: EdgeInsets.symmetric(vertical: 5),
                 color: Color.fromARGB(255, 21, 100, 21),
                 child: ListTile(
                   leading: Icon(
@@ -45,10 +46,12 @@ class CustomDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 21, 100, 21),
             ),
+            padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
                 'A n i m a l s \n   M e n u',
                 style: TextStyle(fontSize: 30, color: Colors.white),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
