@@ -6,7 +6,7 @@ class ApiService {
   static Future<dynamic> fetchDataByCategoryAndId(
       String category, String id) async {
     final url = Uri.parse(
-        'https://api-express-g17-tup-utn.onrender.com/api/v1/$category/$id');
+        'https://api-express-g17-tup-utn-1.onrender.com/api/v1/$category/$id');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
