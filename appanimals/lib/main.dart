@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      title: 'Animals',
+      title: 'Amor Salvaje',
       theme: themeProvider.currentTheme,
       routes: {
         '/buscar': (context) => BuscarScreen(),

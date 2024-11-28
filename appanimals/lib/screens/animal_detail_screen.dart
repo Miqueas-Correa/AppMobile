@@ -1,9 +1,8 @@
-import 'package:appanimals/models/structs/dogs_struct.dart';
+import 'package:appanimals/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:appanimals/models/structs/dogs_struct.dart';
 import 'package:appanimals/models/categories_model.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class AnimalDetailScreen extends StatefulWidget {
   final Category animal;
@@ -16,34 +15,30 @@ class AnimalDetailScreen extends StatefulWidget {
 
 class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
   final TextEditingController _idController = TextEditingController();
+  final ApiService _apiService = ApiService(
+      baseUrl: 'https://api-express-g17-tup-utn.onrender.com/api/v1');
   bool _isLoading = false;
   Map<String, dynamic>? _animalData;
   bool _isFavorite = false;
 
   Future<void> _fetchAnimalData(String id) async {
-    final url =
-        'https://api-express-g17-tup-utn.onrender.com/api/v1/${widget.animal.title.toLowerCase()}/$id';
     setState(() {
       _isLoading = true;
       _animalData = null;
     });
 
     try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final decoded = json.decode(response.body);
-        if (decoded['msg'] == 'Ok' && decoded['data'] != null) {
-          setState(() {
-            _animalData = decoded['data'];
-          });
-        } else {
-          _showSnackBar('No se encontraron datos para este ID.');
-        }
+      final data = await _apiService.fetchDataByCategoryAndId(
+          widget.animal.title.toLowerCase(), id);
+      if (data['msg'] == 'Ok' && data['data'] != null) {
+        setState(() {
+          _animalData = data['data'];
+        });
       } else {
-        _showSnackBar('Error al obtener datos. Código: ${response.statusCode}');
+        _showSnackBar('No se encontraron datos para este ID.');
       }
     } catch (e) {
-      _showSnackBar('Error en la conexión: $e');
+      _showSnackBar('Error al conectarse: $e');
     } finally {
       setState(() {
         _isLoading = false;
