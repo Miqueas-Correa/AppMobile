@@ -15,8 +15,6 @@ class AnimalDetailScreen extends StatefulWidget {
 
 class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
   final TextEditingController _idController = TextEditingController();
-  final ApiService _apiService = ApiService(
-      baseUrl: 'https://api-express-g17-tup-utn.onrender.com/api/v1');
   bool _isLoading = false;
   Map<String, dynamic>? _animalData;
   bool _isFavorite = false;
@@ -28,7 +26,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
     });
 
     try {
-      final data = await _apiService.fetchDataByCategoryAndId(
+      final data = await ApiService.fetchDataByCategoryAndId(
           widget.animal.title.toLowerCase(), id);
       if (data['msg'] == 'Ok' && data['data'] != null) {
         setState(() {

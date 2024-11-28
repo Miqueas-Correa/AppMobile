@@ -2,13 +2,11 @@ import 'dart:convert'; // para decodificar JSON
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  final String baseUrl;
-
-  ApiService({required this.baseUrl});
-
   /// Método para obtener datos por categoría e ID
-  Future<dynamic> fetchDataByCategoryAndId(String category, String id) async {
-    final url = Uri.parse('$baseUrl/$category/$id');
+  static Future<dynamic> fetchDataByCategoryAndId(
+      String category, String id) async {
+    final url = Uri.parse(
+        'https://api-express-g17-tup-utn.onrender.com/api/v1/$category/$id');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
