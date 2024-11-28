@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
-import 'package:appanimals/services/crocodiles_service.dart';
+import 'package:appanimals/service/crocodiles_service.dart';
 import 'package:appanimals/models/crocodiles_model.dart';
 
 class CrocodilesListScreen extends StatefulWidget {
@@ -30,10 +30,13 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
     setState(() {
       _searchQuery = query ?? '';
       if (_searchQuery.isEmpty) {
-        _auxiliarCrocodiles = _auxiliarCrocodiles; // Restablecer al estado original
+        _auxiliarCrocodiles =
+            _auxiliarCrocodiles; // Restablecer al estado original
       } else {
         _auxiliarCrocodiles = _auxiliarCrocodiles.where((crocodile) {
-          return crocodile.name.toLowerCase().contains(_searchQuery.toLowerCase());
+          return crocodile.name
+              .toLowerCase()
+              .contains(_searchQuery.toLowerCase());
         }).toList();
       }
     });
@@ -77,7 +80,8 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CrocodilesDetailScreen(crocodile: crocodile),
+                              builder: (context) =>
+                                  CrocodilesDetailScreen(crocodile: crocodile),
                             ),
                           );
                         },
@@ -86,7 +90,8 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                         },
                         child: Container(
                           height: 100,
-                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -113,7 +118,9 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                                   children: [
                                     Text(
                                       crocodile.name,
-                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text('Color: ${crocodile.color}'),
                                   ],
@@ -122,8 +129,12 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                               // Opción para marcar como favorito
                               IconButton(
                                 icon: Icon(
-                                  crocodile.favorite ? Icons.favorite : Icons.favorite_border,
-                                  color: crocodile.favorite ? Colors.red : Colors.grey,
+                                  crocodile.favorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: crocodile.favorite
+                                      ? Colors.red
+                                      : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {

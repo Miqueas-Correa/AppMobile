@@ -1,3 +1,4 @@
+import 'package:appanimals/models/structs/dogs_struct.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:appanimals/models/categories_model.dart';
@@ -16,10 +17,9 @@ class AnimalDetailScreen extends StatefulWidget {
 class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
   final TextEditingController _idController = TextEditingController();
   bool _isLoading = false;
-  Map<String, dynamic>? _animalData; // Datos del animal desde la API
-  bool _isFavorite = false; // Estado del corazón
+  Map<String, dynamic>? _animalData;
+  bool _isFavorite = false;
 
-  // Método para realizar la búsqueda
   Future<void> _fetchAnimalData(String id) async {
     final url =
         'https://api-express-g17-tup-utn.onrender.com/api/v1/${widget.animal.title.toLowerCase()}/$id';
@@ -56,6 +56,30 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
         .showSnackBar(SnackBar(content: Text(message)));
   }
 
+  Widget _buildAnimalCard() {
+    if (_animalData == null) return const SizedBox.shrink();
+
+    switch (widget.animal.title.toLowerCase()) {
+      case 'dogs':
+        return DogStruct(_animalData!, _isFavorite, () {
+          setState(() {
+            _isFavorite = !_isFavorite;
+          });
+        });
+      case 'cats':
+        // Aquí puedes agregar la estructura para cats
+        return const Text('Estructura para Cats no implementada.');
+      case 'crocodiles':
+        // Aquí puedes agregar la estructura para crocodiles
+        return const Text('Estructura para Crocodiles no implementada.');
+      case 'fish':
+        // Aquí puedes agregar la estructura para fish
+        return const Text('Estructura para Fish no implementada.');
+      default:
+        return const Text('Categoría no soportada.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,9 +97,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
             Center(
               child: Image.asset(
                 widget.animal.imagePath,
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height * 0.5,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain, // ajusto la img
               ),
             ),
             const SizedBox(height: 20),
@@ -124,50 +146,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
             ),
             const SizedBox(height: 20),
             if (_isLoading) const CircularProgressIndicator(),
-            if (_animalData != null)
-              Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    // aca pongo el condicional para mostrar cada estructura, segun la estructura de la api
-                    children: [
-                      Text(
-                        'Nombre: ${_animalData!['nombre']}',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        'Raza: ${_animalData!['raza']}',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        'Fecha de nacimiento: ${_animalData!['fecha_nacimiento']}',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _isFavorite = !_isFavorite;
-                            });
-                          },
-                          icon: Icon(
-                            _isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            color: _isFavorite ? Colors.red : Colors.grey,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            if (_animalData != null) _buildAnimalCard(),
           ],
         ),
       ),
