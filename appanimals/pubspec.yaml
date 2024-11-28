@@ -68,7 +68,7 @@ flutter:
     # aca se agregan todo lo que es imagen/videos
     - assets/images/
     # portada general
-    - assets/images/portada.png
+    - assets/images/portada.jpeg
     - assets/images/logo.jpeg
     - assets/images/loading.gif
     # acerca de
