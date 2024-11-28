@@ -1,3 +1,4 @@
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/models/crocodiles_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,6 +78,7 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: BotoneraNavigation(), // Aquí se agrega la botonera
     );
   }
 }
@@ -106,6 +108,7 @@ class BodyProfileCustomItem extends StatelessWidget {
         DataRow(title: 'Nombre', data: crocodile.name),
         DataRow(title: 'Color', data: crocodile.color),
         DataRow(title: 'Hábitat', data: crocodile.habitat),
+        DataRow(title: 'id', data: crocodile.id.toString()),
         const SizedBox(height: 20),
         // Calificación con estrellas
         Row(

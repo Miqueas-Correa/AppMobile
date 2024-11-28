@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
 import 'package:appanimals/service/crocodiles_service.dart';
@@ -30,14 +31,15 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
     setState(() {
       _searchQuery = query ?? '';
       if (_searchQuery.isEmpty) {
-        _auxiliarCrocodiles =
-            _auxiliarCrocodiles; // Restablecer al estado original
+        _crocodilesFuture = CrocodilesService.fetchCrocodiles(); 
       } else {
-        _auxiliarCrocodiles = _auxiliarCrocodiles.where((crocodile) {
+        _crocodilesFuture = CrocodilesService.fetchCrocodiles().then((crocodiles) {
+        return crocodiles.where((crocodile) {
           return crocodile.name
               .toLowerCase()
               .contains(_searchQuery.toLowerCase());
-        }).toList();
+          }).toList();
+        });
       }
     });
   }
@@ -153,14 +155,15 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
 
   AnimatedSwitcher _searchArea() {
     return AnimatedSwitcher(
-      switchInCurve: Curves.bounceIn,
-      switchOutCurve: Curves.bounceOut,
+      switchInCurve: Curves.easeIn,
+      switchOutCurve: Curves.easeOut,
       duration: const Duration(milliseconds: 300),
       child: (_searchActive)
           ? Padding(
@@ -177,7 +180,7 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                       onFieldSubmitted: (value) {
                         _updateSearch(value);
                       },
-                      decoration: const InputDecoration(hintText: 'Buscar...'),
+                      decoration: const InputDecoration(hintText: 'Buscar por nombre...'),
                     ),
                   ),
                   IconButton(
