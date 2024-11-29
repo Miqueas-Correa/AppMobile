@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/peces/fishes_details_screen.dart';
 import 'package:appanimals/services/peces/fishes_service.dart';
@@ -60,6 +61,7 @@ class _FishesListScreenState extends State<FishesListScreen> {
           foregroundColor: Colors.white,
           centerTitle: true,
         ),
+        drawer: CustomDrawer(),
         body: Column(
           children: [
             _searchArea(),
