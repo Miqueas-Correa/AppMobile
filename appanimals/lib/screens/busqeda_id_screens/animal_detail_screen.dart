@@ -5,8 +5,6 @@ import 'package:appanimals/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:appanimals/models/categories_model.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class AnimalDetailScreen extends StatefulWidget {
   final Category animal;
