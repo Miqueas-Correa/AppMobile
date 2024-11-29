@@ -18,4 +18,6 @@ class Preferences {
     _lightmode = value;
     _prefs.setBool('lightmode', value);
   }
+
+  
 }
