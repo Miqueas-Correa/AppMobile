@@ -21,7 +21,7 @@ class BuscarScreen extends StatelessWidget {
         imagePath: 'assets/images/buscar_page/pez_2.jpg',
         color: Colors.white),
     Category(
-        title: 'crocodriles',
+        title: 'crocodiles',
         imagePath: 'assets/images/buscar_page/cocodriloo_2.jpg',
         color: Colors.white),
   ];
