@@ -46,8 +46,8 @@ class AnimalDetails extends StatelessWidget {
               // Botón de continuar
               Positioned(
                 bottom: 20,
-                left: 130,
-                right: 130,
+                left: 150,
+                right: 150,
                 child: TextButton(
                   onPressed: () {
                     // Animación personalizada para navegar a AnimalHistory
@@ -61,8 +61,8 @@ class AnimalDetails extends StatelessWidget {
                           selectedAnimal: animalType, // Pasamos el tipo de animal
                         ),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          const begin = Offset(1.0, 0.0); // Comienza desde la derecha
-                          const end = Offset.zero;       // Termina en el centro
+                          const begin = Offset(1.0, 0.0); 
+                          const end = Offset.zero; 
                           const curve = Curves.linear;
 
                           var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
@@ -77,11 +77,12 @@ class AnimalDetails extends StatelessWidget {
                     );
                   },
                   style: TextButton.styleFrom(
+                    elevation: 10,
                     foregroundColor: Colors.white,
                     backgroundColor: Color.fromARGB(255, 21, 100, 21),
                     padding: EdgeInsets.symmetric(
                       vertical: 15,
-                      horizontal: 30,
+                      horizontal: 15,
                     ),
                   ),
                   child: const Text("Continuar"),

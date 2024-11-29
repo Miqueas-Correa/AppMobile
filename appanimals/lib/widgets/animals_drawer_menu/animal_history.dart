@@ -37,20 +37,20 @@ class AnimalHistory extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Título del animal
-                SizedBox(height: 60),
+                SizedBox(height: 40),
                 Text(
                   title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Color.fromARGB(255, 21, 100, 21),
-                    wordSpacing: 4,
+                    wordSpacing: 2,
                     height: 1.5,
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),
                 ),
                 // Texto adicional sobre el animal
-                const SizedBox(height: 50),
+                const SizedBox(height: 40),
                 Card(
                   elevation: 10,
                   color: const Color.fromARGB(255, 21, 100, 21),
@@ -62,7 +62,7 @@ class AnimalHistory extends StatelessWidget {
                       textAlign: TextAlign.justify,
                       style: const TextStyle(
                         color: Colors.white,
-                        wordSpacing: 4,
+                        wordSpacing: 2,
                         height: 1.5,
                         fontWeight: FontWeight.w500,
                       ),
@@ -70,7 +70,7 @@ class AnimalHistory extends StatelessWidget {
                   ),
                 ),
                 // Botones de acción
-                const SizedBox(height: 50),
+                const SizedBox(height: 40),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[

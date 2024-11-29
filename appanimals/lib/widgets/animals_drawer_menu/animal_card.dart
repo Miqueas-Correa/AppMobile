@@ -15,6 +15,13 @@ class AnimalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double cardSize = screenWidth * 0.4; // 40% del ancho de la pantalla
+    double imageSize = cardSize * 0.6; // 60% de la altura de la tarjeta
+    //double fontSize = screenWidth * 0.04; // 4% del ancho
+
+
     return GestureDetector(
       onTap: () {
         String description = "";
@@ -53,11 +60,11 @@ class AnimalCard extends StatelessWidget {
         );
       },
       child: Container(
-        width: 160,
-        height: 180,
+        width: cardSize,
+        height: cardSize,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
@@ -68,26 +75,28 @@ class AnimalCard extends StatelessWidget {
           ],
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Image.asset(
                 image,
-                height: 120,
-                width: 120,
+                height: imageSize,
+                width: imageSize,
               ),
             ),
             Text(
               text,
-              style: const TextStyle(
-                color: Colors.black87,
-                fontSize: 15,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: (screenWidth * 0.04).toDouble(),
                 decoration: TextDecoration.none
               ),
             )
           ],
         ),
       ), 
-    );  
+    );
   }
 }
