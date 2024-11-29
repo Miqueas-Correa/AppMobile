@@ -27,7 +27,7 @@ class FishesListItem extends StatelessWidget {
           children: [
             HeaderProfileCustomItem(
               size: size,
-              avatar: args['avatar'],
+              avatarPath: args['avatar'],
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
@@ -74,7 +74,7 @@ class BodyProfileCustomItem extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 30),
         // Información con título
         DataFishCard(title: 'Especie', data: args['especie']),
         DataFishCard(title: 'Nombre', data: args['nombre']),
@@ -98,7 +98,7 @@ class DataFishCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
-      elevation: 5,
+      elevation: 10,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -110,15 +110,15 @@ class DataFishCard extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: Colors.black,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             Text(
               data ?? 'Información no disponible',
-              style: const TextStyle(fontSize: 14, color: Colors.black54),
+              style: const TextStyle(fontSize: 14, color: Colors.black),
             ),
           ],
         ),
@@ -129,12 +129,12 @@ class DataFishCard extends StatelessWidget {
 
 class HeaderProfileCustomItem extends StatelessWidget {
   final Size size;
-  final String? avatar;
+  final String? avatarPath;
 
   const HeaderProfileCustomItem({
     super.key, 
-    this.avatar, 
-    required this.size
+    required this.size,
+    required this.avatarPath, 
   });
 
   @override
@@ -147,8 +147,8 @@ class HeaderProfileCustomItem extends StatelessWidget {
         child: CircleAvatar(
           radius: 100,
           backgroundColor: Colors.white,
-          child: avatar != ""
-              ? Image.asset('assets/images/avatars_peces/$avatar.png')
+          child: avatarPath != ""
+              ? Image.asset('assets/images/avatars_peces/$avatarPath.png')
               : Image.asset('assets/images/avatars_peces/avatar1.png'),
         ),
       ),

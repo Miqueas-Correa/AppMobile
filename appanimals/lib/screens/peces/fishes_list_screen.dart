@@ -13,7 +13,9 @@ class FishesListScreen extends StatefulWidget {
 
 class _FishesListScreenState extends State<FishesListScreen> {
   late Future<List<Fishes>> _fishesFuture;
-  List<Fishes> _auxiliarFishes = [];
+  List<Fishes> _allFishes = [];
+  List<Fishes> _filteredFishes = [];
+
   String _searchQuery = '';
   bool _searchActive = false;
 
@@ -24,19 +26,28 @@ class _FishesListScreenState extends State<FishesListScreen> {
   void initState() {
     super.initState();
     _fishesFuture = FishesService.fetchFishes();
+    _searchController.addListener(_onSearchChanged);
   }
 
-  void _updateSearch(String? query) {
+  void _onSearchChanged() {
     setState(() {
-      _searchQuery = query ?? '';
-      if (_searchQuery.isEmpty) {
-        _auxiliarFishes = _auxiliarFishes; // Restablecer al estado original
-      } else {
-        _auxiliarFishes = _auxiliarFishes.where((fishes) {
-          return fishes.nombre.toLowerCase().contains(_searchQuery.toLowerCase());
-        }).toList();
-      }
+      _searchQuery = _searchController.text.toLowerCase();
+      _filterFishes();
     });
+  }
+
+
+  void _filterFishes() {
+    if (_searchQuery.isEmpty) {
+      _filteredFishes = _allFishes; // Si no hay búsqueda, mostrar todos los peces
+    } else {
+      _filteredFishes = _allFishes.where((fishes) {
+        return fishes.nombre.toLowerCase().contains(_searchQuery) ||
+            fishes.color.toLowerCase().contains(_searchQuery) ||
+            fishes.especie.toLowerCase().contains(_searchQuery) ||
+            fishes.id.toString().contains(_searchQuery); // También buscar por ID
+      }).toList();
+    }
   }
 
   @override
@@ -65,20 +76,28 @@ class _FishesListScreenState extends State<FishesListScreen> {
                   }
 
                   final fishes = snapshot.data!;
-                  _auxiliarFishes = fishes;
+                  _allFishes = fishes; //guarda datos originales
+                  _filterFishes(); //filtra
+
 
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: _auxiliarFishes.length,
+                    itemCount: _filteredFishes.length,
                     itemBuilder: (context, index) {
-                      final fishes = _auxiliarFishes[index];
+                      final fishes = _filteredFishes[index];
+
+                      //avatar
+                      String avatarPath = _getAvatarPath(index);
+
                       return GestureDetector(
                         onTap: () {
                           // Navegar a la pantalla de detalles, pasando el objeto completo
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => FishesDetailScreen(fishes: fishes),
+                              builder: (context) => FishesDetailScreen(
+                                fishes: fishes,
+                                avatarPath: avatarPath),
                             ),
                           );
                         },
@@ -86,25 +105,30 @@ class _FishesListScreenState extends State<FishesListScreen> {
                           log('onLongPress $index');
                         },
                         child: Container(
-                          height: 100,
-                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          height: 110,
+                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 229, 235, 231),
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+                              color: Color.fromARGB(31, 83, 85, 84),
+                              width: 2,
+                            ),
                             boxShadow: const [
                               BoxShadow(
-                                color: Color.fromARGB(31, 206, 219, 246),
-                                blurRadius: 0,
-                                spreadRadius: 3,
-                                offset: Offset(0, 6),
+                                color: Color.fromARGB(31, 78, 80, 79),
+                                blurRadius: 3,
+                                spreadRadius: 0,
+                                offset: Offset(0, 3),
                               )
                             ],
                           ),
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: NetworkImage(fishes.avatar),
-                                radius: 40,
+                                backgroundImage: AssetImage(avatarPath),
+                                radius: 30,
                               ),
                               const SizedBox(width: 10),
                               Expanded(
@@ -114,8 +138,9 @@ class _FishesListScreenState extends State<FishesListScreen> {
                                   children: [
                                     Text(
                                       fishes.nombre,
-                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                     ),
+                                    Text('Especie: ${fishes.especie}'),
                                     Text('Color: ${fishes.color}'),
                                   ],
                                 ),
@@ -146,6 +171,36 @@ class _FishesListScreenState extends State<FishesListScreen> {
     );
   }
 
+  //metodo para obtener la ruta de los avatars
+  String _getAvatarPath(int index) {
+    int avatarIndex = index % 10;
+
+    switch (avatarIndex) {
+      case 0:
+        return 'assets/images/avatars_peces/avatar1.png';
+      case 1:
+        return 'assets/images/avatars_peces/avatar2.png';
+      case 2:
+        return 'assets/images/avatars_peces/avatar3.png';
+      case 3:
+        return 'assets/images/avatars_peces/avatar4.png';
+      case 4:
+        return 'assets/images/avatars_peces/avatar5.png';
+      case 5:
+        return 'assets/images/avatars_peces/avatar6.png';
+      case 6:
+        return 'assets/images/avatars_peces/avatar7.png';
+      case 7:
+        return 'assets/images/avatars_peces/avatar8.png';
+      case 8:
+        return 'assets/images/avatars_peces/avatar9.png';
+      case 9:
+        return 'assets/images/avatars_peces/avatar10.png';
+      default:
+        return 'assets/images/avatars_peces/avatar1.png';
+    }
+  }
+
   AnimatedSwitcher _searchArea() {
     return AnimatedSwitcher(
       switchInCurve: Curves.bounceIn,
@@ -161,11 +216,11 @@ class _FishesListScreenState extends State<FishesListScreen> {
                       controller: _searchController,
                       focusNode: _focusNode,
                       onChanged: (value) {
-                        _updateSearch(value);
+                        _onSearchChanged();
                       },
-                      onFieldSubmitted: (value) {
-                        _updateSearch(value);
-                      },
+                      // onFieldSubmitted: (value) {
+                      //   _updateSearch(value);
+                      // },
                       decoration: const InputDecoration(hintText: 'Buscar...'),
                     ),
                   ),
@@ -173,7 +228,7 @@ class _FishesListScreenState extends State<FishesListScreen> {
                     onPressed: () {
                       _searchController.clear();
                       FocusManager.instance.primaryFocus?.unfocus();
-                      _updateSearch('');
+                      _onSearchChanged();
                     },
                     icon: const Icon(Icons.clear),
                   ),

@@ -4,10 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FishesDetailScreen extends StatefulWidget {
   final Fishes fishes;
+  final String avatarPath;
 
   const FishesDetailScreen({
     super.key, 
-    required this.fishes
+    required this.fishes,
+    required this.avatarPath,
   });
 
   @override
@@ -67,7 +69,7 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
           children: [
             HeaderProfileCustomItem(
               size: size,
-              avatar: _fishes.avatar,
+              avatarPath: widget.avatarPath,
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
@@ -101,14 +103,14 @@ class BodyProfileCustomItem extends StatelessWidget {
     return Column(
       children: [
         SwitchListTile.adaptive(
-          title: const Text('Favorito'),
+          title: const Text('Favorito', style: TextStyle(fontWeight: FontWeight.bold)),
           value: fishes.favorite,
           onChanged: onFavoriteChanged,
         ),
         const SizedBox(height: 20),
         DataRow(title: 'Nombre', data: fishes.nombre),
-        DataRow(title: 'Color', data: fishes.color),
         DataRow(title: 'Especie', data: fishes.especie),
+        DataRow(title: 'Color', data: fishes.color),
         const SizedBox(height: 20),
         // Calificación con estrellas
         Row(
@@ -159,7 +161,7 @@ class DataRow extends StatelessWidget {
             ),
             Text(
               data,
-              style: const TextStyle(fontSize: 16, color: Colors.black54),
+              style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
           ],
         ),
@@ -170,12 +172,12 @@ class DataRow extends StatelessWidget {
 
 class HeaderProfileCustomItem extends StatelessWidget {
   final Size size;
-  final String? avatar;
+  final String avatarPath;
 
   const HeaderProfileCustomItem({
     super.key, 
     required this.size, 
-    this.avatar
+    required this.avatarPath,
   });
 
   @override
@@ -183,26 +185,26 @@ class HeaderProfileCustomItem extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.40,
-      color: const Color.fromARGB(255, 21, 100, 21),
+      color: const Color.fromARGB(255, 58, 133, 58),
       child: Center(
         child: Container(
-          width: 200,  // Tamaño del círculo
+          width: 200,
           height: 200,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: Colors.white,  // Color del borde
-              width: 5,  // Grosor del borde
+              color: const Color.fromARGB(255, 21, 100, 21),
+              width: 2,
             ),
           ),
           child: ClipOval(
-            child: avatar != null && avatar!.isNotEmpty
-                ? Image.network(
-                    avatar!,
-                    fit: BoxFit.cover,  // Ajuste para que la imagen cubra todo el círculo
-                    width: 200,  // Asegura que la imagen ocupe todo el espacio disponible
-                    height: 200, // Asegura que la imagen ocupe todo el espacio disponible
-                  )
+            child: avatarPath.isNotEmpty
+                ? Image.asset(
+                    avatarPath,
+                    fit: BoxFit.cover,  
+                    width: 200,  
+                    height: 200,
+                )
                 : Image.asset(
                     'assets/images/avatars_peces/avatar1.png',
                     fit: BoxFit.cover,
