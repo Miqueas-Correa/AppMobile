@@ -1,5 +1,6 @@
 import 'package:appanimals/models/structs/dogs_struct.dart';
 import 'package:appanimals/models/structs/cats_struct.dart';
+import 'package:appanimals/service/api_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,29 +24,23 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
   bool _isFavorite = false;
 
   Future<void> _fetchAnimalData(String id) async {
-    final url =
-        'https://api-express-g17-tup-utn.onrender.com/api/v1/${widget.animal.title.toLowerCase()}/$id';
     setState(() {
       _isLoading = true;
       _animalData = null;
     });
 
     try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final decoded = json.decode(response.body);
-        if (decoded['msg'] == 'Ok' && decoded['data'] != null) {
-          setState(() {
-            _animalData = decoded['data'];
-          });
-        } else {
-          _showSnackBar('No se encontraron datos para este ID.');
-        }
+      final data = await ApiService.fetchDataByCategoryAndId(
+          widget.animal.title.toLowerCase(), id);
+      if (data['msg'] == 'Ok' && data['data'] != null) {
+        setState(() {
+          _animalData = data['data'];
+        });
       } else {
-        _showSnackBar('Error al obtener datos. Código: ${response.statusCode}');
+        _showSnackBar('No se encontraron datos para este ID.');
       }
     } catch (e) {
-      _showSnackBar('Error en la conexión: $e');
+      _showSnackBar('Error al conectarse: $e');
     } finally {
       setState(() {
         _isLoading = false;
