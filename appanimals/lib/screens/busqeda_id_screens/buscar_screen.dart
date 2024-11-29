@@ -6,7 +6,7 @@ import 'package:appanimals/screens/busqeda_id_screens/animal_detail_screen.dart'
 
 class BuscarScreen extends StatelessWidget {
   BuscarScreen({super.key});
-
+  
   final List<Category> categories = [
     Category(
         title: 'cats',

@@ -1,6 +1,7 @@
-import 'package:appanimals/service/api_service.dart';
 import 'package:appanimals/models/structs/dogs_struct.dart';
-// import 'package:appanimals/models/structs/cats_struct.dart';
+import 'package:appanimals/models/structs/cats_struct.dart';
+import 'package:appanimals/service/api_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:appanimals/models/categories_model.dart';
@@ -44,6 +45,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
       });
     }
   }
+  }
 
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context)
@@ -61,11 +63,11 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
           });
         });
       case 'cats':
-      // return CatStruct(_animalData!, _isFavorite, () {
-      //   setState(() {
-      //     _isFavorite = !_isFavorite;
-      //   });
-      // });
+        return CatStruct(_animalData!, _isFavorite, () {
+          setState(() {
+            _isFavorite = !_isFavorite;
+          });
+        });
       case 'crocodiles':
         // Aquí puedes agregar la estructura para crocodiles
         return const Text('Estructura para Crocodiles no implementada.');
@@ -83,7 +85,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.animal.title),
-        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         child: Padding(
