@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:appanimals/models/crocodiles_model.dart';
+import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
 List<Crocodile> crocodilesFromJson(String str) =>
     List<Crocodile>.from(json.decode(str).map((x) => Crocodile.fromJson(x)));
