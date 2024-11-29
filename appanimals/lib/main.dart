@@ -3,7 +3,7 @@ import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
 /* import 'package:appanimals/screens/peces/fishes_screen.dart'; */
 import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
-import 'package:appanimals/screens/buscar_screen.dart';
+import 'package:appanimals/screens/busqeda_id_screens/buscar_screen.dart';
 import 'package:appanimals/screens/animals_screen.dart';
 import 'package:appanimals/providers/peces/fishes_provider.dart';
 /* import 'package:appanimals/screens/peces/peces_list_item.dart'; */
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      title: 'Animals',
+      title: 'Amor Salvaje',
       theme: themeProvider.currentTheme,
       routes: {
         '/buscar': (context) => BuscarScreen(),
