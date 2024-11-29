@@ -84,7 +84,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.animal.title),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
       ),
       body: Padding(
         padding: const EdgeInsetsDirectional.all(16.0),
