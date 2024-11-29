@@ -21,6 +21,9 @@ class AnimalHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -31,32 +34,35 @@ class AnimalHistory extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: (screenWidth * 0.05)),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Título del animal
-                SizedBox(height: 40),
+                SizedBox(height: screenHeight * 0.05),
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Color.fromARGB(255, 21, 100, 21),
                     wordSpacing: 2,
                     height: 1.5,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
+                    fontSize: screenWidth * 0.07,
                   ),
                 ),
                 // Texto adicional sobre el animal
-                const SizedBox(height: 40),
+                SizedBox(height: screenHeight * 0.05),
                 Card(
                   elevation: 10,
                   color: const Color.fromARGB(255, 21, 100, 21),
                   margin: const EdgeInsets.all(5),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                    padding: EdgeInsets.symmetric(
+                      vertical: screenHeight * 0.04, 
+                      horizontal: screenWidth * 0.05,
+                    ),
                     child: Text(
                       text,
                       textAlign: TextAlign.justify,
@@ -70,7 +76,7 @@ class AnimalHistory extends StatelessWidget {
                   ),
                 ),
                 // Botones de acción
-                const SizedBox(height: 40),
+                SizedBox(height: screenHeight * 0.05),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
