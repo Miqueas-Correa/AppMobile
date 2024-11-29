@@ -24,6 +24,10 @@ class AnimalDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //responsive
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -40,56 +44,60 @@ class AnimalDetails extends StatelessWidget {
               Image.asset(
                 imagePath,
                 fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height, // Ajusta la altura
-                width: MediaQuery.of(context).size.width, // Ajusta el ancho
+                height: screenHeight, //responsive
+                width: screenWidth, // responsive
               ),
               // Botón de continuar
               Positioned(
-                bottom: 20,
-                left: 150,
-                right: 150,
-                child: TextButton(
-                  onPressed: () {
-                    // Animación personalizada para navegar a AnimalHistory
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        transitionDuration: const Duration(milliseconds: 500),
-                        pageBuilder: (context, animation, secondaryAnimation) => AnimalHistory(
-                          title: title,
-                          text: text,
-                          selectedAnimal: animalType, // Pasamos el tipo de animal
+                bottom: screenHeight * 0.1,
+                left: screenWidth * 0.25,
+                right: screenWidth * 0.25,
+                child: SizedBox(
+                  width: screenWidth * 0.5,
+                  child: TextButton(
+                    onPressed: () {
+                      // Animación personalizada para navegar a AnimalHistory
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: const Duration(milliseconds: 500),
+                          pageBuilder: (context, animation, secondaryAnimation) => AnimalHistory(
+                            title: title,
+                            text: text,
+                            selectedAnimal: animalType, // Pasamos el tipo de animal
+                          ),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(1.0, 0.0); 
+                            const end = Offset.zero; 
+                            const curve = Curves.linear;
+
+                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                            var offsetAnimation = animation.drive(tween);
+
+                            return SlideTransition(
+                              position: offsetAnimation,
+                              child: child,
+                            );
+                          },
                         ),
-                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          const begin = Offset(1.0, 0.0); 
-                          const end = Offset.zero; 
-                          const curve = Curves.linear;
-
-                          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                          var offsetAnimation = animation.drive(tween);
-
-                          return SlideTransition(
-                            position: offsetAnimation,
-                            child: child,
-                          );
-                        },
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      elevation: 10,
+                      foregroundColor: Colors.white,
+                      backgroundColor: Color.fromARGB(255, 21, 100, 21),
+                      padding: EdgeInsets.symmetric(
+                        vertical: screenHeight * 0.02,
+                        horizontal: screenWidth * 0.08,
                       ),
-                    );
-                  },
-                  style: TextButton.styleFrom(
-                    elevation: 10,
-                    foregroundColor: Colors.white,
-                    backgroundColor: Color.fromARGB(255, 21, 100, 21),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 15,
-                      horizontal: 15,
                     ),
+                    child: const Text("Continuar"),
                   ),
-                  child: const Text("Continuar"),
+                ),
               ),
-            ),
-          ],
-        )],
+            ]
+          ),
+        ],
       )
     );
   }
