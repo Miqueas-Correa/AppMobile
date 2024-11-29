@@ -3,7 +3,6 @@ import 'package:appanimals/models/structs/cats_struct.dart';
 import 'package:appanimals/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:appanimals/models/structs/dogs_struct.dart';
 import 'package:appanimals/models/categories_model.dart';
 
 class AnimalDetailScreen extends StatefulWidget {
