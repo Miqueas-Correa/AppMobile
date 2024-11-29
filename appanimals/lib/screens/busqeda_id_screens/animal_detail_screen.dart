@@ -24,7 +24,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
 
   Future<void> _fetchAnimalData(String id) async {
     final url =
-        'https://api-express-g17-tup-utn.onrender.com/api/v1/${widget.animal.title.toLowerCase()}/$id';
+        'https://api-express-g17-tup-utn-1.onrender.com/api/v1/${widget.animal.title.toLowerCase()}/$id';
     setState(() {
       _isLoading = true;
       _animalData = null;
