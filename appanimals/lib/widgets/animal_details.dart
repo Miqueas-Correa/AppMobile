@@ -14,13 +14,13 @@ class AnimalDetails extends StatelessWidget {
 
   // Constructor
   AnimalDetails({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.text,
     required this.title,
     required this.titleColor,
     required this.animalType,  // Recibimos el tipo de animal (por ejemplo: 'perros', 'gatos', 'peces', 'cocodrilos')
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

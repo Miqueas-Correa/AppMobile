@@ -175,9 +175,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                   }
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all(
                       const Color.fromARGB(255, 21, 100, 21)),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  foregroundColor: WidgetStateProperty.all(Colors.white),
                 ),
                 child: const Text('Guardar Opinión'),
               ),
