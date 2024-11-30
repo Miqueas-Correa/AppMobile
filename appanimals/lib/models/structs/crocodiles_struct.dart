@@ -16,10 +16,6 @@ Widget CrocodileStruct(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Created At: ${data['createdAt']}',
-            style: const TextStyle(fontSize: 18),
-          ),
-          Text(
             'Nombre: ${data['name']}',
             style: const TextStyle(fontSize: 18),
           ),
@@ -31,22 +27,6 @@ Widget CrocodileStruct(
             'Habitat: ${data['habitat']}',
             style: const TextStyle(fontSize: 18),
           ),
-          Text(
-            'avatar: ${data['avatar']}',
-            style: const TextStyle(fontSize: 18),
-          ),
-          // const SizedBox(height: 10),
-          // Center(
-          //   child: CircleAvatar(
-          //     radius: 40,
-          //     backgroundImage: _getAvatarImage(data['avatar']),
-          //     backgroundColor: Colors.grey[200],
-          //     child: (data['avatar'] == null || data['avatar'].isEmpty)
-          //         ? const Icon(Icons.person, size: 40, color: Colors.grey)
-          //         : null,
-          //   ),
-          // ),
-          // const SizedBox(height: 10),
           Text(
             'ID: ${data['id']}',
             style: const TextStyle(fontSize: 18),
@@ -66,11 +46,3 @@ Widget CrocodileStruct(
     ),
   );
 }
-
-// ImageProvider _getAvatarImage(String? avatarUrl) {
-//   if (avatarUrl != null && avatarUrl.isNotEmpty) {
-//     return NetworkImage(avatarUrl); // Imagen desde la URL
-//   }
-//   return const AssetImage(
-//       'assets/images/default_avatar.png'); // Imagen predeterminada
-// }
