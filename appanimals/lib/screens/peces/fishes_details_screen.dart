@@ -18,12 +18,28 @@ class FishesDetailScreen extends StatefulWidget {
 
 class _FishesDetailScreenState extends State<FishesDetailScreen> {
   late Fishes _fishes;
+  late TextEditingController _nameController;
+  late TextEditingController _speciesController;
+  late TextEditingController _colorController;
 
   @override
   void initState() {
     super.initState();
     _fishes = widget.fishes;
     _loadFavorite(); 
+
+    //inicializa
+    _nameController = TextEditingController(text: _fishes.nombre);
+    _speciesController = TextEditingController(text: _fishes.especie);
+    _colorController = TextEditingController(text: _fishes.color);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _speciesController.dispose();
+    _colorController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadFavorite() async {
@@ -32,11 +48,6 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     setState(() {
       _fishes.favorite = favorite;
     });
-  }
-
-  Future<void> _saveFavorite(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_fishes.id.toString(), value);
   }
 
   void _updateRating(double rating) {
@@ -49,7 +60,6 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     setState(() {
       _fishes.favorite = value;
     });
-    _saveFavorite(value);
   }
 
   @override
@@ -103,14 +113,18 @@ class BodyProfileCustomItem extends StatelessWidget {
     return Column(
       children: [
         SwitchListTile.adaptive(
-          title: const Text('Favorito', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: const Text('Favorito', 
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            )
+          ),
           value: fishes.favorite,
           onChanged: onFavoriteChanged,
         ),
         const SizedBox(height: 20),
-        DataRow(title: 'Nombre', data: fishes.nombre),
-        DataRow(title: 'Especie', data: fishes.especie),
-        DataRow(title: 'Color', data: fishes.color),
+        DataRow(title: 'Nombre', controller: TextEditingController(text: fishes.nombre)),
+        DataRow(title: 'Especie', controller: TextEditingController(text: fishes.especie)),
+        DataRow(title: 'Color', controller: TextEditingController(text: fishes.color)),
         const SizedBox(height: 20),
         // Calificación con estrellas
         Row(
@@ -140,9 +154,13 @@ class BodyProfileCustomItem extends StatelessWidget {
 
 class DataRow extends StatelessWidget {
   final String title;
-  final String data;
+  final TextEditingController controller;
 
-  const DataRow({super.key, required this.title, required this.data});
+  const DataRow({
+    super.key, 
+    required this.title, 
+    required this.controller
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -155,13 +173,14 @@ class DataRow extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              data,
-              style: const TextStyle(fontSize: 16, color: Colors.black),
+            Expanded(
+              child: TextFormField(
+                controller: controller,
+                decoration: decorationInput(
+                  label: title,
+                  hintText: 'Ingresa $title',
+                ),
+              ),
             ),
           ],
         ),
@@ -169,6 +188,19 @@ class DataRow extends StatelessWidget {
     );
   }
 }
+
+//inputs del textformfield
+  InputDecoration decorationInput({
+    IconData? icon, String? hintText, String? helperText, String? label}) {
+    return InputDecoration(
+      fillColor: Colors.black,
+      label: Text(label ?? ''),
+      hintText: hintText,
+      helperText: helperText,
+      helperStyle: const TextStyle(fontSize: 16),
+      prefixIcon: icon != null ? Icon(icon) : null,
+    );
+  }
 
 class HeaderProfileCustomItem extends StatelessWidget {
   final Size size;

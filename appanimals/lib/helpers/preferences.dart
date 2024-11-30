@@ -20,34 +20,23 @@ class Preferences {
   }
 
   //shared preferences de peces
-  // static String _nombre = '';
-  // static String _especie = '';
-  // static String _color = '';
-
-  // static set nombre(String value) {
-  //   _nombre = value;
-  //   _prefs.setString('nombre', value);
+  //guarda al favorito
+  // static Future<void> setFavorite(String id, bool value) async {
+  //   await _prefs.setBool(id.toString(), value);
   // }
 
-  // static String get nombre {
-  //   return _prefs.getString('nombre') ?? _nombre;
+  // // Obtiene el favorito
+  // static bool getFavorite(String id) {
+  //   return _prefs.getBool(id.toString()) ?? false;
   // }
 
-  // static set especie(String value) {
-  //   _especie = value;
-  //   _prefs.setString('especie', value);
+  // // Guarda calificación
+  // static Future<void> setRating(String id, double value) async {
+  //   await _prefs.setDouble(id.toString(), value);
   // }
 
-  // static String get especie {
-  //   return _prefs.getString('especie') ?? _especie;
-  // }
-
-  // static set color(String value) {
-  //   _color = value;
-  //   _prefs.setString('color', value);
-  // }
-
-  // static String get color {
-  //   return _prefs.getString('color') ?? _color;
+  // // Obtiene calificación 
+  // static double getRating(String id) {
+  //   return _prefs.getDouble(id.toString()) ?? 0.0;
   // }
 }

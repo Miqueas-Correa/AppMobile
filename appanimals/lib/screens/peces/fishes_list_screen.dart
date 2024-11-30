@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:appanimals/screens/peces/fishes_details_screen.dart';
 import 'package:appanimals/services/peces/fishes_service.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
@@ -30,6 +30,7 @@ class _FishesListScreenState extends State<FishesListScreen> {
     _searchController.addListener(_onSearchChanged);
   }
 
+
   void _onSearchChanged() {
     setState(() {
       _searchQuery = _searchController.text.toLowerCase();
@@ -40,13 +41,13 @@ class _FishesListScreenState extends State<FishesListScreen> {
 
   void _filterFishes() {
     if (_searchQuery.isEmpty) {
-      _filteredFishes = _allFishes; // Si no hay búsqueda, mostrar todos los peces
+      _filteredFishes = _allFishes;
     } else {
       _filteredFishes = _allFishes.where((fishes) {
         return fishes.nombre.toLowerCase().contains(_searchQuery) ||
             fishes.color.toLowerCase().contains(_searchQuery) ||
             fishes.especie.toLowerCase().contains(_searchQuery) ||
-            fishes.id.toString().contains(_searchQuery); // También buscar por ID
+            fishes.id.toString().contains(_searchQuery);
       }).toList();
     }
   }

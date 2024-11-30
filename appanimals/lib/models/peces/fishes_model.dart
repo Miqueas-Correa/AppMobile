@@ -1,5 +1,5 @@
-import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'dart:convert';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class Fishes {
   final String id;
@@ -29,7 +29,7 @@ class Fishes {
       especie: json["especie"],
       avatar: json['avatar'],
       stars: (json['stars'] != null) ? json['stars'].toDouble() : 0.0,
-      favorite: json['favorite'] ?? false,
+      favorite: json['favorite'],
     );
   }
 
