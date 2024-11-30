@@ -1,3 +1,4 @@
+import 'package:appanimals/screens/gatos/cats_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/peces/peces_list_screen.dart';
@@ -103,10 +104,10 @@ class AnimalHistory extends StatelessWidget {
                           //   MaterialPageRoute(builder: (context) => PerrosListScreen()),
                           // );
                         } else if (selectedAnimal == 'gatos') {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => GatosListScreen()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CatsListScreen()),
+                          );
                         }
                       },
                     ),
