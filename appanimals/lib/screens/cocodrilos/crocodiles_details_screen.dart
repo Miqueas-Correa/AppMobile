@@ -97,6 +97,8 @@ class BodyProfileCustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _noteController = TextEditingController();
+
     return Column(
       children: [
         SwitchListTile.adaptive(
@@ -130,6 +132,42 @@ class BodyProfileCustomItem extends StatelessWidget {
         Text(
           'Calificación: ${crocodile.stars.toStringAsFixed(1)}',
           style: const TextStyle(fontSize: 18),
+        ),
+        const SizedBox(height: 20),
+        // TextFormField para agregar notas o comentarios
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextFormField(
+            controller: _noteController,
+            decoration: InputDecoration(
+              labelText: 'Agregar nota',
+              hintText: 'Escribe una nota sobre este cocodrilo',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            maxLines: 3,
+          ),
+        ),
+        const SizedBox(height: 10),
+        // Botón de guardar
+        ElevatedButton(
+          onPressed: () {
+            // Aquí puedes guardar la nota utilizando _noteController.text
+            final String note = _noteController.text;
+            // Implementar lógica de guardado
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Nota guardada: $note'),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          ),
+          child: const Text('Guardar Nota'),
         ),
       ],
     );

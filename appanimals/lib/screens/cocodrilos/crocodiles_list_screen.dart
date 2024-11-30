@@ -26,23 +26,31 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
     super.initState();
     _crocodilesFuture = CrocodilesService.fetchCrocodiles();
   }
-
-  void _updateSearch(String? query) {
-    setState(() {
-      _searchQuery = query ?? '';
-      if (_searchQuery.isEmpty) {
-        _crocodilesFuture = CrocodilesService.fetchCrocodiles(); 
-      } else {
-        _crocodilesFuture = CrocodilesService.fetchCrocodiles().then((crocodiles) {
+void _updateSearch(String? query) {
+  setState(() {
+    _searchQuery = query ?? '';
+    if (_searchQuery.isEmpty) {
+      _crocodilesFuture = CrocodilesService.fetchCrocodiles();
+    } else {
+      _crocodilesFuture = CrocodilesService.fetchCrocodiles().then((crocodiles) {
         return crocodiles.where((crocodile) {
-          return crocodile.name
-              .toLowerCase()
-              .contains(_searchQuery.toLowerCase());
-          }).toList();
-        });
-      }
-    });
-  }
+          final searchLower = _searchQuery.toLowerCase();
+
+          // Buscar por nombre, color o hábitat (coincidencia parcial)
+          final matchesName = crocodile.name.toLowerCase().contains(searchLower);
+          final matchesColor = crocodile.color.toLowerCase().contains(searchLower);
+          final matchesHabitat = crocodile.habitat.toLowerCase().contains(searchLower);
+
+          // Buscar por id (coincidencia exacta)
+          final matchesId = crocodile.id.toString() == _searchQuery;
+
+          return matchesName || matchesColor || matchesHabitat || matchesId;
+        }).toList();
+      });
+    }
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +188,7 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                       onFieldSubmitted: (value) {
                         _updateSearch(value);
                       },
-                      decoration: const InputDecoration(hintText: 'Buscar por nombre...'),
+                      decoration: const InputDecoration(hintText: 'Buscar por nombre/habitat/color/id...'),
                     ),
                   ),
                   IconButton(
