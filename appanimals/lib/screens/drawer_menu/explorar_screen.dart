@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/loading_icon.dart';
+import '../../widgets/loading_icon.dart';
 
 class ExplorarScreen extends StatefulWidget {
   const ExplorarScreen({super.key});
@@ -66,12 +66,14 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Explorar'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        foregroundColor: Colors.white,
       ),
       body: MediaQuery.removePadding(
         context: context,
