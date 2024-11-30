@@ -1,5 +1,6 @@
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/models/crocodiles_model.dart';
+import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CrocodilesDetailScreen extends StatefulWidget {
@@ -77,6 +78,7 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: BotoneraNavigation(), // Aquí se agrega la botonera
     );
   }
 }
@@ -95,6 +97,8 @@ class BodyProfileCustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _noteController = TextEditingController();
+
     return Column(
       children: [
         SwitchListTile.adaptive(
@@ -106,6 +110,7 @@ class BodyProfileCustomItem extends StatelessWidget {
         DataRow(title: 'Nombre', data: crocodile.name),
         DataRow(title: 'Color', data: crocodile.color),
         DataRow(title: 'Hábitat', data: crocodile.habitat),
+        DataRow(title: 'id', data: crocodile.id.toString()),
         const SizedBox(height: 20),
         // Calificación con estrellas
         Row(
@@ -127,6 +132,42 @@ class BodyProfileCustomItem extends StatelessWidget {
         Text(
           'Calificación: ${crocodile.stars.toStringAsFixed(1)}',
           style: const TextStyle(fontSize: 18),
+        ),
+        const SizedBox(height: 20),
+        // TextFormField para agregar notas o comentarios
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextFormField(
+            controller: _noteController,
+            decoration: InputDecoration(
+              labelText: 'Agregar nota',
+              hintText: 'Escribe una nota sobre este cocodrilo',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            maxLines: 3,
+          ),
+        ),
+        const SizedBox(height: 10),
+        // Botón de guardar
+        ElevatedButton(
+          onPressed: () {
+            // Aquí puedes guardar la nota utilizando _noteController.text
+            final String note = _noteController.text;
+            // Implementar lógica de guardado
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Nota guardada: $note'),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          ),
+          child: const Text('Guardar Nota'),
         ),
       ],
     );
