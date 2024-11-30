@@ -1,32 +1,35 @@
+import 'package:appanimals/screens/gatos/cats_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/models/cats_model.dart';
+import 'package:appanimals/models/cats/cats_model.dart';
 
-class CatsListItem extends StatelessWidget{
-  final CatsModel cat;
+class CatsListItem extends StatelessWidget {
+  final Cat cat;
 
   const CatsListItem({super.key, required this.cat});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+    return GestureDetector(
+      onTap: () {
+        // Aquí navegas al detalle del gato
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CatsDetailScreen(cat: cat),
+          ),
+        );
+      },
       child: ListTile(
-        contentPadding: const EdgeInsets.all(8.0),
-        leading: cat.avatar != null 
-        ? CircleAvatar(
-          backgroundImage: NetworkImage(cat.avatar!),
-          radius: 30,
-        )
-        : CircleAvatar(
-          radius: 30,
-          child: Icon(Icons.pets),
+        contentPadding: const EdgeInsets.all(10),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(cat.avatar),
         ),
-        title: Text(cat.nombre ?? 'Sin nombre'),
-        subtitle: Text(
-                    '${cat.raza ?? 'Sin raza'} - ${cat.color ?? 'Sin color'}\n'
-                    'Cazador: ${cat.cazador ?? 'No especificado'}',
-                    style: const TextStyle(fontSize: 12),
-                  ),
+        title: Text(cat.nombre),
+        subtitle: Text('Color: ${cat.color}'),
+        trailing: Icon(
+          cat.favorito ? Icons.favorite : Icons.favorite_border,
+          color: cat.favorito ? Colors.red : Colors.grey,
+        ),
       ),
     );
   }

@@ -1,8 +1,7 @@
-import 'package:appanimals/screens/gatos/cats_list_item.dart';
-import 'package:appanimals/service/cats_service.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/gatos/cats_details_screen.dart';
-import 'package:appanimals/models/cats_model.dart';
+import 'package:appanimals/models/cats/cats_model.dart';
+import 'package:appanimals/service/cats_service.dart';
+import 'cats_list_item.dart';
 
 class CatsListScreen extends StatefulWidget {
   const CatsListScreen({super.key});
@@ -12,9 +11,7 @@ class CatsListScreen extends StatefulWidget {
 }
 
 class _CatsListScreenState extends State<CatsListScreen> {
-  late Future<List<CatsModel>> _catsFuture;
-  List<CatsModel> _filteredCats = [];
-  String _searchQuery = '';
+  late Future<List<Cat>> _catsFuture;
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -24,73 +21,61 @@ class _CatsListScreenState extends State<CatsListScreen> {
     _catsFuture = CatsService.fetchCats();
   }
 
-  void _updateSearch(String query){
+  void _updateSearch(String query) {
     setState(() {
-      _searchQuery = query;
-      _filteredCats = _filteredCats.where((cat){
-        return cat.nombre!.toLowerCase().contains(_searchQuery.toLowerCase());
-      }).toList();
+      // Aquí puedes agregar la lógica de búsqueda
+      _catsFuture = CatsService.fetchCats().then((cats) {
+        return cats.where((cat) {
+          return cat.nombre.toLowerCase().contains(query.toLowerCase());
+        }).toList();
+      });
     });
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Listado de Gatos'),
-        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
       ),
       body: Column(
         children: [
-          _buildSearchBar(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _searchController,
+              onChanged: _updateSearch,
+              decoration: const InputDecoration(
+                hintText: 'Buscar por nombre...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
           Expanded(
-            child: FutureBuilder<List<CatsModel>>(
+            child: FutureBuilder<List<Cat>>(
               future: _catsFuture,
               builder: (context, snapshot) {
-                if(snapshot.connectionState == ConnectionState.waiting) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                if (snapshot.hasError){
-                  return Center(child: Text('Errorr: ${snapshot.error}'));
-                }
-                final cats = snapshot.data ?? [];
-                _filteredCats = cats;
 
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                }
+
+                final cats = snapshot.data!;
                 return ListView.builder(
-                  itemCount: _filteredCats.length,
+                  itemCount: cats.length,
                   itemBuilder: (context, index) {
-                    final cat = _filteredCats[index];
-                    return GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                              CatsDetailsScreen(cat:cat),
-                          ),
-                        );
-                      },
-                      child: CatsListItem(cat:cat),
-                    );
-                  }
+                    return CatsListItem(cat: cats[index]);
+                  },
                 );
-              }
-            )
-          )
+              },
+            ),
+          ),
         ],
-      )
-    );
-  }
-  Widget _buildSearchBar(){
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        controller: _searchController,
-        onChanged: _updateSearch,
-        decoration: const InputDecoration(
-          labelText: 'Buscar gato....',
-          border: OutlineInputBorder(),
-        ),
       ),
     );
   }
