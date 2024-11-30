@@ -23,7 +23,7 @@ class _CatsListScreenState extends State<CatsListScreen> {
 
   void _updateSearch(String query) {
     setState(() {
-      // Aquí puedes agregar la lógica de búsqueda
+      //logica d bsuqeda
       _catsFuture = CatsService.fetchCats().then((cats) {
         return cats.where((cat) {
           return cat.nombre.toLowerCase().contains(query.toLowerCase());

@@ -11,7 +11,7 @@ class CatsListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Aquí navegas al detalle del gato
+       
         Navigator.push(
           context,
           MaterialPageRoute(
