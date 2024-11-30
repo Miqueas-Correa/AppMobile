@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/models/cocodrilos/crocodiles_model.dart';
+import 'package:appanimals/models/cocodriles/crocodiles_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CrocodilesDetailScreen extends StatefulWidget {

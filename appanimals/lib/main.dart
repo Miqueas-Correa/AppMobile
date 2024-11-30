@@ -4,13 +4,13 @@ import 'screens/home/home_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
 import 'package:appanimals/screens/buscar_screen.dart';
 import 'package:appanimals/screens/drawer_menu/animals_screen.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 import 'package:appanimals/providers/peces/fishes_provider.dart';
 import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'providers/theme_provider.dart';
 import 'providers/loading_provider.dart';
 import 'observers/loading_observer.dart';
-import 'widgets/loading/loading_overlay.dart';
+import 'widgets/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
 void main() {

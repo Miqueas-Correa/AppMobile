@@ -2,7 +2,7 @@ import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/peces/fishes_list_screen.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 // import 'package:appanimals/screens/perros/perros_list_screen.dart';
 // import 'package:appanimals/screens/gatos/gatos_list_screen.dart';
 import 'package:appanimals/widgets/animals_drawer_menu/custom_outlined_button.dart';

@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
-import 'package:appanimals/services/cocodrilos/crocodiles_service.dart';
-import 'package:appanimals/models/cocodrilos/crocodiles_model.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
+import 'package:appanimals/services/crocodiles_service.dart';
+import 'package:appanimals/models/cocodriles/crocodiles_model.dart';
 
 class CrocodilesListScreen extends StatefulWidget {
   const CrocodilesListScreen({super.key});
