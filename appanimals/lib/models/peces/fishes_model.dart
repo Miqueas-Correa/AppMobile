@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Fishes {
   final String id;
   final String nombre;
@@ -37,6 +40,7 @@ class Fishes {
       'color': color,
       'especie': especie,
       'avatar': avatar,
+      'stars': stars,
       'favorite': favorite,
     };
   }
