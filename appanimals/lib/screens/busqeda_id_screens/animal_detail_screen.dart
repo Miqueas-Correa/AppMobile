@@ -48,9 +48,10 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(widget.animal.title),
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsetsDirectional.all(16.0),

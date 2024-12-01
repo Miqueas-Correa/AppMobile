@@ -21,8 +21,9 @@ class CustomOutlinedButton extends StatelessWidget {
             fontWeight: FontWeight.w500,
             wordSpacing: 5,
           ),
-          backgroundColor: Colors.white, // Fondo blanco
-          foregroundColor: const Color.fromARGB(255, 21, 100, 21), // Texto verde
+          backgroundColor: const Color.fromARGB(255, 21, 100, 21), // Fondo blanco
+          foregroundColor: Colors.white, // Texto verde
+          shadowColor: const Color(0xFF3D3C3C),
           side: const BorderSide(color: Color.fromARGB(255, 21, 100, 21)), // Borde verde
           padding: const EdgeInsets.symmetric(
             vertical: 10,

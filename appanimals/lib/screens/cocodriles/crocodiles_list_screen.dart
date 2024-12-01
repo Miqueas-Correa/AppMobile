@@ -1,20 +1,20 @@
 import 'dart:developer';
-import 'package:appanimals/models/dogs_model.dart';
-import 'package:appanimals/screens/dogs/dogs_detalis_screen.dart';
-import 'package:appanimals/service/dogs_service.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
+import 'package:appanimals/service/crocodiles_service.dart';
+import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
-class DogsListScreen extends StatefulWidget {
-  const DogsListScreen({super.key});
+class CrocodilesListScreen extends StatefulWidget {
+  const CrocodilesListScreen({super.key});
 
   @override
-  _dongsListScreenState createState() => _dongsListScreenState();
+  _CrocodilesListScreenState createState() => _CrocodilesListScreenState();
 }
 
-// ignore: camel_case_types
-class _dongsListScreenState extends State<DogsListScreen> {
-  late Future<List<DogsModel>> _dogsFuture;
-  List<DogsModel> _auxiliarDogs = [];
+class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
+  late Future<List<Crocodile>> _crocodilesFuture;
+  List<Crocodile> _auxiliarCrocodiles = [];
   String _searchQuery = '';
   bool _searchActive = false;
 
@@ -24,18 +24,34 @@ class _dongsListScreenState extends State<DogsListScreen> {
   @override
   void initState() {
     super.initState();
-    _dogsFuture = DogsService.fetchDogs();
+    _crocodilesFuture = CrocodilesService.fetchCrocodiles();
   }
 
   void _updateSearch(String? query) {
     setState(() {
       _searchQuery = query ?? '';
       if (_searchQuery.isEmpty) {
-        _auxiliarDogs = _auxiliarDogs; // Restablecer al estado original
+        _crocodilesFuture = CrocodilesService.fetchCrocodiles();
       } else {
-        _auxiliarDogs = _auxiliarDogs.where((dog) {
-          return dog.nombre.toLowerCase().contains(_searchQuery.toLowerCase());
-        }).toList();
+        _crocodilesFuture =
+            CrocodilesService.fetchCrocodiles().then((crocodiles) {
+          return crocodiles.where((crocodile) {
+            final searchLower = _searchQuery.toLowerCase();
+
+            // Buscar por nombre, color o hábitat (coincidencia parcial)
+            final matchesName =
+                crocodile.name.toLowerCase().contains(searchLower);
+            final matchesColor =
+                crocodile.color.toLowerCase().contains(searchLower);
+            final matchesHabitat =
+                crocodile.habitat.toLowerCase().contains(searchLower);
+
+            // Buscar por id (coincidencia exacta)
+            final matchesId = crocodile.id.toString() == _searchQuery;
+
+            return matchesName || matchesColor || matchesHabitat || matchesId;
+          }).toList();
+        });
       }
     });
   }
@@ -45,7 +61,7 @@ class _dongsListScreenState extends State<DogsListScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Listado de perros'),
+          title: const Text('Listado de Cocodrilos'),
           backgroundColor: const Color.fromARGB(255, 21, 100, 21),
           centerTitle: true,
         ),
@@ -53,8 +69,8 @@ class _dongsListScreenState extends State<DogsListScreen> {
           children: [
             _searchArea(),
             Expanded(
-              child: FutureBuilder<List<DogsModel>>(
-                future: _dogsFuture,
+              child: FutureBuilder<List<Crocodile>>(
+                future: _crocodilesFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -64,21 +80,22 @@ class _dongsListScreenState extends State<DogsListScreen> {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   }
 
-                  final dogs = snapshot.data!;
-                  _auxiliarDogs = dogs;
+                  final crocodiles = snapshot.data!;
+                  _auxiliarCrocodiles = crocodiles;
 
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: _auxiliarDogs.length,
+                    itemCount: _auxiliarCrocodiles.length,
                     itemBuilder: (context, index) {
-                      final dog = _auxiliarDogs[index];
+                      final crocodile = _auxiliarCrocodiles[index];
                       return GestureDetector(
                         onTap: () {
                           // Navegar a la pantalla de detalles, pasando el objeto completo
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DogsDetailScreen(dog: dog),
+                              builder: (context) =>
+                                  CrocodilesDetailScreen(crocodile: crocodile),
                             ),
                           );
                         },
@@ -103,38 +120,39 @@ class _dongsListScreenState extends State<DogsListScreen> {
                           ),
                           child: Row(
                             children: [
-                              // CircleAvatar(
-                              //   backgroundImage: NetworkImage(dog.avatar),
-                              //   radius: 40,
-                              // ),
-                              // const SizedBox(width: 10),
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(crocodile.avatar),
+                                radius: 40,
+                              ),
+                              const SizedBox(width: 10),
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      dog.nombre,
+                                      crocodile.name,
                                       style: const TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text('Raza: ${dog.raza}'),
+                                    Text('Color: ${crocodile.color}'),
                                   ],
                                 ),
                               ),
                               // Opción para marcar como favorito
                               IconButton(
                                 icon: Icon(
-                                  dog.favorite
+                                  crocodile.favorite
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color:
-                                      dog.favorite ? Colors.red : Colors.grey,
+                                  color: crocodile.favorite
+                                      ? Colors.red
+                                      : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    dog.favorite = !dog.favorite;
+                                    crocodile.favorite = !crocodile.favorite;
                                   });
                                 },
                               ),
@@ -149,14 +167,15 @@ class _dongsListScreenState extends State<DogsListScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
 
   AnimatedSwitcher _searchArea() {
     return AnimatedSwitcher(
-      switchInCurve: Curves.bounceIn,
-      switchOutCurve: Curves.bounceOut,
+      switchInCurve: Curves.easeIn,
+      switchOutCurve: Curves.easeOut,
       duration: const Duration(milliseconds: 300),
       child: (_searchActive)
           ? Padding(
@@ -173,7 +192,8 @@ class _dongsListScreenState extends State<DogsListScreen> {
                       onFieldSubmitted: (value) {
                         _updateSearch(value);
                       },
-                      decoration: const InputDecoration(hintText: 'Buscar...'),
+                      decoration: const InputDecoration(
+                          hintText: 'Buscar por nombre/habitat/color/id...'),
                     ),
                   ),
                   IconButton(

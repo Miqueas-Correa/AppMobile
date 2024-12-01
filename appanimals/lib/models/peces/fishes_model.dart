@@ -1,28 +1,47 @@
+//import 'dart:convert';
+//import 'package:shared_preferences/shared_preferences.dart';
+
 class Fishes {
   final String id;
-  final String especie;
   final String nombre;
   final String color;
+  final String especie;
+  final String avatar;
+  double stars;
+  bool favorite;
 
 
   Fishes({
-    required this.especie,
+    required this.id,
     required this.nombre,
     required this.color,
-    required this.id,
+    required this.especie,
+    required this.avatar,
+    required this.stars,
+    this.favorite = false,
   });
 
-  factory Fishes.fromJson(Map<String, dynamic> json) => Fishes(
-        especie: json["especie"] ?? 'Especie no encontrada',
-        nombre: json["nombre"] ?? 'Nombre desconocido',
-        color: json["color"] ?? 'Color no econtrado',
-        id: json["id"],
-      );
+  factory Fishes.fromJson(Map<String, dynamic> json) {
+    return Fishes(
+      id: json["id"],
+      nombre: json["nombre"],
+      color: json["color"],
+      especie: json["especie"],
+      avatar: json['avatar'],
+      stars: (json['stars'] != null) ? json['stars'].toDouble() : 0.0,
+      favorite: json['favorite'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "especie": especie,
-        "nombre": nombre, //no muestra -> dice nombre desconocido
-        "olor": color,
-        "id": id,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nombre': nombre,
+      'color': color,
+      'especie': especie,
+      'avatar': avatar,
+      'stars': stars,
+      'favorite': favorite,
+    };
+  }
 }
