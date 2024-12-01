@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           '/buscar': (context) => BuscarScreen(),
           '/animals': (context) => const AnimalScreen(),
           '/crocodile_profile': (context) => const CrocodilesListScreen(),
-          '/list_fishes': (context) => const FishesListScreen(),
+          // '/list_fishes': (context) => const FishesListScreen(),
           '/perfiles': (context) => ProfilesScreen(),
         },
         navigatorObservers: [

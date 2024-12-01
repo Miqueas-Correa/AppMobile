@@ -93,11 +93,11 @@ class AnimalHistory extends StatelessWidget {
                       text: 'Ver listado',
                       onPressed: () {
                         if (selectedAnimal == 'peces') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FishesListScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => FishesListScreen()),
+                          // );
                         } else if (selectedAnimal == 'cocodrilos') {
                           Navigator.push(
                             context,

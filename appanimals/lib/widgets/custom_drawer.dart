@@ -1,8 +1,8 @@
-import 'package:appanimals/screens/news/news_screen.dart';
+import 'package:appanimals/screens/drawer_menu/news_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/acerca_de_.dart';
-import 'package:appanimals/screens/animals_screen.dart';
-import 'package:appanimals/screens/explorar_screen.dart';
+import 'package:appanimals/screens/drawer_menu/acerca_de_.dart';
+import 'package:appanimals/screens/drawer_menu/animals_screen.dart';
+import 'package:appanimals/screens/drawer_menu/explorar_screen.dart';
 // import 'package:provider/provider.dart';
 // import 'package:appanimals/providers/theme_provider.dart';
 

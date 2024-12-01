@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/helpers/peces/fishes_future.dart';
+// import 'package:appanimals/helpers/peces/fishes_future.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
 
 class SearchFishesDelegate extends SearchDelegate {
   void reset() {
     query = '';
-    clearActiveSearch();
+    // clearActiveSearch();
   }
 
   @override
@@ -37,7 +37,7 @@ class SearchFishesDelegate extends SearchDelegate {
       return Container();
     }
     return FutureBuilder<List<Fishes>?>(
-      future: searchFishes(query),
+      // future: searchFishes(query),
       builder: (context, AsyncSnapshot<List<Fishes>?> snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
@@ -76,7 +76,7 @@ class SearchFishesDelegate extends SearchDelegate {
             ),
           );
         }
-      },
+      }, future: null,
     );
   }
 }
