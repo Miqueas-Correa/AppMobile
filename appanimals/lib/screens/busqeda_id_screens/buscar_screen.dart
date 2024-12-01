@@ -1,8 +1,8 @@
-import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/models/categories_model.dart';
-import 'package:appanimals/widgets/category_card.dart';
 import 'package:appanimals/screens/busqeda_id_screens/animal_detail_screen.dart';
+import 'package:appanimals/widgets/widgets.dart';
+import 'package:appanimals/screens/screens.dart';
 
 class BuscarScreen extends StatelessWidget {
   BuscarScreen({super.key});

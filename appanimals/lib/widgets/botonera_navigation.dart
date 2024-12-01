@@ -1,8 +1,5 @@
-import 'package:appanimals/screens/busqeda_id_screens/buscar_screen.dart';
-import 'package:appanimals/screens/home/home_screen.dart';
-import 'package:appanimals/screens/profile_screen.dart';
-import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:appanimals/screens/screens.dart';
 
 class BotoneraNavigation extends StatefulWidget {
   const BotoneraNavigation({
