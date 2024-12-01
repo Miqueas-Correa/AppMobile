@@ -32,6 +32,7 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
     );
     setState(() {}); // Actualizar el estado para mostrar la tarjeta del animal
   }
+
   Widget _buildAnimalCard() {
     return AnimalService.buildAnimalCard(
       animalData: _animalData,
@@ -47,9 +48,10 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(widget.animal.title),
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsetsDirectional.all(16.0),

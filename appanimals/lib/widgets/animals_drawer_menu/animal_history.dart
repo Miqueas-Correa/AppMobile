@@ -1,22 +1,21 @@
+import 'package:appanimals/screens/dogs/dogs_list_screen.dart';
+import 'package:appanimals/screens/gatos/cats_list_screen.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
-import 'package:appanimals/screens/list/dogs_list_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 import 'package:appanimals/widgets/animals_drawer_menu/custom_outlined_button.dart';
-import 'package:flutter/material.dart';
-import 'package:appanimals/screens/home/home_screen.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
 
 class AnimalHistory extends StatelessWidget {
   final String title;
   final String text;
-  final String selectedAnimal; // Este es el nuevo parámetro
-
+  final String selectedAnimal;
   const AnimalHistory({
     super.key,
     required this.title,
     required this.text,
-    required this.selectedAnimal, // Ahora recibe el tipo de animal
+    required this.selectedAnimal,
   });
 
   @override
@@ -27,6 +26,7 @@ class AnimalHistory extends StatelessWidget {
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -37,47 +37,50 @@ class AnimalHistory extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: (screenWidth * 0.05)),
           child: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Título del animal
+                SizedBox(height: screenHeight * 0.05),
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    wordSpacing: 4,
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 21, 100, 21),
+                    wordSpacing: 2,
                     height: 1.5,
                     fontWeight: FontWeight.bold,
-                    fontSize: 35,
+                    fontSize: screenWidth * 0.07,
                   ),
                 ),
                 // Texto adicional sobre el animal
-                const SizedBox(height: 30),
+                SizedBox(height: screenHeight * 0.05),
                 Card(
                   elevation: 10,
-                  color: const Color.fromARGB(255, 21, 100, 21), shadowColor: const Color(0xFF3D3C3C),
+                  color: const Color.fromARGB(255, 21, 100, 21),
+                  shadowColor: const Color(0xFF3D3C3C),
                   margin: const EdgeInsets.all(5),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 30, horizontal: 30),
+                    padding: EdgeInsets.symmetric(
+                      vertical: screenHeight * 0.04,
+                      horizontal: screenWidth * 0.05,
+                    ),
                     child: Text(
                       text,
                       textAlign: TextAlign.justify,
                       style: const TextStyle(
                         color: Colors.white,
-                        wordSpacing: 4,
+                        wordSpacing: 2,
                         height: 1.5,
                         fontWeight: FontWeight.w500,
-                        fontSize: 18,
                       ),
                     ),
                   ),
                 ),
                 // Botones de acción
-                const SizedBox(height: 50),
+                SizedBox(height: screenHeight * 0.05),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -94,7 +97,6 @@ class AnimalHistory extends StatelessWidget {
                     CustomOutlinedButton(
                       text: 'Ver listado',
                       onPressed: () {
-                        // Dependiendo del tipo de animal, navegamos a la lista correspondiente
                         if (selectedAnimal == 'peces') {
                           Navigator.push(
                             context,
@@ -108,15 +110,17 @@ class AnimalHistory extends StatelessWidget {
                                 builder: (context) => CrocodilesListScreen()),
                           );
                         } else if (selectedAnimal == 'perros') {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => PerrosListScreen()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DogsListScreen()),
+                          );
                         } else if (selectedAnimal == 'gatos') {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => GatosListScreen()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CatsListScreen()),
+                          );
                         }
                       },
                     ),
@@ -127,6 +131,7 @@ class AnimalHistory extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BotoneraNavigation(),
     );
   }
 }
