@@ -117,7 +117,7 @@ flutter:
     - assets/images/profiles/Mikeas.jpeg
     - assets/images/profiles/Wanda.jpeg
     - assets/images/profiles/Brenda.jpeg
-    #.env
+    - assets/images/profiles/dog_profile.jpeg
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

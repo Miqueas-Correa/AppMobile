@@ -1,8 +1,4 @@
-// import 'package:appanimals/models/structs/crocodiles_struct.dart';
-import 'package:appanimals/models/structs/crocodiles_struct.dart';
-import 'package:appanimals/models/structs/dogs_struct.dart';
-// import 'package:appanimals/models/structs/cats_struct.dart';
-import 'package:appanimals/service/api_service.dart';
+import 'package:appanimals/service/animal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:appanimals/models/categories_model.dart';
@@ -22,61 +18,30 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
   Map<String, dynamic>? _animalData;
   bool _isFavorite = false;
 
-  Future<void> _fetchAnimalData(String id) async {
-    setState(() {
-      _isLoading = true;
-      _animalData = null;
-    });
-
-    try {
-      final data = await ApiService.fetchDataByCategoryAndId(
-          widget.animal.title.toLowerCase(), id);
-      if (data['msg'] == 'Ok' && data['data'] != null) {
-        setState(() {
-          _animalData = data['data'];
-        });
-      } else {
-        _showSnackBar('No se encontraron datos para este ID.');
-      }
-    } catch (e) {
-      _showSnackBar('Error al conectarse: $e');
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
   }
 
-  Widget _buildAnimalCard() {
-    if (_animalData == null) return const SizedBox.shrink();
+  Future<void> _fetchAnimalData(String id) async {
+    _animalData = await AnimalService.fetchAnimalData(
+      category: widget.animal.title.toLowerCase(),
+      id: id,
+      showSnackBar: _showSnackBar,
+      setLoading: (loading) => setState(() => _isLoading = loading),
+    );
+    setState(() {}); // Actualizar el estado para mostrar la tarjeta del animal
+  }
 
-    switch (widget.animal.title.toLowerCase()) {
-      case 'dogs':
-        return DogStruct(_animalData!, _isFavorite, () {
-          setState(() {
-            _isFavorite = !_isFavorite;
-          });
-        });
-      case 'cats':
-        // Aquí puedes agregar la estructura para cats
-        return const Text('Estructura para Cats no implementada.');
-      case 'crocodiles':
-        return CrocodileStruct(_animalData!, _isFavorite, () {
-          setState(() {
-            _isFavorite = !_isFavorite;
-          });
-        });
-      case 'fish':
-        // Aquí puedes agregar la estructura para fish
-        return const Text('Estructura para Fish no implementada.');
-      default:
-        return const Text('Categoría no soportada.');
-    }
+  Widget _buildAnimalCard() {
+    return AnimalService.buildAnimalCard(
+      animalData: _animalData,
+      category: widget.animal.title.toLowerCase(),
+      isFavorite: _isFavorite,
+      toggleFavorite: () => setState(() {
+        _isFavorite = !_isFavorite;
+      }),
+    );
   }
 
   @override

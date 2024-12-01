@@ -25,6 +25,10 @@ Widget DogStruct(
             'Fecha de nacimiento: ${data['fecha_nacimiento']}',
             style: const TextStyle(fontSize: 18),
           ),
+          Text(
+            'Id:  ${data['id']}',
+            style: const TextStyle(fontSize: 18),
+          ),
           Align(
             alignment: Alignment.centerRight,
             child: IconButton(
