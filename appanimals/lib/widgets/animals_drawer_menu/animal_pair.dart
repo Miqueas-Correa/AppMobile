@@ -22,7 +22,7 @@ class AnimalPair extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

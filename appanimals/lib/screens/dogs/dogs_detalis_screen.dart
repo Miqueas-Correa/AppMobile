@@ -1,65 +1,50 @@
-import 'package:appanimals/models/peces/fishes_model.dart';
+import 'package:appanimals/models/dogs_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FishesDetailScreen extends StatefulWidget {
-  final Fishes fishes;
-  final String avatarPath;
+class DogsDetailScreen extends StatefulWidget {
+  final DogsModel dog;
 
-  const FishesDetailScreen({
-    super.key,
-    required this.fishes,
-    required this.avatarPath,
-  });
+  const DogsDetailScreen({super.key, required this.dog});
 
   @override
-  _FishesDetailScreenState createState() => _FishesDetailScreenState();
+  _DogsDetailScreenState createState() => _DogsDetailScreenState();
 }
 
-class _FishesDetailScreenState extends State<FishesDetailScreen> {
-  late Fishes _fishes;
-  late TextEditingController _nameController;
-  late TextEditingController _speciesController;
-  late TextEditingController _colorController;
+class _DogsDetailScreenState extends State<DogsDetailScreen> {
+  late DogsModel _dog;
 
   @override
   void initState() {
     super.initState();
-    _fishes = widget.fishes;
+    _dog = widget.dog;
     _loadFavorite();
-
-    //inicializa
-    _nameController = TextEditingController(text: _fishes.nombre);
-    _speciesController = TextEditingController(text: _fishes.especie);
-    _colorController = TextEditingController(text: _fishes.color);
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _speciesController.dispose();
-    _colorController.dispose();
-    super.dispose();
   }
 
   Future<void> _loadFavorite() async {
     final prefs = await SharedPreferences.getInstance();
-    final favorite = prefs.getBool(_fishes.id.toString()) ?? false;
+    final favorite = prefs.getBool(_dog.id.toString()) ?? false;
     setState(() {
-      _fishes.favorite = favorite;
+      _dog.favorite = favorite;
     });
+  }
+
+  Future<void> _saveFavorite(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_dog.id.toString(), value);
   }
 
   void _updateRating(double rating) {
     setState(() {
-      _fishes.stars = rating;
+      _dog.stars = rating;
     });
   }
 
   void _toggleFavorite(bool value) {
     setState(() {
-      _fishes.favorite = value;
+      _dog.favorite = value;
     });
+    _saveFavorite(value);
   }
 
   @override
@@ -69,7 +54,7 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Perfil del pez'),
+        title: const Text('Perfil del perro'),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
         elevation: 10,
@@ -79,12 +64,12 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
           children: [
             HeaderProfileCustomItem(
               size: size,
-              avatarPath: widget.avatarPath,
+              nombre: _dog.nombre,
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: BodyProfileCustomItem(
-                fishes: _fishes,
+                dog: _dog,
                 onFavoriteChanged: _toggleFavorite,
                 onRatingChanged: _updateRating,
               ),
@@ -97,13 +82,13 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
 }
 
 class BodyProfileCustomItem extends StatelessWidget {
-  final Fishes fishes;
+  final DogsModel dog;
   final ValueChanged<bool> onFavoriteChanged;
   final ValueChanged<double> onRatingChanged;
 
   const BodyProfileCustomItem({
     super.key,
-    required this.fishes,
+    required this.dog,
     required this.onFavoriteChanged,
     required this.onRatingChanged,
   });
@@ -113,21 +98,15 @@ class BodyProfileCustomItem extends StatelessWidget {
     return Column(
       children: [
         SwitchListTile.adaptive(
-          title: const Text('Favorito',
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          value: fishes.favorite,
+          title: const Text('Favorito'),
+          value: dog.favorite,
           onChanged: onFavoriteChanged,
         ),
         const SizedBox(height: 20),
-        DataRow(
-            title: 'Nombre',
-            controller: TextEditingController(text: fishes.nombre)),
-        DataRow(
-            title: 'Especie',
-            controller: TextEditingController(text: fishes.especie)),
-        DataRow(
-            title: 'Color',
-            controller: TextEditingController(text: fishes.color)),
+        DataRow(title: 'Id: ', data: dog.id),
+        DataRow(title: 'Nombre: ', data: dog.nombre),
+        DataRow(title: 'Raza: ', data: dog.raza),
+        DataRow(title: 'Fecha de nacimiento: ', data: dog.fechaNacimiento),
         const SizedBox(height: 20),
         // Calificación con estrellas
         Row(
@@ -138,8 +117,8 @@ class BodyProfileCustomItem extends StatelessWidget {
                 onRatingChanged(index + 1.0);
               },
               child: Icon(
-                index < fishes.stars ? Icons.star : Icons.star_border,
-                color: const Color.fromARGB(255, 21, 100, 21),
+                index < dog.stars ? Icons.star : Icons.star_border,
+                color: Colors.yellow,
                 size: 40,
               ),
             );
@@ -147,7 +126,7 @@ class BodyProfileCustomItem extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Calificación: ${fishes.stars.toStringAsFixed(1)}',
+          'Calificación: ${dog.stars.toStringAsFixed(1)}',
           style: const TextStyle(fontSize: 18),
         ),
       ],
@@ -157,9 +136,9 @@ class BodyProfileCustomItem extends StatelessWidget {
 
 class DataRow extends StatelessWidget {
   final String title;
-  final TextEditingController controller;
+  final String data;
 
-  const DataRow({super.key, required this.title, required this.controller});
+  const DataRow({super.key, required this.title, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -172,14 +151,13 @@ class DataRow extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: TextFormField(
-                controller: controller,
-                decoration: decorationInput(
-                  label: title,
-                  hintText: 'Ingresa $title',
-                ),
-              ),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              data,
+              style: const TextStyle(fontSize: 16, color: Colors.black54),
             ),
           ],
         ),
@@ -188,56 +166,42 @@ class DataRow extends StatelessWidget {
   }
 }
 
-//inputs del textformfield
-InputDecoration decorationInput(
-    {IconData? icon, String? hintText, String? helperText, String? label}) {
-  return InputDecoration(
-    fillColor: Colors.black,
-    label: Text(label ?? ''),
-    hintText: hintText,
-    helperText: helperText,
-    helperStyle: const TextStyle(fontSize: 16),
-    prefixIcon: icon != null ? Icon(icon) : null,
-  );
-}
-
 class HeaderProfileCustomItem extends StatelessWidget {
   final Size size;
-  final String avatarPath;
+  final String? nombre;
 
-  const HeaderProfileCustomItem({
-    super.key,
-    required this.size,
-    required this.avatarPath,
-  });
+  const HeaderProfileCustomItem({super.key, required this.size, this.nombre});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: size.height * 0.40,
-      color: const Color.fromARGB(255, 58, 133, 58),
+      color: const Color.fromARGB(255, 21, 100, 21),
       child: Center(
         child: Container(
-          width: 200,
+          width: 200, // Tamaño del círculo
           height: 200,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: const Color.fromARGB(255, 21, 100, 21),
-              width: 2,
+              color: Colors.white, // Color del borde
+              width: 5, // Grosor del borde
             ),
           ),
           child: ClipOval(
-            child: avatarPath.isNotEmpty
-                ? Image.asset(
-                    avatarPath,
-                    fit: BoxFit.cover,
-                    width: 200,
-                    height: 200,
+            child: nombre != null && nombre!.isNotEmpty
+                ? Image.network(
+                    nombre!,
+                    fit: BoxFit
+                        .cover, // Ajuste para que la imagen cubra todo el círculo
+                    width:
+                        200, // Asegura que la imagen ocupe todo el espacio disponible
+                    height:
+                        200, // Asegura que la imagen ocupe todo el espacio disponible
                   )
                 : Image.asset(
-                    'assets/images/avatars_peces/avatar1.png',
+                    'assets/images/profiles/dog_profile.jpeg',
                     fit: BoxFit.cover,
                     width: 200,
                     height: 200,

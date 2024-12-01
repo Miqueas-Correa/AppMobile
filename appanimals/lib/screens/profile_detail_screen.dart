@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:appanimals/data/profile_data.dart';
 import 'package:appanimals/providers/theme_provider.dart';
-import 'package:appanimals/widgets/widgets_matias/profile_detail_card.dart';
+import 'package:appanimals/widgets/profile_detail_card.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 
 class ProfileDetailScreen extends StatefulWidget {
@@ -39,16 +39,11 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         // Colores según el tema
         const titleColor = Colors.white;
         final textColor = isLightTheme ? Colors.black : Colors.white;
-        final inputBorderColor =
-            isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C);
-        final iconColor = isLightTheme
-            ? const Color.fromARGB(255, 21, 100, 21)
-            : const Color.fromARGB(255, 21, 100, 21);
+        final inputBorderColor = isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C);
+        final iconColor = isLightTheme ? const Color.fromARGB(255, 21, 100, 21) : const Color.fromARGB(255, 21, 100, 21);
         final backgroundColor = isLightTheme ? Colors.white : Colors.black;
         final cardColor = isLightTheme
-            // ignore: deprecated_member_use
             ? Colors.grey.withOpacity(0.1)
-            // ignore: deprecated_member_use
             : Colors.grey.withOpacity(0.3);
 
         return Scaffold(
@@ -74,8 +69,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: const Color.fromARGB(
-                              255, 21, 100, 21), // Borde verde
+                          color: const Color.fromARGB(255, 21, 100, 21), // Borde verde
                           width: 5, // Grosor del borde (ajustado a 6)
                         ),
                       ),
@@ -182,9 +176,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(
+                      backgroundColor: MaterialStateProperty.all(
                           const Color.fromARGB(255, 21, 100, 21)),
-                      foregroundColor: WidgetStateProperty.all(Colors.white),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
                     ),
                     child: const Text('Guardar Opinión'),
                   ),

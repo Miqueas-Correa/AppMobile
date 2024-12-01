@@ -15,19 +15,28 @@ class AnimalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    final backgroundColor = isLightTheme ? Colors.white : Color(0xFF121212);
+    final fontColor = isLightTheme ? Colors.black : Colors.white;
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double cardSize = screenWidth * 0.4; // 40% del ancho de la pantalla
+    double imageSize = cardSize * 0.6; // 60% de la altura de la tarjeta
+    //double fontSize = screenWidth * 0.04; // 4% del ancho
+
     return GestureDetector(
       onTap: () {
         String description = "";
         String title = "";
         Color titleColor = Colors.white;
-        String animalType = ""; // Variable para el tipo de animal
+        String animalType = "";
 
-        // Lógica para definir el título, la descripción y el tipo de animal
+        // Lógica para definir el título y la descripción del animal
         if (text == 'Gatos') {
           title = "Época Egipcia";
           description =
               'Se cree que los egipcios comenzaron a domesticar gatos alrededor del 4.000 a.C. Los gatos fueron venerados por los egipcios debido a su habilidad para cazar roedores, que eran una amenaza para los alimentos almacenados. \nSe les asociaba con la diosa Bastet, quien representaba la protección, la fertilidad y la casa. Los gatos eran tan respetados que eran momificados y enterrados junto a sus dueños en tumbas reales.';
-          animalType = "gatos"; // Definir el tipo de animal
         } else if (text == 'Perros') {
           title = "Época Prehistórica";
           description =
@@ -43,28 +52,30 @@ class AnimalCard extends StatelessWidget {
           description =
               'Los cocodrilos han existido desde hace más de 200 millones de años, y pertenecen al grupo de los arcosaurios. \nEn la prehistoria, vivían en ambientes acuáticos similares a los actuales, pero en un entorno con especies de animales y plantas que ya no existen. \nHoy en día, los cocodrilos siguen siendo considerados "fósiles vivientes", ya que su anatomía es prácticamente la misma que hace millones de años.';
           animalType = "cocodrilos";
+        } else {
+          title = 'Proximamente...';
+          description = 'La sección que intentas ver no está disponible aún.';
         }
 
-        // Navegar a la pantalla AnimalDetails y pasar 'animalType'
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => AnimalDetails(
               imagePath: detailedImage,
               text: description,
-              title: title, // Pasar título
-              titleColor: titleColor, // Pasar color del título
-              animalType: animalType, // Pasar tipo de animal
+              title: title,
+              titleColor: titleColor,
+              animalType: animalType,
             ),
           ),
         );
       },
       child: Container(
-        width: 160,
-        height: 180,
+        width: cardSize,
+        height: cardSize,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
@@ -75,20 +86,22 @@ class AnimalCard extends StatelessWidget {
           ],
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Image.asset(
                 image,
-                height: 120,
-                width: 120,
+                height: imageSize,
+                width: imageSize,
               ),
             ),
             Text(
               text,
-              style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 15,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: fontColor,
+                  fontSize: (screenWidth * 0.04).toDouble(),
                   decoration: TextDecoration.none),
             )
           ],

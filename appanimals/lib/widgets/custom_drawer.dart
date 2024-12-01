@@ -1,35 +1,56 @@
-import 'package:appanimals/screens/drawer_menu/news_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:appanimals/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:appanimals/screens/drawer_menu/acerca_de_.dart';
 import 'package:appanimals/screens/drawer_menu/animals_screen.dart';
 import 'package:appanimals/screens/drawer_menu/explorar_screen.dart';
-// import 'package:provider/provider.dart';
-// import 'package:appanimals/providers/theme_provider.dart';
+import 'package:appanimals/screens/drawer_menu/news_screen.dart';
+import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final themeProvider = Provider.of<ThemeProvider>(context);
-    // final isLightTheme = themeProvider.currentTheme == ThemeData.light();
-
-    // Establecemos el color de los iconos según el tema
-    // final iconColor = isLightTheme ? Colors.white : Colors.black;
-
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              final isLightTheme = themeProvider.currentTheme == ThemeData.light();
+
+              return Container(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                color: Color.fromARGB(255, 21, 100, 21),
+                child: ListTile(
+                  leading: Icon(
+                    isLightTheme ? Icons.wb_sunny : Icons.nightlight_round,
+                    color: isLightTheme ? Colors.white : Colors.white,
+                  ),
+                  title: Text(
+                    isLightTheme ? 'Modo Claro' : 'Modo Oscuro',
+                    style: TextStyle(color: isLightTheme ? Colors.white : Colors.white),
+                  ),
+                  onTap: () {
+                    // Cambiar entre modo claro u oscuro
+                    themeProvider.toggleTheme();
+                  },
+                ),
+              );
+            }
+          ),
+          DrawerHeader(
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 21, 100, 21),
             ),
+            padding: EdgeInsets.all(10),
             child: Center(
-                child: Text(
-              'A n i m a l s \n   M e n u',
-              style: TextStyle(fontSize: 30, color: Colors.white),
-            )),
+              child: Text(
+                'A n i m a l s \n   M e n u',
+                style: TextStyle(fontSize: 30, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.home, color: Color.fromARGB(255, 21, 100, 21)),
@@ -43,23 +64,23 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Animales'),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AnimalScreen()));
+                context,
+                MaterialPageRoute(builder: (context) => const AnimalScreen()),
+              );
             },
           ),
           ListTile(
-            leading: Icon(Icons.newspaper_sharp,
-                color: Color.fromARGB(255, 21, 100, 21)),
+            leading: Icon(Icons.newspaper_sharp, color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Noticias'),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const NewsScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NewsScreen()),
+              );
             },
           ),
           ListTile(
-            leading:
-                Icon(Icons.explore, color: Color.fromARGB(255, 21, 100, 21)),
+            leading: Icon(Icons.explore, color: Color.fromARGB(255, 21, 100, 21)),
             title: const Text('Explorar'),
             onTap: () {
               Navigator.push(

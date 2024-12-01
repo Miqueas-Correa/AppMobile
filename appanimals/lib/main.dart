@@ -1,5 +1,5 @@
 import 'package:appanimals/providers/cocodrilos/crocodiles_provider.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/busqeda_id_screens/buscar_screen.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           '/buscar': (context) => BuscarScreen(),
           '/animals': (context) => const AnimalScreen(),
           '/crocodile_profile': (context) => const CrocodilesListScreen(),
-          // '/list_fishes': (context) => const FishesListScreen(),
+          '/list_fishes': (context) => const FishesListScreen(),
           '/perfiles': (context) => ProfilesScreen(),
         },
         navigatorObservers: [

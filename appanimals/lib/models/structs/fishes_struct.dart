@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names
-Widget DogStruct(
+Widget FishesStruct(
     Map<String, dynamic> data, bool isFavorite, VoidCallback onFavoriteToggle) {
   return Card(
     elevation: 5,
@@ -18,15 +18,15 @@ Widget DogStruct(
             style: const TextStyle(fontSize: 18),
           ),
           Text(
-            'Raza: ${data['raza']}',
+            'Especie: ${data['especie']}',
             style: const TextStyle(fontSize: 18),
           ),
           Text(
-            'Fecha de nacimiento: ${data['fecha_nacimiento']}',
+            'Color: ${data['color']}',
             style: const TextStyle(fontSize: 18),
           ),
           Text(
-            'Id:  ${data['id']}',
+            'Id: ${data['id']}',
             style: const TextStyle(fontSize: 18),
           ),
           Align(
@@ -35,7 +35,7 @@ Widget DogStruct(
               onPressed: onFavoriteToggle,
               icon: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : Colors.grey,
+                color: isFavorite ? const Color.fromARGB(255, 21, 100, 21) : Colors.grey,
               ),
             ),
           ),
