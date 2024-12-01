@@ -32,7 +32,6 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
     );
     setState(() {}); // Actualizar el estado para mostrar la tarjeta del animal
   }
-
   Widget _buildAnimalCard() {
     return AnimalService.buildAnimalCard(
       animalData: _animalData,

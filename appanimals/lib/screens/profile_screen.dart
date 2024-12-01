@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/profile_detail_screen.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
-import 'package:provider/provider.dart';
-import 'package:appanimals/providers/theme_provider.dart';
 
 class ProfilesScreen extends StatelessWidget {
   ProfilesScreen({super.key});
 
   final List<String> nombres = [
-    'Matías Emanuel Coronel Hittler',
-    'Miqueas Hugo Ezequiel Correa',
-    'Wanda Yasmin Nara Suarez',
-    'Brenda Anabella Yañez Wagner'
+    'Matías Coronel Dittler',
+    'Miqueas Correa',
+    'Wanda Suarez',
+    'Brenda Yañez'
   ];
 
   final List<String> imagenes = [
     'assets/images/profiles/Matias.jpeg',
     'assets/images/profiles/Mikeas.jpeg',
-    'assets/images/profiles/wanda.jpeg',
+    'assets/images/profiles/Wanda.jpeg',
     'assets/images/profiles/Brenda.jpeg'
   ];
 
@@ -25,36 +23,25 @@ class ProfilesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Obtener el tema actual para aplicar el estilo adecuado
     final isLightTheme = Theme.of(context).brightness == Brightness.light;
-    final borderColor = isLightTheme ? Colors.black : Colors.white;
-    final shadowColor = isLightTheme ? Colors.black : Colors.white;
-    final arrowColor = isLightTheme ? Colors.black : Colors.white;
+    final borderColor = isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C);
+    final shadowColor = isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C);
+    final arrowColor = isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perfiles'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-        actions: [
-          // IconButton para cambiar entre temas
-          IconButton(
-            icon: Icon(isLightTheme
-                ? Icons.wb_sunny
-                : Icons.nightlight_round), // Cambiar ícono según el tema
-            onPressed: () {
-              // Cambiar entre temas claro y oscuro
-              context.read<ThemeProvider>().toggleTheme();
-            },
-          ),
-        ],
+        foregroundColor: Colors.white,
       ),
       body: ListView.builder(
         itemCount: nombres.length,
         itemBuilder: (context, index) {
           return Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Card(
-              color: isLightTheme ? Colors.white : Colors.black54,
+              color: isLightTheme ? Colors.white : Colors.black,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 side: BorderSide(

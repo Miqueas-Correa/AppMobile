@@ -72,6 +72,7 @@ flutter:
     - assets/images/portada.jpeg
     - assets/images/logo.jpeg
     - assets/images/loading.gif
+    - assets/images/loading_image.png
     # acerca de
     - assets/images/acerca_de_screens/exintos_acerca_De.png
     - assets/images/buscar_page/cocodriloo_2.jpg
@@ -81,12 +82,12 @@ flutter:
 
     # categorias animales
     - assets/images/animals_screen/
-    - assets/images/animals_screen/cat.jpg
+    - assets/images/animals_screen/cat.png
     - assets/images/animals_screen/cocodrile.png
-    - assets/images/animals_screen/dog.jpg
+    - assets/images/animals_screen/dog.png
     - assets/images/animals_screen/fish.png
-    - assets/images/animals_screen/fox.webp
-    - assets/images/animals_screen/penguin.jpg
+    - assets/images/animals_screen/fox.png
+    - assets/images/animals_screen/penguin.png
     - assets/images/animals_details/
     - assets/images/animals_details/gato_detail.jpg
     - assets/images/animals_details/perro_details.jpg

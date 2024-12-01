@@ -1,5 +1,7 @@
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:appanimals/screens/list/dogs_list_screen.dart';
 import 'package:appanimals/screens/peces/fishes_list_screen.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 import 'package:appanimals/widgets/animals_drawer_menu/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/home/home_screen.dart';
@@ -19,6 +21,12 @@ class AnimalHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+
+    final backgroundColor = isLightTheme ? Colors.white : Color(0xFF121212);
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -26,7 +34,7 @@ class AnimalHistory extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
       ),
-      backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -50,7 +58,7 @@ class AnimalHistory extends StatelessWidget {
                 const SizedBox(height: 30),
                 Card(
                   elevation: 10,
-                  color: const Color.fromARGB(255, 21, 100, 21),
+                  color: const Color.fromARGB(255, 21, 100, 21), shadowColor: const Color(0xFF3D3C3C),
                   margin: const EdgeInsets.all(5),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -100,11 +108,10 @@ class AnimalHistory extends StatelessWidget {
                                 builder: (context) => CrocodilesListScreen()),
                           );
                         } else if (selectedAnimal == 'perros') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DogsListScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => PerrosListScreen()),
+                          // );
                         } else if (selectedAnimal == 'gatos') {
                           // Navigator.push(
                           //   context,

@@ -1,8 +1,9 @@
 import 'dart:developer';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:appanimals/screens/peces/fishes_details_screen.dart';
-import 'package:appanimals/services/peces/fishes_service.dart';
+import 'package:appanimals/service/fishes_service.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
 
 class FishesListScreen extends StatefulWidget {
@@ -52,6 +53,11 @@ class _FishesListScreenState extends State<FishesListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+
+    final borderColor = isLightTheme ? Color.fromARGB(31, 83, 85, 84) : const Color(0xFF3D3C3C);
+    final shadowColor = isLightTheme ? Color.fromARGB(31, 78, 80, 79) : const Color(0xFF3D3C3C);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -109,15 +115,15 @@ class _FishesListScreenState extends State<FishesListScreen> {
                               horizontal: 10, vertical: 10),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 229, 235, 231),
+                            color: borderColor,
                             borderRadius: BorderRadius.circular(25),
                             border: Border.all(
                               color: Color.fromARGB(31, 83, 85, 84),
                               width: 2,
                             ),
-                            boxShadow: const [
+                            boxShadow: [
                               BoxShadow(
-                                color: Color.fromARGB(31, 78, 80, 79),
+                                color: shadowColor,
                                 blurRadius: 3,
                                 spreadRadius: 0,
                                 offset: Offset(0, 3),
@@ -173,6 +179,7 @@ class _FishesListScreenState extends State<FishesListScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }

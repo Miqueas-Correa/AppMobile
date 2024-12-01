@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
 import 'package:appanimals/service/crocodiles_service.dart';
 import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
@@ -26,31 +26,35 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
     super.initState();
     _crocodilesFuture = CrocodilesService.fetchCrocodiles();
   }
-void _updateSearch(String? query) {
-  setState(() {
-    _searchQuery = query ?? '';
-    if (_searchQuery.isEmpty) {
-      _crocodilesFuture = CrocodilesService.fetchCrocodiles();
-    } else {
-      _crocodilesFuture = CrocodilesService.fetchCrocodiles().then((crocodiles) {
-        return crocodiles.where((crocodile) {
-          final searchLower = _searchQuery.toLowerCase();
 
-          // Buscar por nombre, color o hábitat (coincidencia parcial)
-          final matchesName = crocodile.name.toLowerCase().contains(searchLower);
-          final matchesColor = crocodile.color.toLowerCase().contains(searchLower);
-          final matchesHabitat = crocodile.habitat.toLowerCase().contains(searchLower);
+  void _updateSearch(String? query) {
+    setState(() {
+      _searchQuery = query ?? '';
+      if (_searchQuery.isEmpty) {
+        _crocodilesFuture = CrocodilesService.fetchCrocodiles();
+      } else {
+        _crocodilesFuture =
+            CrocodilesService.fetchCrocodiles().then((crocodiles) {
+          return crocodiles.where((crocodile) {
+            final searchLower = _searchQuery.toLowerCase();
 
-          // Buscar por id (coincidencia exacta)
-          final matchesId = crocodile.id.toString() == _searchQuery;
+            // Buscar por nombre, color o hábitat (coincidencia parcial)
+            final matchesName =
+                crocodile.name.toLowerCase().contains(searchLower);
+            final matchesColor =
+                crocodile.color.toLowerCase().contains(searchLower);
+            final matchesHabitat =
+                crocodile.habitat.toLowerCase().contains(searchLower);
 
-          return matchesName || matchesColor || matchesHabitat || matchesId;
-        }).toList();
-      });
-    }
-  });
-}
+            // Buscar por id (coincidencia exacta)
+            final matchesId = crocodile.id.toString() == _searchQuery;
 
+            return matchesName || matchesColor || matchesHabitat || matchesId;
+          }).toList();
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +192,8 @@ void _updateSearch(String? query) {
                       onFieldSubmitted: (value) {
                         _updateSearch(value);
                       },
-                      decoration: const InputDecoration(hintText: 'Buscar por nombre/habitat/color/id...'),
+                      decoration: const InputDecoration(
+                          hintText: 'Buscar por nombre/habitat/color/id...'),
                     ),
                   ),
                   IconButton(

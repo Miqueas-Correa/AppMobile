@@ -20,19 +20,16 @@ class _LoadingAnimationState extends State<LoadingAnimation>
   void initState() {
     super.initState();
 
-    // Controlador para la rotación
     _rotationController = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
     )..repeat();
 
-    // Controlador para el cambio de color
     _colorController = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
     )..repeat(reverse: true);
 
-    // Ocultar la animación después del tiempo especificado
     Future.delayed(widget.duration, () {
       if (mounted) {
         setState(() {
@@ -74,7 +71,7 @@ class _LoadingAnimationState extends State<LoadingAnimation>
               },
             ),
           )
-        : Container(); // Después de la animación, no muestra nada
+        : Container();
   }
 }
 

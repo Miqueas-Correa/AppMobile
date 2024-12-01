@@ -19,7 +19,7 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
   void initState() {
     super.initState();
     _crocodile = widget.crocodile;
-    _loadFavorite(); 
+    _loadFavorite();
   }
 
   Future<void> _loadFavorite() async {
@@ -220,22 +220,25 @@ class HeaderProfileCustomItem extends StatelessWidget {
       color: const Color.fromARGB(255, 21, 100, 21),
       child: Center(
         child: Container(
-          width: 200,  // Tamaño del círculo
+          width: 200, // Tamaño del círculo
           height: 200,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: Colors.white,  // Color del borde
-              width: 5,  // Grosor del borde
+              color: Colors.white, // Color del borde
+              width: 5, // Grosor del borde
             ),
           ),
           child: ClipOval(
             child: avatar != null && avatar!.isNotEmpty
                 ? Image.network(
                     avatar!,
-                    fit: BoxFit.cover,  // Ajuste para que la imagen cubra todo el círculo
-                    width: 200,  // Asegura que la imagen ocupe todo el espacio disponible
-                    height: 200, // Asegura que la imagen ocupe todo el espacio disponible
+                    fit: BoxFit
+                        .cover, // Ajuste para que la imagen cubra todo el círculo
+                    width:
+                        200, // Asegura que la imagen ocupe todo el espacio disponible
+                    height:
+                        200, // Asegura que la imagen ocupe todo el espacio disponible
                   )
                 : Image.asset(
                     'assets/images/crocodile.png',
