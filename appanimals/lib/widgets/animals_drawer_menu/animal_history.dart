@@ -21,6 +21,10 @@ class AnimalHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+
+    final backgroundColor = isLightTheme ? Colors.white : Color(0xFF121212);
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -31,7 +35,7 @@ class AnimalHistory extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: (screenWidth * 0.05)),
@@ -56,7 +60,7 @@ class AnimalHistory extends StatelessWidget {
                 SizedBox(height: screenHeight * 0.05),
                 Card(
                   elevation: 10,
-                  color: const Color.fromARGB(255, 21, 100, 21),
+                  color: const Color.fromARGB(255, 21, 100, 21), shadowColor: const Color(0xFF3D3C3C),
                   margin: const EdgeInsets.all(5),
                   child: Padding(
                     padding: EdgeInsets.symmetric(

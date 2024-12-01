@@ -6,7 +6,7 @@ class ProfilesScreen extends StatelessWidget {
   ProfilesScreen({super.key});
 
   final List<String> nombres = [
-    'Matías Coronel Hittler',
+    'Matías Coronel Dittler',
     'Miqueas Correa',
     'Wanda Suarez',
     'Brenda Yañez'

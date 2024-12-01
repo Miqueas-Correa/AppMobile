@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
-import 'package:appanimals/services/peces/fishes_service.dart';
+import 'package:appanimals/service/fishes_service.dart';
 
 class FishesProvider with ChangeNotifier {
   List<Fishes> _listFishes = [];

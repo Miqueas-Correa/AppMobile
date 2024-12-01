@@ -1,6 +1,6 @@
-// import 'package:appanimals/models/structs/crocodiles_struct.dart';
 import 'package:appanimals/models/structs/crocodiles_struct.dart';
 import 'package:appanimals/models/structs/dogs_struct.dart';
+import 'package:appanimals/models/structs/fishes_struct.dart';
 // import 'package:appanimals/models/structs/cats_struct.dart';
 import 'package:appanimals/service/api_service.dart';
 import 'package:flutter/material.dart';
@@ -72,8 +72,11 @@ class _AnimalDetailScreenState extends State<AnimalDetailScreen> {
           });
         });
       case 'fish':
-        // Aquí puedes agregar la estructura para fish
-        return const Text('Estructura para Fish no implementada.');
+        return FishesStruct(_animalData!, _isFavorite, () {
+          setState(() {
+            _isFavorite = !_isFavorite;
+          });
+        });
       default:
         return const Text('Categoría no soportada.');
     }

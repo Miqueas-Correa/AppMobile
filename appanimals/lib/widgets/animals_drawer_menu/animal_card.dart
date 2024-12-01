@@ -15,6 +15,10 @@ class AnimalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    final backgroundColor = isLightTheme ? Colors.white : Color(0xFF121212);
+    final fontColor = isLightTheme ? Colors.black : Colors.white;
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     double cardSize = screenWidth * 0.4; // 40% del ancho de la pantalla
@@ -48,7 +52,11 @@ class AnimalCard extends StatelessWidget {
           description =
               'Los cocodrilos han existido desde hace más de 200 millones de años, y pertenecen al grupo de los arcosaurios. \nEn la prehistoria, vivían en ambientes acuáticos similares a los actuales, pero en un entorno con especies de animales y plantas que ya no existen. \nHoy en día, los cocodrilos siguen siendo considerados "fósiles vivientes", ya que su anatomía es prácticamente la misma que hace millones de años.';
           animalType = "cocodrilos";
+        } else {
+          title = 'Proximamente...';
+          description = 'La sección que intentas ver no está disponible aún.';
         }
+
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -66,7 +74,7 @@ class AnimalCard extends StatelessWidget {
         width: cardSize,
         height: cardSize,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -92,7 +100,7 @@ class AnimalCard extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.black,
+                  color: fontColor,
                   fontSize: (screenWidth * 0.04).toDouble(),
                   decoration: TextDecoration.none),
             )

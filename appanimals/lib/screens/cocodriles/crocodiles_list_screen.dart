@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
 import 'package:appanimals/service/crocodiles_service.dart';
 import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 

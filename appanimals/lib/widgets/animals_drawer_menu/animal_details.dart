@@ -41,8 +41,9 @@ class AnimalDetails extends StatelessWidget {
           Stack(
             children: [
               // Imagen que ocupa toda la pantalla
-              Image.asset(
-                imagePath,
+              FadeInImage(
+                placeholder: AssetImage('assets/images/loading_image.png'), //simula ser un gif
+                image: AssetImage(imagePath),
                 fit: BoxFit.cover,
                 height: screenHeight, //responsive
                 width: screenWidth, // responsive
