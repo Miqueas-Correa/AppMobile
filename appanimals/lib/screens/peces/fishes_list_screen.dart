@@ -1,20 +1,22 @@
 import 'dart:developer';
-import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
-import 'package:appanimals/service/crocodiles_service.dart';
-import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
+import 'package:appanimals/widgets/custom_drawer.dart';
+import 'package:appanimals/screens/peces/fishes_details_screen.dart';
+import 'package:appanimals/services/peces/fishes_service.dart';
+import 'package:appanimals/models/peces/fishes_model.dart';
 
-class CrocodilesListScreen extends StatefulWidget {
-  const CrocodilesListScreen({super.key});
+class FishesListScreen extends StatefulWidget {
+  const FishesListScreen({super.key});
 
   @override
-  _CrocodilesListScreenState createState() => _CrocodilesListScreenState();
+  _FishesListScreenState createState() => _FishesListScreenState();
 }
 
-class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
-  late Future<List<Crocodile>> _crocodilesFuture;
-  List<Crocodile> _auxiliarCrocodiles = [];
+class _FishesListScreenState extends State<FishesListScreen> {
+  late Future<List<Fishes>> _fishesFuture;
+  List<Fishes> _allFishes = [];
+  List<Fishes> _filteredFishes = [];
+
   String _searchQuery = '';
   bool _searchActive = false;
 
@@ -24,49 +26,47 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
   @override
   void initState() {
     super.initState();
-    _crocodilesFuture = CrocodilesService.fetchCrocodiles();
+    _fishesFuture = FishesService.fetchFishes();
+    _searchController.addListener(_onSearchChanged);
   }
-void _updateSearch(String? query) {
-  setState(() {
-    _searchQuery = query ?? '';
+
+  void _onSearchChanged() {
+    setState(() {
+      _searchQuery = _searchController.text.toLowerCase();
+      _filterFishes();
+    });
+  }
+
+  void _filterFishes() {
     if (_searchQuery.isEmpty) {
-      _crocodilesFuture = CrocodilesService.fetchCrocodiles();
+      _filteredFishes = _allFishes;
     } else {
-      _crocodilesFuture = CrocodilesService.fetchCrocodiles().then((crocodiles) {
-        return crocodiles.where((crocodile) {
-          final searchLower = _searchQuery.toLowerCase();
-
-          // Buscar por nombre, color o hábitat (coincidencia parcial)
-          final matchesName = crocodile.name.toLowerCase().contains(searchLower);
-          final matchesColor = crocodile.color.toLowerCase().contains(searchLower);
-          final matchesHabitat = crocodile.habitat.toLowerCase().contains(searchLower);
-
-          // Buscar por id (coincidencia exacta)
-          final matchesId = crocodile.id.toString() == _searchQuery;
-
-          return matchesName || matchesColor || matchesHabitat || matchesId;
-        }).toList();
-      });
+      _filteredFishes = _allFishes.where((fishes) {
+        return fishes.nombre.toLowerCase().contains(_searchQuery) ||
+            fishes.color.toLowerCase().contains(_searchQuery) ||
+            fishes.especie.toLowerCase().contains(_searchQuery) ||
+            fishes.id.toString().contains(_searchQuery);
+      }).toList();
     }
-  });
-}
-
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Listado de Cocodrilos'),
+          title: const Text('Listado de Peces'),
           backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+          foregroundColor: Colors.white,
           centerTitle: true,
         ),
+        drawer: CustomDrawer(),
         body: Column(
           children: [
             _searchArea(),
             Expanded(
-              child: FutureBuilder<List<Crocodile>>(
-                future: _crocodilesFuture,
+              child: FutureBuilder<List<Fishes>>(
+                future: _fishesFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -76,22 +76,27 @@ void _updateSearch(String? query) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   }
 
-                  final crocodiles = snapshot.data!;
-                  _auxiliarCrocodiles = crocodiles;
+                  final fishes = snapshot.data!;
+                  _allFishes = fishes; //guarda datos originales
+                  _filterFishes(); //filtra
 
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: _auxiliarCrocodiles.length,
+                    itemCount: _filteredFishes.length,
                     itemBuilder: (context, index) {
-                      final crocodile = _auxiliarCrocodiles[index];
+                      final fishes = _filteredFishes[index];
+
+                      //avatar
+                      String avatarPath = _getAvatarPath(index);
+
                       return GestureDetector(
                         onTap: () {
                           // Navegar a la pantalla de detalles, pasando el objeto completo
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  CrocodilesDetailScreen(crocodile: crocodile),
+                              builder: (context) => FishesDetailScreen(
+                                  fishes: fishes, avatarPath: avatarPath),
                             ),
                           );
                         },
@@ -99,26 +104,31 @@ void _updateSearch(String? query) {
                           log('onLongPress $index');
                         },
                         child: Container(
-                          height: 100,
+                          height: 110,
                           margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
+                              horizontal: 10, vertical: 10),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 229, 235, 231),
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+                              color: Color.fromARGB(31, 83, 85, 84),
+                              width: 2,
+                            ),
                             boxShadow: const [
                               BoxShadow(
-                                color: Color.fromARGB(31, 206, 219, 246),
-                                blurRadius: 0,
-                                spreadRadius: 3,
-                                offset: Offset(0, 6),
+                                color: Color.fromARGB(31, 78, 80, 79),
+                                blurRadius: 3,
+                                spreadRadius: 0,
+                                offset: Offset(0, 3),
                               )
                             ],
                           ),
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: NetworkImage(crocodile.avatar),
-                                radius: 40,
+                                backgroundImage: AssetImage(avatarPath),
+                                radius: 30,
                               ),
                               const SizedBox(width: 10),
                               Expanded(
@@ -127,28 +137,28 @@ void _updateSearch(String? query) {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      crocodile.name,
+                                      fishes.nombre,
                                       style: const TextStyle(
-                                          fontSize: 17,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text('Color: ${crocodile.color}'),
+                                    Text('Especie: ${fishes.especie}'),
+                                    Text('Color: ${fishes.color}'),
                                   ],
                                 ),
                               ),
-                              // Opción para marcar como favorito
                               IconButton(
                                 icon: Icon(
-                                  crocodile.favorite
+                                  fishes.favorite
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color: crocodile.favorite
-                                      ? Colors.red
+                                  color: fishes.favorite
+                                      ? Color.fromARGB(255, 21, 100, 21)
                                       : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    crocodile.favorite = !crocodile.favorite;
+                                    fishes.favorite = !fishes.favorite;
                                   });
                                 },
                               ),
@@ -163,15 +173,44 @@ void _updateSearch(String? query) {
             ),
           ],
         ),
-        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
 
+  //metodo para obtener la ruta de los avatars
+  String _getAvatarPath(int index) {
+    int avatarIndex = index % 10;
+
+    switch (avatarIndex) {
+      case 0:
+        return 'assets/images/avatars_peces/avatar1.png';
+      case 1:
+        return 'assets/images/avatars_peces/avatar2.png';
+      case 2:
+        return 'assets/images/avatars_peces/avatar3.png';
+      case 3:
+        return 'assets/images/avatars_peces/avatar4.png';
+      case 4:
+        return 'assets/images/avatars_peces/avatar5.png';
+      case 5:
+        return 'assets/images/avatars_peces/avatar6.png';
+      case 6:
+        return 'assets/images/avatars_peces/avatar7.png';
+      case 7:
+        return 'assets/images/avatars_peces/avatar8.png';
+      case 8:
+        return 'assets/images/avatars_peces/avatar9.png';
+      case 9:
+        return 'assets/images/avatars_peces/avatar10.png';
+      default:
+        return 'assets/images/avatars_peces/avatar1.png';
+    }
+  }
+
   AnimatedSwitcher _searchArea() {
     return AnimatedSwitcher(
-      switchInCurve: Curves.easeIn,
-      switchOutCurve: Curves.easeOut,
+      switchInCurve: Curves.bounceIn,
+      switchOutCurve: Curves.bounceOut,
       duration: const Duration(milliseconds: 300),
       child: (_searchActive)
           ? Padding(
@@ -183,19 +222,19 @@ void _updateSearch(String? query) {
                       controller: _searchController,
                       focusNode: _focusNode,
                       onChanged: (value) {
-                        _updateSearch(value);
+                        _onSearchChanged();
                       },
-                      onFieldSubmitted: (value) {
-                        _updateSearch(value);
-                      },
-                      decoration: const InputDecoration(hintText: 'Buscar por nombre/habitat/color/id...'),
+                      // onFieldSubmitted: (value) {
+                      //   _updateSearch(value);
+                      // },
+                      decoration: const InputDecoration(hintText: 'Buscar...'),
                     ),
                   ),
                   IconButton(
                     onPressed: () {
                       _searchController.clear();
                       FocusManager.instance.primaryFocus?.unfocus();
-                      _updateSearch('');
+                      _onSearchChanged();
                     },
                     icon: const Icon(Icons.clear),
                   ),

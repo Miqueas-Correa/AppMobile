@@ -1,12 +1,12 @@
-import 'package:appanimals/widgets/animal_history.dart';
 import 'package:flutter/material.dart';
+import 'package:appanimals/widgets/animals_drawer_menu/animal_history.dart';
 
 class AnimalDetails extends StatelessWidget {
   final String imagePath;
   final String text;
   final String title;
   final Color titleColor;
-  final String animalType; // Nueva propiedad para identificar el tipo de animal
+  final String animalType;
 
   final PageController pageController = PageController(
     initialPage: 0,
@@ -19,11 +19,15 @@ class AnimalDetails extends StatelessWidget {
     required this.text,
     required this.title,
     required this.titleColor,
-    required this.animalType, // Recibimos el tipo de animal (por ejemplo: 'perros', 'gatos', 'peces', 'cocodrilos')
+    required this.animalType,
   });
 
   @override
   Widget build(BuildContext context) {
+    //responsive
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -34,21 +38,21 @@ class AnimalDetails extends StatelessWidget {
         body: PageView(
           controller: pageController,
           children: [
-            Stack(
-              children: [
-                // Imagen que ocupa toda la pantalla
-                Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
-                  height:
-                      MediaQuery.of(context).size.height, // Ajusta la altura
-                  width: MediaQuery.of(context).size.width, // Ajusta el ancho
-                ),
-                // Botón de continuar
-                Positioned(
-                  bottom: 20,
-                  left: 130,
-                  right: 130,
+            Stack(children: [
+              // Imagen que ocupa toda la pantalla
+              Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+                height: screenHeight, //responsive
+                width: screenWidth, // responsive
+              ),
+              // Botón de continuar
+              Positioned(
+                bottom: screenHeight * 0.1,
+                left: screenWidth * 0.25,
+                right: screenWidth * 0.25,
+                child: SizedBox(
+                  width: screenWidth * 0.5,
                   child: TextButton(
                     onPressed: () {
                       // Animación personalizada para navegar a AnimalHistory
@@ -66,9 +70,8 @@ class AnimalDetails extends StatelessWidget {
                           ),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
-                            const begin =
-                                Offset(1.0, 0.0); // Comienza desde la derecha
-                            const end = Offset.zero; // Termina en el centro
+                            const begin = Offset(1.0, 0.0);
+                            const end = Offset.zero;
                             const curve = Curves.linear;
 
                             var tween = Tween(begin: begin, end: end)
@@ -84,18 +87,19 @@ class AnimalDetails extends StatelessWidget {
                       );
                     },
                     style: TextButton.styleFrom(
+                      elevation: 10,
                       foregroundColor: Colors.white,
                       backgroundColor: Color.fromARGB(255, 21, 100, 21),
                       padding: EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 30,
+                        vertical: screenHeight * 0.02,
+                        horizontal: screenWidth * 0.08,
                       ),
                     ),
                     child: const Text("Continuar"),
                   ),
                 ),
-              ],
-            )
+              ),
+            ]),
           ],
         ));
   }

@@ -9,13 +9,13 @@ import 'package:appanimals/widgets/custom_outlined_button.dart';
 class AnimalHistory extends StatelessWidget {
   final String title;
   final String text;
-  final String selectedAnimal;  // Este es el nuevo parámetro
+  final String selectedAnimal; // Este es el nuevo parámetro
 
   const AnimalHistory({
     super.key,
     required this.title,
     required this.text,
-    required this.selectedAnimal,  // Ahora recibe el tipo de animal
+    required this.selectedAnimal, // Ahora recibe el tipo de animal
   });
 
   @override
@@ -54,7 +54,8 @@ class AnimalHistory extends StatelessWidget {
                   color: const Color.fromARGB(255, 21, 100, 21),
                   margin: const EdgeInsets.all(5),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 30, horizontal: 30),
                     child: Text(
                       text,
                       textAlign: TextAlign.justify,
@@ -90,12 +91,14 @@ class AnimalHistory extends StatelessWidget {
                         if (selectedAnimal == 'peces') {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => PecesListScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => PecesListScreen()),
                           );
                         } else if (selectedAnimal == 'cocodrilos') {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CrocodilesListScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => CrocodilesListScreen()),
                           );
                         } else if (selectedAnimal == 'perros') {
                           // Navigator.push(

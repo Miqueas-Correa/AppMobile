@@ -1,20 +1,20 @@
 import 'dart:developer';
-import 'package:appanimals/widgets/botonera_navigation.dart';
+import 'package:appanimals/models/dogs_model.dart';
+import 'package:appanimals/screens/dogs/dogs_detalis_screen.dart';
+import 'package:appanimals/service/dogs_service.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
-import 'package:appanimals/service/crocodiles_service.dart';
-import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
-class CrocodilesListScreen extends StatefulWidget {
-  const CrocodilesListScreen({super.key});
+class DogsListScreen extends StatefulWidget {
+  const DogsListScreen({super.key});
 
   @override
-  _CrocodilesListScreenState createState() => _CrocodilesListScreenState();
+  _dongsListScreenState createState() => _dongsListScreenState();
 }
 
-class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
-  late Future<List<Crocodile>> _crocodilesFuture;
-  List<Crocodile> _auxiliarCrocodiles = [];
+// ignore: camel_case_types
+class _dongsListScreenState extends State<DogsListScreen> {
+  late Future<List<DogsModel>> _dogsFuture;
+  List<DogsModel> _auxiliarDogs = [];
   String _searchQuery = '';
   bool _searchActive = false;
 
@@ -24,40 +24,28 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
   @override
   void initState() {
     super.initState();
-    _crocodilesFuture = CrocodilesService.fetchCrocodiles();
+    _dogsFuture = DogsService.fetchDogs();
   }
-void _updateSearch(String? query) {
-  setState(() {
-    _searchQuery = query ?? '';
-    if (_searchQuery.isEmpty) {
-      _crocodilesFuture = CrocodilesService.fetchCrocodiles();
-    } else {
-      _crocodilesFuture = CrocodilesService.fetchCrocodiles().then((crocodiles) {
-        return crocodiles.where((crocodile) {
-          final searchLower = _searchQuery.toLowerCase();
 
-          // Buscar por nombre, color o hábitat (coincidencia parcial)
-          final matchesName = crocodile.name.toLowerCase().contains(searchLower);
-          final matchesColor = crocodile.color.toLowerCase().contains(searchLower);
-          final matchesHabitat = crocodile.habitat.toLowerCase().contains(searchLower);
-
-          // Buscar por id (coincidencia exacta)
-          final matchesId = crocodile.id.toString() == _searchQuery;
-
-          return matchesName || matchesColor || matchesHabitat || matchesId;
+  void _updateSearch(String? query) {
+    setState(() {
+      _searchQuery = query ?? '';
+      if (_searchQuery.isEmpty) {
+        _auxiliarDogs = _auxiliarDogs; // Restablecer al estado original
+      } else {
+        _auxiliarDogs = _auxiliarDogs.where((dog) {
+          return dog.nombre.toLowerCase().contains(_searchQuery.toLowerCase());
         }).toList();
-      });
-    }
-  });
-}
-
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Listado de Cocodrilos'),
+          title: const Text('Listado de perros'),
           backgroundColor: const Color.fromARGB(255, 21, 100, 21),
           centerTitle: true,
         ),
@@ -65,8 +53,8 @@ void _updateSearch(String? query) {
           children: [
             _searchArea(),
             Expanded(
-              child: FutureBuilder<List<Crocodile>>(
-                future: _crocodilesFuture,
+              child: FutureBuilder<List<DogsModel>>(
+                future: _dogsFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -76,22 +64,21 @@ void _updateSearch(String? query) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   }
 
-                  final crocodiles = snapshot.data!;
-                  _auxiliarCrocodiles = crocodiles;
+                  final dogs = snapshot.data!;
+                  _auxiliarDogs = dogs;
 
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: _auxiliarCrocodiles.length,
+                    itemCount: _auxiliarDogs.length,
                     itemBuilder: (context, index) {
-                      final crocodile = _auxiliarCrocodiles[index];
+                      final dog = _auxiliarDogs[index];
                       return GestureDetector(
                         onTap: () {
                           // Navegar a la pantalla de detalles, pasando el objeto completo
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  CrocodilesDetailScreen(crocodile: crocodile),
+                              builder: (context) => DogsDetailScreen(dog: dog),
                             ),
                           );
                         },
@@ -116,39 +103,38 @@ void _updateSearch(String? query) {
                           ),
                           child: Row(
                             children: [
-                              CircleAvatar(
-                                backgroundImage: NetworkImage(crocodile.avatar),
-                                radius: 40,
-                              ),
-                              const SizedBox(width: 10),
+                              // CircleAvatar(
+                              //   backgroundImage: NetworkImage(dog.avatar),
+                              //   radius: 40,
+                              // ),
+                              // const SizedBox(width: 10),
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      crocodile.name,
+                                      dog.nombre,
                                       style: const TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text('Color: ${crocodile.color}'),
+                                    Text('Raza: ${dog.raza}'),
                                   ],
                                 ),
                               ),
                               // Opción para marcar como favorito
                               IconButton(
                                 icon: Icon(
-                                  crocodile.favorite
+                                  dog.favorite
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color: crocodile.favorite
-                                      ? Colors.red
-                                      : Colors.grey,
+                                  color:
+                                      dog.favorite ? Colors.red : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    crocodile.favorite = !crocodile.favorite;
+                                    dog.favorite = !dog.favorite;
                                   });
                                 },
                               ),
@@ -163,15 +149,14 @@ void _updateSearch(String? query) {
             ),
           ],
         ),
-        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
 
   AnimatedSwitcher _searchArea() {
     return AnimatedSwitcher(
-      switchInCurve: Curves.easeIn,
-      switchOutCurve: Curves.easeOut,
+      switchInCurve: Curves.bounceIn,
+      switchOutCurve: Curves.bounceOut,
       duration: const Duration(milliseconds: 300),
       child: (_searchActive)
           ? Padding(
@@ -188,7 +173,7 @@ void _updateSearch(String? query) {
                       onFieldSubmitted: (value) {
                         _updateSearch(value);
                       },
-                      decoration: const InputDecoration(hintText: 'Buscar por nombre/habitat/color/id...'),
+                      decoration: const InputDecoration(hintText: 'Buscar...'),
                     ),
                   ),
                   IconButton(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names
-Widget DogStruct(
+Widget CrocodileStruct(
     Map<String, dynamic> data, bool isFavorite, VoidCallback onFavoriteToggle) {
+  // final Map<String, dynamic> data = apiResponse['data'] ?? {}; // Asegura que se use la clave 'data'
+
   return Card(
     elevation: 5,
     shape: RoundedRectangleBorder(
@@ -14,19 +16,19 @@ Widget DogStruct(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Nombre: ${data['nombre']}',
+            'Nombre: ${data['name']}',
             style: const TextStyle(fontSize: 18),
           ),
           Text(
-            'Raza: ${data['raza']}',
+            'Color: ${data['color']}',
             style: const TextStyle(fontSize: 18),
           ),
           Text(
-            'Fecha de nacimiento: ${data['fecha_nacimiento']}',
+            'Habitat: ${data['habitat']}',
             style: const TextStyle(fontSize: 18),
           ),
           Text(
-            'Id:  ${data['id']}',
+            'ID: ${data['id']}',
             style: const TextStyle(fontSize: 18),
           ),
           Align(
