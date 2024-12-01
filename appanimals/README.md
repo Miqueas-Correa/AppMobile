@@ -13,7 +13,7 @@ Aplicación Móvil Amor Salvaje
 
     - Detalles de la creacion, dieño y asistencia del proyecto:
 
-        - URL de la api de noticias para iniciar sesion para la parte de las noticias del home: 'https://newsapi.org/v2/everything?q=animals&page=$_page&apiKey=$apiKey', clave de Miqueas: '4a3e02f5c6a2485f907790cd2ee51bef'
+        - URL de la api de noticias para iniciar sesion para la parte de las noticias del drawer_menu.dart: 'https://newsapi.org/v2/everything?q=animals&page=$_page&apiKey=$apiKey', clave de Miqueas: '4a3e02f5c6a2485f907790cd2ee51bef'
 
         - Dentro de la carpeta lib tenemos todo esto:
 
