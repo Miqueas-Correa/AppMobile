@@ -109,11 +109,11 @@ class _CatsListScreenState extends State<CatsListScreen> {
                                   horizontal: 10, vertical: 10),
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.grey[200],
+                                color: Colors.blueGrey[200],
                                 borderRadius: BorderRadius.circular(25),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
+                                    color: Colors.blueGrey.withOpacity(0.5),
                                     spreadRadius: 2,
                                     blurRadius: 5,
                                     offset: const Offset(0, 3),
@@ -151,7 +151,7 @@ class _CatsListScreenState extends State<CatsListScreen> {
                                           : Icons.favorite_border,
                                       color: cats.favorite
                                           ? const Color.fromARGB(255, 21, 100, 21)
-                                          : Colors.grey,
+                                          : Colors.blueGrey,
                                     ),
                                     onPressed: () {
                                       setState(() {
