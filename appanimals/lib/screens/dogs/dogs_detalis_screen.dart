@@ -190,22 +190,12 @@ class HeaderProfileCustomItem extends StatelessWidget {
             ),
           ),
           child: ClipOval(
-            child: nombre != null && nombre!.isNotEmpty
-                ? Image.network(
-                    nombre!,
-                    fit: BoxFit
-                        .cover, // Ajuste para que la imagen cubra todo el círculo
-                    width:
-                        200, // Asegura que la imagen ocupe todo el espacio disponible
-                    height:
-                        200, // Asegura que la imagen ocupe todo el espacio disponible
-                  )
-                : Image.asset(
-                    'assets/images/profiles/dog_profile.jpeg',
-                    fit: BoxFit.cover,
-                    width: 200,
-                    height: 200,
-                  ),
+            child: Image.asset(
+              'assets/images/profiles/dog_profile.jpeg',
+              fit: BoxFit.cover,
+              width: 200,
+              height: 200,
+            ),
           ),
         ),
       ),

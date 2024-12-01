@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:appanimals/models/dogs_model.dart';
 import 'package:appanimals/screens/dogs/dogs_detalis_screen.dart';
 import 'package:appanimals/service/dogs_service.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 
 class DogsListScreen extends StatefulWidget {
@@ -48,6 +49,7 @@ class _dongsListScreenState extends State<DogsListScreen> {
           title: const Text('Listado de perros'),
           backgroundColor: const Color.fromARGB(255, 21, 100, 21),
           centerTitle: true,
+          foregroundColor: Colors.white,
         ),
         body: Column(
           children: [
@@ -103,11 +105,12 @@ class _dongsListScreenState extends State<DogsListScreen> {
                           ),
                           child: Row(
                             children: [
-                              // CircleAvatar(
-                              //   backgroundImage: NetworkImage(dog.avatar),
-                              //   radius: 40,
-                              // ),
-                              // const SizedBox(width: 10),
+                              CircleAvatar(
+                                radius: 40,
+                                child: Image.asset(
+                                    'assets/images/profiles/dog_profile.jpeg'),
+                              ),
+                              const SizedBox(width: 10),
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -149,6 +152,7 @@ class _dongsListScreenState extends State<DogsListScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
