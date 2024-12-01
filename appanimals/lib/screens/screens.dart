@@ -13,7 +13,7 @@ export 'package:appanimals/screens/busqeda_id_screens/buscar_screen.dart';
 export 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
 export 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 /*perros*/
-export 'package:appanimals/screens/list/dogs_list_screen.dart';
+export 'package:appanimals/screens/dogs/dogs_list_screen.dart';
 /*gatos*/
 export 'package:appanimals/screens/gatos/cats_list_item.dart';
 export 'package:appanimals/screens/gatos/cats_list_screen.dart';
