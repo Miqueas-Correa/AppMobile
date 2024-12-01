@@ -1,20 +1,17 @@
 import 'package:appanimals/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:appanimals/screens/drawer_menu/acerca_de_.dart';
 import 'package:appanimals/screens/drawer_menu/animals_screen.dart';
-import 'package:appanimals/screens/drawer_menu/news_screen.dart';
 import 'package:appanimals/screens/drawer_menu/explorar_screen.dart';
+import 'package:appanimals/screens/drawer_menu/news_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //final themeProvider = Provider.of<ThemeProvider>(context);
-    //final isLightTheme = themeProvider.currentTheme == ThemeData.light();
-
-    return Drawer(     
+    return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
