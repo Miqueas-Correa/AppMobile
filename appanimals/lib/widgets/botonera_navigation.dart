@@ -1,7 +1,6 @@
 import 'package:appanimals/screens/busqeda_id_screens/buscar_screen.dart';
 import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class BotoneraNavigation extends StatefulWidget {
@@ -22,7 +21,6 @@ class _BotoneraNavigationState extends State<BotoneraNavigation> {
     HomeScreen(),
     BuscarScreen(),
     ProfilesScreen(),
-    PecesListScreen(),
   ];
 
   @override
