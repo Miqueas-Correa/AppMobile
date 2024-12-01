@@ -199,6 +199,10 @@ Aplicación Móvil Amor Salvaje
         - Wanda: category_card.dart
 
         - Matias: loading_animation.dart, loading_icon.dart, loading_overlay.dart y profile_detail_card.dart
+     
+
+* Proyecto encabezado por Miqueas
+          
 
 - Explicacion para el cliente sobre la finalidad y funiconalidad de nuestra app de Amor Salvaje:
 
