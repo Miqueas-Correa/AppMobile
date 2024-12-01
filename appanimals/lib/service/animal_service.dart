@@ -45,7 +45,7 @@ class AnimalService {
         return CatStruct(animalData, isFavorite, toggleFavorite);
       case 'crocodiles':
         return CrocodileStruct(animalData, isFavorite, toggleFavorite);
-      case 'fish':
+      case 'peces':
         return FishesStruct(animalData, isFavorite, toggleFavorite);
       default:
         return const Text('Categoría no soportada.');
