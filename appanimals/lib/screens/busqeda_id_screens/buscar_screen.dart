@@ -45,10 +45,8 @@ class BuscarScreen extends StatelessWidget {
             buttonColor, // Cambio el color del AppBar segun el tema
         title: Text(
           'Seleccione el animal que quiere buscar:',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white), // Texto adaptado al tema
         ),
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

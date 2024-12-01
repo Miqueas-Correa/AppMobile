@@ -1,11 +1,12 @@
+import 'package:appanimals/screens/dogs/dogs_list_screen.dart';
 import 'package:appanimals/screens/gatos/cats_list_screen.dart';
-import 'package:appanimals/screens/list/dogs_list_screen.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/home/home_screen.dart';
 import 'package:appanimals/screens/peces/fishes_list_screen.dart';
 import 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 import 'package:appanimals/widgets/animals_drawer_menu/custom_outlined_button.dart';
+
 class AnimalHistory extends StatelessWidget {
   final String title;
   final String text;

@@ -1,3 +1,6 @@
+import 'package:appanimals/models/structs/cats_struct.dart';
+import 'package:appanimals/models/structs/crocodiles_struct.dart';
+import 'package:appanimals/models/structs/fishes_struct.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/service/api_service.dart';
 import 'package:appanimals/models/structs/dogs_struct.dart';
@@ -39,11 +42,11 @@ class AnimalService {
       case 'dogs':
         return DogStruct(animalData, isFavorite, toggleFavorite);
       case 'cats':
-        return const Text('Estructura para Cats no implementada.');
+        return CatStruct(animalData, isFavorite, toggleFavorite);
       case 'crocodiles':
-        return const Text('Estructura para Crocodiles no implementada.');
-      case 'fish':
-        return const Text('Estructura para Fish no implementada.');
+        return CrocodileStruct(animalData, isFavorite, toggleFavorite);
+      case 'peces':
+        return FishesStruct(animalData, isFavorite, toggleFavorite);
       default:
         return const Text('Categoría no soportada.');
     }
