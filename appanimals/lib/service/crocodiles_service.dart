@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:appanimals/models/cocodriles/crocodiles_model.dart';
+import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
 class CrocodilesService {
-  static const String apiUrl = 'https://66d0f21f181d059277e01d3c.mockapi.io/api/v1/crocodiles';
+  static const String apiUrl =
+      'https://66d0f21f181d059277e01d3c.mockapi.io/api/v1/crocodiles';
 
   // Método estático para obtener los cocodrilos desde la API
 
@@ -14,7 +15,8 @@ class CrocodilesService {
       if (response.statusCode == 200) {
         // Decodificar los datos de la API
         List<dynamic> data = json.decode(response.body);
-        List<Crocodile> crocodiles = data.map((json) => Crocodile.fromJson(json)).toList();
+        List<Crocodile> crocodiles =
+            data.map((json) => Crocodile.fromJson(json)).toList();
 
         // Sincronizar favoritos y estrellas con SharedPreferences
         final prefs = await SharedPreferences.getInstance();

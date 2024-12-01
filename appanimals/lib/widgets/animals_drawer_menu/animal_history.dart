@@ -60,7 +60,7 @@ class AnimalHistory extends StatelessWidget {
                   margin: const EdgeInsets.all(5),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      vertical: screenHeight * 0.04, 
+                      vertical: screenHeight * 0.04,
                       horizontal: screenWidth * 0.05,
                     ),
                     child: Text(
@@ -96,12 +96,14 @@ class AnimalHistory extends StatelessWidget {
                         if (selectedAnimal == 'peces') {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => FishesListScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => FishesListScreen()),
                           );
                         } else if (selectedAnimal == 'cocodrilos') {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CrocodilesListScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => CrocodilesListScreen()),
                           );
                         } else if (selectedAnimal == 'perros') {
                           // Navigator.push(

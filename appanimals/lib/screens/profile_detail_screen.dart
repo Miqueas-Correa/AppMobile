@@ -9,6 +9,8 @@ class ProfileDetailScreen extends StatefulWidget {
   final int perfil;
   final String name;
   final String imagen;
+  final String name;
+  final String imagen;
 
   const ProfileDetailScreen({
     super.key,
@@ -32,6 +34,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        final isLightTheme = themeProvider.currentTheme == ThemeData.light();
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         final isLightTheme = themeProvider.currentTheme == ThemeData.light();
@@ -190,5 +195,6 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         );
       },
     );
+  }
   }
 }

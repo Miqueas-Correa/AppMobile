@@ -1,49 +1,59 @@
-import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
+import 'package:appanimals/models/cats/cats_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CrocodilesDetailScreen extends StatefulWidget {
-  final Crocodile crocodile;
+const Color appGreenColor = Color.fromARGB(255, 21, 100, 21);
+const double avatarSize = 200.0;
 
-  const CrocodilesDetailScreen({super.key, required this.crocodile});
+class CatsDetailScreen extends StatefulWidget {
+  final Cat cat;
+
+  const CatsDetailScreen({super.key, required this.cat});
 
   @override
-  _CrocodilesDetailScreenState createState() => _CrocodilesDetailScreenState();
+  _CatsDetailScreenState createState() => _CatsDetailScreenState();
 }
 
-class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
-  late Crocodile _crocodile;
+class _CatsDetailScreenState extends State<CatsDetailScreen> {
+  late Cat _cat;
+  late TextEditingController _noteController;
 
   @override
   void initState() {
     super.initState();
-    _crocodile = widget.crocodile;
+    _cat = widget.cat;
+    _noteController = TextEditingController();
     _loadFavorite();
+  }
+
+  @override
+  void dispose() {
+    _noteController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadFavorite() async {
     final prefs = await SharedPreferences.getInstance();
-    final favorite = prefs.getBool(_crocodile.id.toString()) ?? false;
+    final favorite = prefs.getBool(_cat.id.toString()) ?? false;
     setState(() {
-      _crocodile.favorite = favorite;
+      _cat.favorito = favorite;
     });
   }
 
   Future<void> _saveFavorite(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_crocodile.id.toString(), value);
+    await prefs.setBool(_cat.id.toString(), value);
   }
 
   void _updateRating(double rating) {
     setState(() {
-      _crocodile.stars = rating;
+      _cat.estrella = rating;
     });
   }
 
   void _toggleFavorite(bool value) {
     setState(() {
-      _crocodile.favorite = value;
+      _cat.favorito = value;
     });
     _saveFavorite(value);
   }
@@ -55,62 +65,59 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Perfil del Cocodrilo'),
-        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        title: const Text('Perfil del Gato'),
+        backgroundColor: appGreenColor,
         foregroundColor: Colors.white,
         elevation: 10,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderProfileCustomItem(
-              size: size,
-              avatar: _crocodile.avatar,
-            ),
+            HeaderProfileCustomItem(size: size, avatar: _cat.avatar),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: BodyProfileCustomItem(
-                crocodile: _crocodile,
+                cat: _cat,
                 onFavoriteChanged: _toggleFavorite,
                 onRatingChanged: _updateRating,
+                noteController: _noteController,
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BotoneraNavigation(), // Aquí se agrega la botonera
     );
   }
 }
 
 class BodyProfileCustomItem extends StatelessWidget {
-  final Crocodile crocodile;
+  final Cat cat;
   final ValueChanged<bool> onFavoriteChanged;
   final ValueChanged<double> onRatingChanged;
+  final TextEditingController noteController;
 
   const BodyProfileCustomItem({
     super.key,
-    required this.crocodile,
+    required this.cat,
     required this.onFavoriteChanged,
     required this.onRatingChanged,
+    required this.noteController,
   });
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _noteController = TextEditingController();
-
     return Column(
       children: [
         SwitchListTile.adaptive(
           title: const Text('Favorito'),
-          value: crocodile.favorite,
+          value: cat.favorito,
           onChanged: onFavoriteChanged,
         ),
         const SizedBox(height: 20),
-        DataRow(title: 'Nombre', data: crocodile.name),
-        DataRow(title: 'Color', data: crocodile.color),
-        DataRow(title: 'Hábitat', data: crocodile.habitat),
-        DataRow(title: 'id', data: crocodile.id.toString()),
+        DataRow(title: 'Nombre', data: cat.nombre),
+        DataRow(title: 'Color', data: cat.color),
+        DataRow(title: 'Raza', data: cat.raza),
+        DataRow(title: 'ID', data: cat.id.toString()),
         const SizedBox(height: 20),
         // Calificación con estrellas
         Row(
@@ -121,7 +128,7 @@ class BodyProfileCustomItem extends StatelessWidget {
                 onRatingChanged(index + 1.0);
               },
               child: Icon(
-                index < crocodile.stars ? Icons.star : Icons.star_border,
+                index < cat.estrella ? Icons.star : Icons.star_border,
                 color: Colors.yellow,
                 size: 40,
               ),
@@ -130,45 +137,10 @@ class BodyProfileCustomItem extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Calificación: ${crocodile.stars.toStringAsFixed(1)}',
+          'Calificación: ${cat.estrella.toStringAsFixed(1)}',
           style: const TextStyle(fontSize: 18),
         ),
         const SizedBox(height: 20),
-        // TextFormField para agregar notas o comentarios
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: TextFormField(
-            controller: _noteController,
-            decoration: InputDecoration(
-              labelText: 'Agregar nota',
-              hintText: 'Escribe una nota sobre este cocodrilo',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            maxLines: 3,
-          ),
-        ),
-        const SizedBox(height: 10),
-        // Botón de guardar
-        ElevatedButton(
-          onPressed: () {
-            // Aquí puedes guardar la nota utilizando _noteController.text
-            final String note = _noteController.text;
-            // Implementar lógica de guardado
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Nota guardada: $note'),
-                duration: const Duration(seconds: 2),
-              ),
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromARGB(255, 21, 100, 21),
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-          ),
-          child: const Text('Guardar Nota'),
-        ),
       ],
     );
   }
@@ -217,34 +189,31 @@ class HeaderProfileCustomItem extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.40,
-      color: const Color.fromARGB(255, 21, 100, 21),
+      color: appGreenColor,
       child: Center(
         child: Container(
-          width: 200, // Tamaño del círculo
-          height: 200,
+          width: avatarSize,
+          height: avatarSize,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: Colors.white, // Color del borde
-              width: 5, // Grosor del borde
+              color: Colors.white,
+              width: 5,
             ),
           ),
           child: ClipOval(
             child: avatar != null && avatar!.isNotEmpty
                 ? Image.network(
                     avatar!,
-                    fit: BoxFit
-                        .cover, // Ajuste para que la imagen cubra todo el círculo
-                    width:
-                        200, // Asegura que la imagen ocupe todo el espacio disponible
-                    height:
-                        200, // Asegura que la imagen ocupe todo el espacio disponible
+                    fit: BoxFit.cover,
+                    width: avatarSize,
+                    height: avatarSize,
                   )
                 : Image.asset(
-                    'assets/images/crocodile.png',
+                    'assets/images/buscar_page/gato_2.jpg',
                     fit: BoxFit.cover,
-                    width: 200,
-                    height: 200,
+                    width: avatarSize,
+                    height: avatarSize,
                   ),
           ),
         ),

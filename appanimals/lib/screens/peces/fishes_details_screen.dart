@@ -7,7 +7,7 @@ class FishesDetailScreen extends StatefulWidget {
   final String avatarPath;
 
   const FishesDetailScreen({
-    super.key, 
+    super.key,
     required this.fishes,
     required this.avatarPath,
   });
@@ -26,7 +26,7 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
   void initState() {
     super.initState();
     _fishes = widget.fishes;
-    _loadFavorite(); 
+    _loadFavorite();
 
     //inicializa
     _nameController = TextEditingController(text: _fishes.nombre);
@@ -113,18 +113,21 @@ class BodyProfileCustomItem extends StatelessWidget {
     return Column(
       children: [
         SwitchListTile.adaptive(
-          title: const Text('Favorito', 
-            style: TextStyle(
-              fontWeight: FontWeight.bold
-            )
-          ),
+          title: const Text('Favorito',
+              style: TextStyle(fontWeight: FontWeight.bold)),
           value: fishes.favorite,
           onChanged: onFavoriteChanged,
         ),
         const SizedBox(height: 20),
-        DataRow(title: 'Nombre', controller: TextEditingController(text: fishes.nombre)),
-        DataRow(title: 'Especie', controller: TextEditingController(text: fishes.especie)),
-        DataRow(title: 'Color', controller: TextEditingController(text: fishes.color)),
+        DataRow(
+            title: 'Nombre',
+            controller: TextEditingController(text: fishes.nombre)),
+        DataRow(
+            title: 'Especie',
+            controller: TextEditingController(text: fishes.especie)),
+        DataRow(
+            title: 'Color',
+            controller: TextEditingController(text: fishes.color)),
         const SizedBox(height: 20),
         // Calificación con estrellas
         Row(
@@ -156,11 +159,7 @@ class DataRow extends StatelessWidget {
   final String title;
   final TextEditingController controller;
 
-  const DataRow({
-    super.key, 
-    required this.title, 
-    required this.controller
-  });
+  const DataRow({super.key, required this.title, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -190,25 +189,25 @@ class DataRow extends StatelessWidget {
 }
 
 //inputs del textformfield
-  InputDecoration decorationInput({
-    IconData? icon, String? hintText, String? helperText, String? label}) {
-    return InputDecoration(
-      fillColor: Colors.black,
-      label: Text(label ?? ''),
-      hintText: hintText,
-      helperText: helperText,
-      helperStyle: const TextStyle(fontSize: 16),
-      prefixIcon: icon != null ? Icon(icon) : null,
-    );
-  }
+InputDecoration decorationInput(
+    {IconData? icon, String? hintText, String? helperText, String? label}) {
+  return InputDecoration(
+    fillColor: Colors.black,
+    label: Text(label ?? ''),
+    hintText: hintText,
+    helperText: helperText,
+    helperStyle: const TextStyle(fontSize: 16),
+    prefixIcon: icon != null ? Icon(icon) : null,
+  );
+}
 
 class HeaderProfileCustomItem extends StatelessWidget {
   final Size size;
   final String avatarPath;
 
   const HeaderProfileCustomItem({
-    super.key, 
-    required this.size, 
+    super.key,
+    required this.size,
     required this.avatarPath,
   });
 
@@ -233,10 +232,10 @@ class HeaderProfileCustomItem extends StatelessWidget {
             child: avatarPath.isNotEmpty
                 ? Image.asset(
                     avatarPath,
-                    fit: BoxFit.cover,  
-                    width: 200,  
+                    fit: BoxFit.cover,
+                    width: 200,
                     height: 200,
-                )
+                  )
                 : Image.asset(
                     'assets/images/avatars_peces/avatar1.png',
                     fit: BoxFit.cover,

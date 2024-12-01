@@ -30,14 +30,12 @@ class _FishesListScreenState extends State<FishesListScreen> {
     _searchController.addListener(_onSearchChanged);
   }
 
-
   void _onSearchChanged() {
     setState(() {
       _searchQuery = _searchController.text.toLowerCase();
       _filterFishes();
     });
   }
-
 
   void _filterFishes() {
     if (_searchQuery.isEmpty) {
@@ -82,7 +80,6 @@ class _FishesListScreenState extends State<FishesListScreen> {
                   _allFishes = fishes; //guarda datos originales
                   _filterFishes(); //filtra
 
-
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     itemCount: _filteredFishes.length,
@@ -99,8 +96,7 @@ class _FishesListScreenState extends State<FishesListScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => FishesDetailScreen(
-                                fishes: fishes,
-                                avatarPath: avatarPath),
+                                  fishes: fishes, avatarPath: avatarPath),
                             ),
                           );
                         },
@@ -109,7 +105,8 @@ class _FishesListScreenState extends State<FishesListScreen> {
                         },
                         child: Container(
                           height: 110,
-                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 229, 235, 231),
@@ -141,7 +138,9 @@ class _FishesListScreenState extends State<FishesListScreen> {
                                   children: [
                                     Text(
                                       fishes.nombre,
-                                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text('Especie: ${fishes.especie}'),
                                     Text('Color: ${fishes.color}'),
@@ -150,8 +149,12 @@ class _FishesListScreenState extends State<FishesListScreen> {
                               ),
                               IconButton(
                                 icon: Icon(
-                                  fishes.favorite ? Icons.favorite : Icons.favorite_border,
-                                  color: fishes.favorite ? Color.fromARGB(255, 21, 100, 21) : Colors.grey,
+                                  fishes.favorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: fishes.favorite
+                                      ? Color.fromARGB(255, 21, 100, 21)
+                                      : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {

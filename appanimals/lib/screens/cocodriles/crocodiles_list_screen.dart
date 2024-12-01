@@ -1,8 +1,9 @@
 import 'dart:developer';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
-import 'package:appanimals/services/crocodiles_service.dart';
-import 'package:appanimals/models/cocodriles/crocodiles_model.dart';
+import 'package:appanimals/screens/cocodrilos/crocodiles_details_screen.dart';
+import 'package:appanimals/service/crocodiles_service.dart';
+import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
 class CrocodilesListScreen extends StatefulWidget {
   const CrocodilesListScreen({super.key});
@@ -30,11 +31,27 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
     setState(() {
       _searchQuery = query ?? '';
       if (_searchQuery.isEmpty) {
-        _auxiliarCrocodiles = _auxiliarCrocodiles; // Restablecer al estado original
+        _crocodilesFuture = CrocodilesService.fetchCrocodiles();
       } else {
-        _auxiliarCrocodiles = _auxiliarCrocodiles.where((crocodile) {
-          return crocodile.name.toLowerCase().contains(_searchQuery.toLowerCase());
-        }).toList();
+        _crocodilesFuture =
+            CrocodilesService.fetchCrocodiles().then((crocodiles) {
+          return crocodiles.where((crocodile) {
+            final searchLower = _searchQuery.toLowerCase();
+
+            // Buscar por nombre, color o hábitat (coincidencia parcial)
+            final matchesName =
+                crocodile.name.toLowerCase().contains(searchLower);
+            final matchesColor =
+                crocodile.color.toLowerCase().contains(searchLower);
+            final matchesHabitat =
+                crocodile.habitat.toLowerCase().contains(searchLower);
+
+            // Buscar por id (coincidencia exacta)
+            final matchesId = crocodile.id.toString() == _searchQuery;
+
+            return matchesName || matchesColor || matchesHabitat || matchesId;
+          }).toList();
+        });
       }
     });
   }
@@ -77,7 +94,8 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CrocodilesDetailScreen(crocodile: crocodile),
+                              builder: (context) =>
+                                  CrocodilesDetailScreen(crocodile: crocodile),
                             ),
                           );
                         },
@@ -86,7 +104,8 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                         },
                         child: Container(
                           height: 100,
-                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -113,7 +132,9 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                                   children: [
                                     Text(
                                       crocodile.name,
-                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text('Color: ${crocodile.color}'),
                                   ],
@@ -122,8 +143,12 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                               // Opción para marcar como favorito
                               IconButton(
                                 icon: Icon(
-                                  crocodile.favorite ? Icons.favorite : Icons.favorite_border,
-                                  color: crocodile.favorite ? Colors.red : Colors.grey,
+                                  crocodile.favorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: crocodile.favorite
+                                      ? Colors.red
+                                      : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {
@@ -142,14 +167,15 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
 
   AnimatedSwitcher _searchArea() {
     return AnimatedSwitcher(
-      switchInCurve: Curves.bounceIn,
-      switchOutCurve: Curves.bounceOut,
+      switchInCurve: Curves.easeIn,
+      switchOutCurve: Curves.easeOut,
       duration: const Duration(milliseconds: 300),
       child: (_searchActive)
           ? Padding(
@@ -166,7 +192,8 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                       onFieldSubmitted: (value) {
                         _updateSearch(value);
                       },
-                      decoration: const InputDecoration(hintText: 'Buscar...'),
+                      decoration: const InputDecoration(
+                          hintText: 'Buscar por nombre/habitat/color/id...'),
                     ),
                   ),
                   IconButton(

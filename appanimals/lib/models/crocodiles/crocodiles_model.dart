@@ -7,6 +7,7 @@ class Crocodile {
   double stars; // Calificación de estrellas
   bool favorite; // Nuevo campo 'favorite' de tipo bool
 
+
   Crocodile({
     required this.id,
     required this.name,
@@ -15,6 +16,7 @@ class Crocodile {
     required this.avatar,
     required this.stars,
     this.favorite = false, // Valor por defecto 'false'
+
   });
 
   factory Crocodile.fromJson(Map<String, dynamic> json) {
@@ -24,11 +26,8 @@ class Crocodile {
       color: json['color'],
       habitat: json['habitat'],
       avatar: json['avatar'],
-      stars: (json['stars'] != null)
-          ? json['stars'].toDouble()
-          : 0.0, // Aseguramos que 'stars' nunca sea null
-      favorite: json['favorite'] ??
-          false, // Asegúrate de que venga el valor de 'favorite' si existe
+      stars: (json['stars'] != null) ? json['stars'].toDouble() : 0.0, // Aseguramos que 'stars' nunca sea null
+      favorite: json['favorite'] ?? false, // Asegúrate de que venga el valor de 'favorite' si existe
     );
   }
 

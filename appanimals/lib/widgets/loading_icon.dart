@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoadingIcon extends StatelessWidget {
-  const LoadingIcon({
-    super.key
-  });
+  const LoadingIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +10,7 @@ class LoadingIcon extends StatelessWidget {
       height: 60,
       width: 60,
       decoration: BoxDecoration(
+        // ignore: deprecated_member_use
         color: Colors.white.withOpacity(0.9),
         shape: BoxShape.circle,
       ),

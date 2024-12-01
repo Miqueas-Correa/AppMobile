@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 class FishesListItem extends StatelessWidget {
   final Map<String, dynamic> args;
 
-  const FishesListItem({
-    super.key, 
-    required this.args
-  });
+  const FishesListItem({super.key, required this.args});
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +40,18 @@ class FishesListItem extends StatelessWidget {
 class BodyProfileCustomItem extends StatelessWidget {
   final Map<String, dynamic> args;
 
-  const BodyProfileCustomItem({
-    super.key, 
-    required this.args
-  });
+  const BodyProfileCustomItem({super.key, required this.args});
 
   @override
-
   Widget build(BuildContext context) {
     return Column(
       children: [
         IconButton(
           icon: Icon(
             args['favorito'] ? Icons.favorite : Icons.favorite_border,
-            color: args['favorito'] ? const Color.fromARGB(255, 21, 100, 21) : Colors.grey,
+            color: args['favorito']
+                ? const Color.fromARGB(255, 21, 100, 21)
+                : Colors.grey,
           ),
           onPressed: () {
             // actualizar el estado del favorito en SharedPreferences o en el estado global
@@ -67,9 +62,7 @@ class BodyProfileCustomItem extends StatelessWidget {
           children: List.generate(
             5,
             (index) => Icon(
-              index < args['stars']
-                  ? Icons.star
-                  : Icons.star_border,
+              index < args['stars'] ? Icons.star : Icons.star_border,
               color: const Color.fromARGB(255, 21, 100, 21),
             ),
           ),
@@ -88,11 +81,7 @@ class DataFishCard extends StatelessWidget {
   final String title;
   final String? data;
 
-  const DataFishCard({
-    super.key,
-    required this.title,
-    required this.data
-  });
+  const DataFishCard({super.key, required this.title, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -132,9 +121,9 @@ class HeaderProfileCustomItem extends StatelessWidget {
   final String? avatarPath;
 
   const HeaderProfileCustomItem({
-    super.key, 
+    super.key,
     required this.size,
-    required this.avatarPath, 
+    required this.avatarPath,
   });
 
   @override
