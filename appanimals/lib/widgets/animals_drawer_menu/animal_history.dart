@@ -1,10 +1,9 @@
+import 'package:appanimals/screens/list/dogs_list_screen.dart';
+import 'package:appanimals/screens/peces/fishes_list_screen.dart';
+import 'package:appanimals/widgets/animals_drawer_menu/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/home/home_screen.dart';
-import 'package:appanimals/screens/peces/peces_list_screen.dart';
 import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
-// import 'package:appanimals/screens/perros/perros_list_screen.dart';
-// import 'package:appanimals/screens/gatos/gatos_list_screen.dart'; // Asegúrate de importar todas las pantallas
-import 'package:appanimals/widgets/custom_outlined_button.dart';
 
 class AnimalHistory extends StatelessWidget {
   final String title;
@@ -92,7 +91,7 @@ class AnimalHistory extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PecesListScreen()),
+                                builder: (context) => FishesListScreen()),
                           );
                         } else if (selectedAnimal == 'cocodrilos') {
                           Navigator.push(
@@ -101,10 +100,11 @@ class AnimalHistory extends StatelessWidget {
                                 builder: (context) => CrocodilesListScreen()),
                           );
                         } else if (selectedAnimal == 'perros') {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => PerrosListScreen()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DogsListScreen()),
+                          );
                         } else if (selectedAnimal == 'gatos') {
                           // Navigator.push(
                           //   context,
