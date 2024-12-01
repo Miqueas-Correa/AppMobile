@@ -1,12 +1,10 @@
 import 'package:appanimals/providers/crocodiles_provider.dart';
 import 'package:appanimals/screens/cocodrilos/crocodiles_list_screen.dart';
 import 'package:appanimals/screens/profile_screen.dart';
-/* import 'package:appanimals/screens/peces/fishes_screen.dart'; */
-import 'package:flutter/material.dart'; // Importa el paquete de widgets de Flutter.
+import 'package:flutter/material.dart';
 import 'package:appanimals/screens/busqeda_id_screens/buscar_screen.dart';
 import 'package:appanimals/screens/animals_screen.dart';
 import 'package:appanimals/providers/peces/fishes_provider.dart';
-/* import 'package:appanimals/screens/peces/peces_list_item.dart'; */
 import 'package:appanimals/models/peces/listview_separated_fishes.dart';
 import 'package:provider/provider.dart';
 

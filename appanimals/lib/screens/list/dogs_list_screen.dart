@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:appanimals/models/dogs_model.dart';
 import 'package:appanimals/screens/dogs/dogs_detalis_screen.dart';
+import 'package:appanimals/service/dogs_service.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/service/crocodiles_service.dart';
 
 class DogsListScreen extends StatefulWidget {
   const DogsListScreen({super.key});
@@ -11,6 +11,7 @@ class DogsListScreen extends StatefulWidget {
   _dongsListScreenState createState() => _dongsListScreenState();
 }
 
+// ignore: camel_case_types
 class _dongsListScreenState extends State<DogsListScreen> {
   late Future<List<DogsModel>> _dogsFuture;
   List<DogsModel> _auxiliarDogs = [];
@@ -23,7 +24,7 @@ class _dongsListScreenState extends State<DogsListScreen> {
   @override
   void initState() {
     super.initState();
-    _dogsFuture = CrocodilesService.fetchCrocodiles();
+    _dogsFuture = DogsService.fetchDogs();
   }
 
   void _updateSearch(String? query) {
