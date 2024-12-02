@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/animals_drawer_menu/animal_history.dart';
+import 'package:appanimals/widgets/widgets.dart';
 
 class AnimalDetails extends StatelessWidget {
   final String imagePath;

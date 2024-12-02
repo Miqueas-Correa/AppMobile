@@ -1,5 +1,6 @@
-import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:appanimals/widgets/widgets.dart';
+
 
 class AcercaDePage extends StatelessWidget {
   const AcercaDePage({super.key});
@@ -12,21 +13,17 @@ class AcercaDePage extends StatelessWidget {
     // Colores según el tema
     final backgroundColor = isLightTheme ? Colors.white : Colors.black;
     final textColor = isLightTheme ? Colors.black : Colors.white;
-    final buttonColor = isLightTheme ? const Color.fromARGB(255, 21, 100, 21) : Colors.green;
+    final buttonColor =
+        isLightTheme ? const Color.fromARGB(255, 21, 100, 21) : Colors.green;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: const Text('Acerca de'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         foregroundColor: Colors.white,
-      ), drawer: const CustomDrawer(),
+      ),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -111,7 +108,10 @@ class AcercaDePage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Cerrar', selectionColor: Colors.black,),
+                                child: const Text(
+                                  'Cerrar',
+                                  selectionColor: Colors.black,
+                                ),
                               ),
                             ],
                           );
@@ -121,7 +121,11 @@ class AcercaDePage extends StatelessWidget {
                     backgroundColor: buttonColor,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('Mas Info', style: TextStyle(fontSize: 18), selectionColor: Colors.green,),
+                  child: const Text(
+                    'Mas Info',
+                    style: TextStyle(fontSize: 18),
+                    selectionColor: Colors.green,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),

@@ -1,8 +1,8 @@
-import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/models/categories_model.dart';
-import 'package:appanimals/widgets/category_card.dart';
 import 'package:appanimals/screens/busqeda_id_screens/animal_detail_screen.dart';
+import 'package:appanimals/widgets/widgets.dart';
+import 'package:appanimals/screens/screens.dart';
 
 class BuscarScreen extends StatelessWidget {
   BuscarScreen({super.key});
@@ -45,10 +45,8 @@ class BuscarScreen extends StatelessWidget {
             buttonColor, // Cambio el color del AppBar segun el tema
         title: Text(
           'Seleccione el animal que quiere buscar:',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white), // Texto adaptado al tema
         ),
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
