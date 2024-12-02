@@ -2,6 +2,7 @@ import 'package:appanimals/models/peces/fishes_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class FishesDetailScreen extends StatefulWidget {
   final Fishes fishes;
   final String avatarPath;

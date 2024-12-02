@@ -51,7 +51,7 @@ class BodyProfileCustomItem extends StatelessWidget {
             args['favorito'] ? Icons.favorite : Icons.favorite_border,
             color: args['favorito']
                 ? const Color.fromARGB(255, 21, 100, 21)
-                : Colors.grey,
+                : const Color.fromARGB(151, 158, 158, 158),
           ),
           onPressed: () {
           },

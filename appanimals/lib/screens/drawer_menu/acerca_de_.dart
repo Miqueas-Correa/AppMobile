@@ -1,5 +1,6 @@
-import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:appanimals/widgets/widgets.dart';
+
 
 class AcercaDePage extends StatelessWidget {
   const AcercaDePage({super.key});

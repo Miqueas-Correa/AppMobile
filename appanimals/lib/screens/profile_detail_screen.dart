@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:appanimals/data/profile_data.dart';
 import 'package:appanimals/providers/theme_provider.dart';
-import 'package:appanimals/widgets/profile_detail_card.dart';
-import 'package:appanimals/widgets/botonera_navigation.dart';
+import 'package:appanimals/widgets/widgets.dart';
 
 class ProfileDetailScreen extends StatefulWidget {
   final int perfil;

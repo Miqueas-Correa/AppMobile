@@ -39,6 +39,8 @@ class MyApp extends StatelessWidget {
           '/animals': (context) => const AnimalScreen(),
           '/crocodile_profile': (context) => const CrocodilesListScreen(),
           '/list_fishes': (context) => const FishesListScreen(),
+          '/list_dogs': (context) => const DogsListScreen(),
+          '/list_cats': (context) => const CatsListScreen(),
           '/perfiles': (context) => ProfilesScreen(),
         },
         navigatorObservers: [

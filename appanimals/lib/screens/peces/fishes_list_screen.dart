@@ -1,10 +1,9 @@
 import 'dart:developer';
-import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:appanimals/screens/peces/fishes_details_screen.dart';
 import 'package:appanimals/service/fishes_service.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
+import 'package:appanimals/widgets/widgets.dart';
 
 class FishesListScreen extends StatefulWidget {
   const FishesListScreen({super.key});

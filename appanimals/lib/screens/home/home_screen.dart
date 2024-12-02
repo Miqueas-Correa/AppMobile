@@ -1,9 +1,6 @@
 // import 'dart:developer';
-import 'package:appanimals/widgets/custom_drawer.dart';
-import 'package:appanimals/widgets/home/scroll_horizontal.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/botonera_navigation.dart';
-
+import 'package:appanimals/widgets/widgets.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
