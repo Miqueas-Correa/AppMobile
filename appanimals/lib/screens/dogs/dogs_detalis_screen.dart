@@ -157,7 +157,7 @@ class DataRow extends StatelessWidget {
             ),
             Text(
               data,
-              style: const TextStyle(fontSize: 16, color: Colors.black54),
+              style: const TextStyle(fontSize: 16, color: Color.fromARGB(255, 134, 132, 132)),
             ),
           ],
         ),
