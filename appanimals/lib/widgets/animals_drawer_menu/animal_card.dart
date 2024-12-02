@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/animals_drawer_menu/animal_details.dart';
+import 'package:appanimals/widgets/widgets.dart';
 
 class AnimalCard extends StatelessWidget {
   final String image;
