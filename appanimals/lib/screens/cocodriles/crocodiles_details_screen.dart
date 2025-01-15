@@ -20,6 +20,7 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
   late Crocodile _crocodile;
   bool _isFavorite = false;
   bool _isLove = false;
+  String _note = '';
 
 
   @override
@@ -28,6 +29,7 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
     _crocodile = widget.crocodile;
     _loadFavoritesAndLove();
     _loadRating(); // Cargar la calificación de estrellas
+    _loadNote();
   }
 
 
@@ -52,6 +54,13 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
     });
   }
 
+  Future<void> _loadNote() async {
+    final prefs = await SharedPreferences.getInstance();
+    final note = prefs.getString('${_crocodile.id}_note') ?? ''; // Clave única para la nota
+    setState(() {
+      _note = note;
+    });
+  }
 
   Future<void> _saveFavorite(bool value) async {
     final prefs = await SharedPreferences.getInstance();
@@ -64,7 +73,7 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('${_crocodile.id}_love', value); // Guardamos 'love' usando id + '_love' como clave
   }
-
+  
 
   // Guardar la calificación de estrellas en SharedPreferences
   Future<void> _saveRating(double rating) async {
@@ -72,6 +81,10 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
     await prefs.setDouble('${_crocodile.id}_rating', rating); // Guardamos la calificación usando id + '_rating'
   }
 
+  Future<void> _saveNote() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('${_crocodile.id}_note', _note); // Guardar nota
+  }
 
   void _updateRating(double rating) {
     setState(() {
@@ -120,6 +133,13 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
                 isLove: _isLove,
                 onFavoriteAndLoveChanged: _toggleFavoriteAndLove,
                 onRatingChanged: _updateRating,
+                initialNote: _note, // Pasar la nota inicial
+                onNoteChanged: (value) {
+                  setState(() {
+                    _note = value;
+                  });
+                  _saveNote(); // Guardar automáticamente cada vez que se edite
+                },
               ),
             ),
           ],
@@ -137,6 +157,8 @@ class BodyProfileCustomItem extends StatelessWidget {
   final bool isLove;
   final ValueChanged<bool> onFavoriteAndLoveChanged;
   final ValueChanged<double> onRatingChanged;
+   final String initialNote;
+  final ValueChanged<String> onNoteChanged; // Callback para cambios en la nota
 
 
   const BodyProfileCustomItem({
@@ -146,12 +168,15 @@ class BodyProfileCustomItem extends StatelessWidget {
     required this.isLove,
     required this.onFavoriteAndLoveChanged,
     required this.onRatingChanged,
+    required this.initialNote,
+    required this.onNoteChanged,
   });
 
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController noteController = TextEditingController();
+    noteController.text = initialNote; // Inicializar con la nota existente
 
 
     return Column(
@@ -202,6 +227,7 @@ class BodyProfileCustomItem extends StatelessWidget {
               ),
             ),
             maxLines: 3,
+            onChanged: onNoteChanged, // Llamar al callback en cada cambio
           ),
         ),
         const SizedBox(height: 10),
