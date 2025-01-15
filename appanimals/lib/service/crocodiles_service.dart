@@ -1,15 +1,15 @@
 import 'dart:convert';
+import 'package:appanimals/utils/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
 class CrocodilesService {
-  static const String apiUrl =
-      'https://api-express-g17-tup-utn-1.onrender.com/api/v1/crocodiles';
+  static final String apiUrl = '${Config.apiUrl}/api/v1/crocodiles';
 
   // Método estático para obtener los cocodrilos desde la API
 
-    static Future<List<Crocodile>> fetchCrocodiles() async {
+  static Future<List<Crocodile>> fetchCrocodiles() async {
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
@@ -17,7 +17,8 @@ class CrocodilesService {
         Map<String, dynamic> decodedData = json.decode(response.body);
 
         // Asegúrate de acceder a la clave correcta (ejemplo: 'data')
-        List<dynamic> data = decodedData['data']; // Cambia 'data' según la estructura real de la API
+        List<dynamic> data = decodedData[
+            'data']; // Cambia 'data' según la estructura real de la API
 
         // Crear la lista de objetos Crocodile
         List<Crocodile> crocodiles =
