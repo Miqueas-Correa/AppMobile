@@ -143,16 +143,16 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                               // Opción para marcar como favorito
                               IconButton(
                                 icon: Icon(
-                                  crocodile.favorite
+                                  crocodile.isFavorite
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color: crocodile.favorite
+                                  color: crocodile.isFavorite
                                       ? Colors.red
                                       : Colors.grey,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    crocodile.favorite = !crocodile.favorite;
+                                    crocodile.isFavorite = !crocodile.isFavorite;
                                   });
                                 },
                               ),
