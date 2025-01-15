@@ -5,16 +5,21 @@ import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
 
 class CrocodilesService {
   static const String apiUrl =
-      'https://66d0f21f181d059277e01d3c.mockapi.io/api/v1/crocodiles';
+      'https://api-express-g17-tup-utn-1.onrender.com/api/v1/crocodiles';
 
   // Método estático para obtener los cocodrilos desde la API
 
-  static Future<List<Crocodile>> fetchCrocodiles() async {
+    static Future<List<Crocodile>> fetchCrocodiles() async {
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
         // Decodificar los datos de la API
-        List<dynamic> data = json.decode(response.body);
+        Map<String, dynamic> decodedData = json.decode(response.body);
+
+        // Asegúrate de acceder a la clave correcta (ejemplo: 'data')
+        List<dynamic> data = decodedData['data']; // Cambia 'data' según la estructura real de la API
+
+        // Crear la lista de objetos Crocodile
         List<Crocodile> crocodiles =
             data.map((json) => Crocodile.fromJson(json)).toList();
 
