@@ -228,6 +228,7 @@ class BodyProfileCustomItem extends StatelessWidget {
             ),
             maxLines: 3,
             onChanged: onNoteChanged, // Llamar al callback en cada cambio
+
           ),
         ),
         const SizedBox(height: 10),
