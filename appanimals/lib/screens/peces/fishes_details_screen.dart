@@ -2,7 +2,6 @@ import 'package:appanimals/models/peces/fishes_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class FishesDetailScreen extends StatefulWidget {
   final Fishes fishes;
   final String avatarPath;
@@ -57,10 +56,12 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     });
   }
 
-  void _toggleFavorite(bool value) {
+  void _toggleFavorite(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
       _fishes.favorite = value;
     });
+    await prefs.setBool(_fishes.id.toString(), _fishes.favorite);
   }
 
   @override
@@ -160,7 +161,11 @@ class DataRow extends StatelessWidget {
   final String title;
   final TextEditingController controller;
 
-  const DataRow({super.key, required this.title, required this.controller});
+  const DataRow({
+    super.key, 
+    required this.title, 
+    required this.controller
+  });
 
   @override
   Widget build(BuildContext context) {
