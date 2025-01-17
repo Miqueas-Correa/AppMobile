@@ -42,7 +42,8 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     super.dispose();
   }
 
-  Future<void> _loadFavorite() async {
+  //Future<void> _loadFavorite() async {
+  void _loadFavorite() async {
     final prefs = await SharedPreferences.getInstance();
     final favorite = prefs.getBool(_fishes.id.toString()) ?? false;
     setState(() {
