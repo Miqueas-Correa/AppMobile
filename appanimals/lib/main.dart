@@ -21,7 +21,6 @@ main() async {
         ChangeNotifierProvider(create: (_) => FishesProvider()),
         ChangeNotifierProvider(create: (_) => LoadingProvider()),
         ChangeNotifierProvider(create: (_) => CrocodilesProvider()),
-
         ChangeNotifierProvider(
           create: (context) => AnimalsProvider(
             catsProvider: CatsProvider(),

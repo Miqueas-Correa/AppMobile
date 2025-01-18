@@ -6,10 +6,7 @@ import 'loading_animation.dart';
 class LoadingOverlay extends StatelessWidget {
   final Widget child;
 
-  const LoadingOverlay({
-    super.key, 
-    required this.child
-  });
+  const LoadingOverlay({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

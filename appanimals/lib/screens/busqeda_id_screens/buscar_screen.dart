@@ -15,21 +15,26 @@ class BuscarScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 21, 100, 21),
         centerTitle: true,
-        title:  const Text('Buscar animal', style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Buscar animal',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
           IconButton(
-          icon: const Icon(Icons.search, color: Colors.white,),
-          onPressed: () {
-            showSearch(
-              context: context, 
-              delegate: SearchAnimalsDelegate(animalsProvider),
-            );
-          }
-        )
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchAnimalsDelegate(animalsProvider),
+                );
+              })
         ],
       ),
       body: Center(
@@ -45,10 +50,9 @@ class BuscarScreen extends StatelessWidget {
             const Text(
               'Bienvenido a la pantalla de Bucar Animales!',
               style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 21, 100, 21)
-              ),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 21, 100, 21)),
             )
           ],
         ),
@@ -57,5 +61,3 @@ class BuscarScreen extends StatelessWidget {
     );
   }
 }
-
-  

@@ -38,11 +38,16 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         // Colores según el tema
         const titleColor = Colors.white;
         final textColor = isLightTheme ? Colors.black : Colors.white;
-        final inputBorderColor = isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C);
-        final iconColor = isLightTheme ? const Color.fromARGB(255, 21, 100, 21) : const Color.fromARGB(255, 21, 100, 21);
+        final inputBorderColor =
+            isLightTheme ? const Color(0xFFC0BABA) : const Color(0xFF3D3C3C);
+        final iconColor = isLightTheme
+            ? const Color.fromARGB(255, 21, 100, 21)
+            : const Color.fromARGB(255, 21, 100, 21);
         final backgroundColor = isLightTheme ? Colors.white : Colors.black;
         final cardColor = isLightTheme
+            // ignore: deprecated_member_use
             ? Colors.grey.withOpacity(0.1)
+            // ignore: deprecated_member_use
             : Colors.grey.withOpacity(0.3);
 
         return Scaffold(
@@ -68,7 +73,8 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: const Color.fromARGB(255, 21, 100, 21), // Borde verde
+                          color: const Color.fromARGB(
+                              255, 21, 100, 21), // Borde verde
                           width: 5, // Grosor del borde (ajustado a 6)
                         ),
                       ),
@@ -175,8 +181,10 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                       }
                     },
                     style: ButtonStyle(
+                      // ignore: deprecated_member_use
                       backgroundColor: MaterialStateProperty.all(
                           const Color.fromARGB(255, 21, 100, 21)),
+                      // ignore: deprecated_member_use
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                     ),
                     child: const Text('Guardar Opinión'),
