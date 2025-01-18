@@ -1,7 +1,5 @@
-import 'package:appanimals/widgets/botonera_navigation.dart';
-import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/animals_drawer_menu/animal_pair.dart';
+import 'package:appanimals/widgets/widgets.dart';
 
 class AnimalScreen extends StatelessWidget {
   const AnimalScreen({super.key});

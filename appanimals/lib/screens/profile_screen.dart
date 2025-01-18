@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:appanimals/screens/profile_detail_screen.dart';
-import 'package:appanimals/widgets/botonera_navigation.dart';
+import 'package:appanimals/widgets/widgets.dart';
+import 'package:appanimals/screens/screens.dart';
 
 class ProfilesScreen extends StatelessWidget {
   ProfilesScreen({super.key});

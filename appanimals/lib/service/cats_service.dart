@@ -1,14 +1,17 @@
 import 'dart:convert';
+import 'package:appanimals/utils/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appanimals/models/cats/cats_model.dart';
 
 class CatsService {
-  static const String apiUrl = 'https://api-express-g17-tup-utn-1.onrender.com/api/v1/cats';
-
   static Future<List<Cats>> fetchCats() async {
     try {
-      final response = await http.get(Uri.parse(apiUrl));
+      final response =
+          await http.get(Uri.parse('${Config.apiUrl}/api/v1/cats'));
+      print('Status code: ${response.statusCode}');
+      print('Respuesta: ${response.body}');
+
       if (response.statusCode == 200) {
         final decodedResponse = json.decode(response.body);
         if (decodedResponse is! Map<String, dynamic> ||

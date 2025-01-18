@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:appanimals/widgets/custom_drawer.dart';
 import 'package:appanimals/screens/peces/fishes_details_screen.dart';
 import 'package:appanimals/service/fishes_service.dart';
 import 'package:appanimals/models/peces/fishes_model.dart';
+import 'package:appanimals/widgets/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FishesListScreen extends StatefulWidget {
   const FishesListScreen({super.key});
@@ -162,10 +162,12 @@ class _FishesListScreenState extends State<FishesListScreen> {
                                       ? Color.fromARGB(255, 21, 100, 21)
                                       : Colors.grey,
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   setState(() {
                                     fishes.favorite = !fishes.favorite;
                                   });
+                                  final prefs = await SharedPreferences.getInstance();
+                                  await prefs.setBool(fishes.id.toString(), fishes.favorite);
                                 },
                               ),
                             ],
