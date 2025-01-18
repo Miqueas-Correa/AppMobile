@@ -91,23 +91,24 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                     itemCount: _auxiliarCrocodiles.length,
                     itemBuilder: (context, index) {
                       final crocodile = _auxiliarCrocodiles[index];
-                      return GestureDetector(
+                       return GestureDetector(
                         onTap: () async {
-                          final updatedCrocodile = await Navigator.push(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CrocodilesDetailScreen(crocodile: crocodile),
+                              builder: (context) => CrocodilesDetailScreen(
+                                crocodile: crocodile,
+                                onFavoriteChanged: (updatedCrocodile) {
+                                  setState(() {
+                                    final crocodileIndex = _auxiliarCrocodiles.indexWhere((c) => c.id == updatedCrocodile.id);
+                                    if (crocodileIndex != -1) {
+                                      _auxiliarCrocodiles[crocodileIndex] = updatedCrocodile;
+                                    }
+                                  });
+                                },
+                              ),
                             ),
                           );
-
-                          if (updatedCrocodile != null) {
-                            setState(() {
-                              final crocodileIndex = _auxiliarCrocodiles.indexWhere((c) => c.id == updatedCrocodile.id);
-                              if (crocodileIndex != -1) {
-                                _auxiliarCrocodiles[crocodileIndex] = updatedCrocodile;
-                              }
-                            });
-                          }
                         },
                         child: Container(
                           height: 100,

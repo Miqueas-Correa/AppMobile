@@ -6,9 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CrocodilesDetailScreen extends StatefulWidget {
   final Crocodile crocodile;
+  final ValueChanged<Crocodile>? onFavoriteChanged;
 
 
-  const CrocodilesDetailScreen({super.key, required this.crocodile});
+
+  const CrocodilesDetailScreen({super.key, required this.crocodile,this.onFavoriteChanged});
 
 
   @override
@@ -65,6 +67,9 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
   Future<void> _saveFavorite(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_crocodile.id, value);
+    setState(() {
+    _crocodile.isFavorite = value;
+    });
   }
 
 
@@ -95,13 +100,19 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
 
 
   // Cambiar el estado de 'favorite' y 'love'
-  void _toggleFavoriteAndLove(bool value) {
+  void _toggleFavoriteAndLove(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _isFavorite = value;
+      _crocodile.isFavorite = value;
       _isLove = value; // Cuando uno se activa o desactiva, ambos se actualizan
     });
     _saveFavorite(value); // Guardar el valor actualizado de 'favorite'
     _saveLove(value); // Guardar el valor actualizado de 'love'
+    await prefs.setBool(_crocodile.id, value); // Guarda en SharedPreferences
+    // Notifica el cambio a la lista
+    if (widget.onFavoriteChanged != null) {
+      widget.onFavoriteChanged!(_crocodile);
+    }
   }
 
 
@@ -129,7 +140,7 @@ class _CrocodilesDetailScreenState extends State<CrocodilesDetailScreen> {
               padding: const EdgeInsets.all(15.0),
               child: BodyProfileCustomItem(
                 crocodile: _crocodile,
-                isFavorite: _isFavorite,
+                isFavorite: _crocodile.isFavorite,
                 isLove: _isLove,
                 onFavoriteAndLoveChanged: _toggleFavoriteAndLove,
                 onRatingChanged: _updateRating,
@@ -196,14 +207,17 @@ class BodyProfileCustomItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(5, (index) {
-            return GestureDetector(
-              onTap: () {
-                onRatingChanged(index + 1.0);
-              },
-              child: Icon(
-                index < crocodile.stars ? Icons.star : Icons.star_border,
-                color: Colors.yellow,
-                size: 40,
+            return MouseRegion(
+              cursor: SystemMouseCursors.click, // Cambia el cursor al pasar sobre las estrellas
+              child: GestureDetector(
+                onTap: () {
+                  onRatingChanged(index + 1.0); // Actualiza la calificación
+                },
+                child: Icon(
+                  index < crocodile.stars ? Icons.star : Icons.star_border,
+                  color: Colors.yellow,
+                  size: 40,
+                ),
               ),
             );
           }),
