@@ -35,10 +35,10 @@ class _CatsListScreenState extends State<CatsListScreen> {
       final cats = await CatsService.fetchCats();
       setState(() {
         _allCats = cats;
-        _filteredCats = cats;
+        _filteredCats = _allCats;
         _isLoading = false;
       });
-      print('Gatos cargados: ${cats.length}');
+      print('Gatos cargados: ${_allCats.length}');
     } catch (e) {
       print('Error cargando gatos: $e');
       setState(() {
