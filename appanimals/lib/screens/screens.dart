@@ -5,7 +5,6 @@ export 'package:appanimals/screens/drawer_menu/acerca_de_.dart';
 export 'package:appanimals/screens/drawer_menu/animals_screen.dart';
 export 'package:appanimals/screens/drawer_menu/explorar_screen.dart';
 export 'package:appanimals/screens/drawer_menu/news_screen.dart';
-export 'package:appanimals/screens/busqeda_id_screens/animal_detail_screen.dart';
 export 'package:appanimals/screens/busqeda_id_screens/buscar_screen.dart';
 
 /*animales*/

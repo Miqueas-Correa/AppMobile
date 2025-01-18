@@ -9,7 +9,11 @@ class CatsProvider with ChangeNotifier {
   Future<void> loadCats() async {
     try {
       final cats = await CatsService.fetchCats();
-      _listCats = cats;
+      if (cats.isNotEmpty) {
+        _listCats = cats;
+      } else {
+        _listCats = [];
+      }
       notifyListeners();
     } catch (e) {
       print('Error: $e');

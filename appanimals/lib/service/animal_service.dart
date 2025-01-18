@@ -6,6 +6,7 @@ import 'package:appanimals/service/api_service.dart';
 import 'package:appanimals/models/structs/dogs_struct.dart';
 
 class AnimalService {
+
   static Future<Map<String, dynamic>?> fetchAnimalData({
     required String category,
     required String id,
@@ -48,7 +49,7 @@ class AnimalService {
       case 'peces':
         return FishesStruct(animalData, isFavorite, toggleFavorite);
       default:
-        return const Text('Categoría no soportada.');
+        return const Text('Categoria no soportada.');
     }
   }
 }
