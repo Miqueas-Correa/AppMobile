@@ -1,3 +1,6 @@
+import 'package:appanimals/providers/animals_provider.dart';
+import 'package:appanimals/providers/dogs/dogs_providers.dart';
+import 'package:appanimals/providers/gatos/cats_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +21,15 @@ main() async {
         ChangeNotifierProvider(create: (_) => FishesProvider()),
         ChangeNotifierProvider(create: (_) => LoadingProvider()),
         ChangeNotifierProvider(create: (_) => CrocodilesProvider()),
+
+        ChangeNotifierProvider(
+          create: (context) => AnimalsProvider(
+            catsProvider: CatsProvider(),
+            dogsProviders: DogsProviders(),
+            fishesProvider: context.read<FishesProvider>(),
+            crocodilesProvider: context.read<CrocodilesProvider>(),
+          ),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -37,7 +49,7 @@ class MyApp extends StatelessWidget {
         title: 'Amor Salvaje',
         theme: themeProvider.currentTheme,
         routes: {
-          '/buscar': (context) => BuscarScreen(),
+          '/buscar': (context) => const BuscarScreen(),
           '/animals': (context) => const AnimalScreen(),
           '/crocodile_profile': (context) => const CrocodilesListScreen(),
           '/list_fishes': (context) => const FishesListScreen(),
