@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 class CrocodilesListItem extends StatelessWidget {
   final Map<String, dynamic> args;
 
+
   const CrocodilesListItem({super.key, required this.args});
+
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
 
     return Scaffold(
       appBar: AppBar(
@@ -35,12 +38,16 @@ class CrocodilesListItem extends StatelessWidget {
   }
 }
 
+
 class BodyProfileCustomItem extends StatelessWidget {
   final Map<String, dynamic> args;
 
+
   const BodyProfileCustomItem({super.key, required this.args});
 
+
   @override
+
 
   Widget build(BuildContext context) {
     return Column(
@@ -78,11 +85,14 @@ class BodyProfileCustomItem extends StatelessWidget {
   }
 }
 
+
 class DataCard extends StatelessWidget {
   final String title;
   final String? data;
 
+
   const DataCard({super.key, required this.title, required this.data});
+
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +127,14 @@ class DataCard extends StatelessWidget {
   }
 }
 
+
 class HeaderProfileCustomItem extends StatelessWidget {
   final Size size;
   final String? avatar;
 
+
   const HeaderProfileCustomItem({super.key, this.avatar, required this.size});
+
 
   @override
   Widget build(BuildContext context) {
