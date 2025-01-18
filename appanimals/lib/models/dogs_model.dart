@@ -28,7 +28,7 @@ class DogsModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'Id🐶: ': id,
+      'Id: ': id,
       'Nombre: ': nombre,
       'Raza: ': raza,
       'Fecha de nacimiento: ': fechaNacimiento,

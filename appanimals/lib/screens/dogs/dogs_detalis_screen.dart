@@ -1,4 +1,5 @@
 import 'package:appanimals/models/dogs_model.dart';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,19 +14,42 @@ class DogsDetailScreen extends StatefulWidget {
 
 class _DogsDetailScreenState extends State<DogsDetailScreen> {
   late DogsModel _dog;
+  bool _isFavorite = false;
+  bool _isLove = false;
+  String _note = '';
 
   @override
   void initState() {
     super.initState();
     _dog = widget.dog;
-    _loadFavorite();
+    _loadFavoriteAndLove();
+    _loadRating();
+    _loadNote();
   }
 
-  Future<void> _loadFavorite() async {
+  Future<void> _loadFavoriteAndLove() async {
     final prefs = await SharedPreferences.getInstance();
     final favorite = prefs.getBool(_dog.id.toString()) ?? false;
+    final love = prefs.getBool('${_dog.id}_love') ?? false;
     setState(() {
-      _dog.favorite = favorite;
+      _isFavorite = favorite;
+      _isLove = love;
+    });
+  }
+
+  Future<void> _loadRating() async {
+    final prefs = await SharedPreferences.getInstance();
+    final rating = prefs.getDouble('${_dog.id}_rating') ?? 0.0;
+    setState(() {
+      _dog.stars = rating;
+    });
+  }
+
+  Future<void> _loadNote() async {
+    final prefs = await SharedPreferences.getInstance();
+    final note = prefs.getString('${_dog.id}_note') ?? '';
+    setState(() {
+      _note = note;
     });
   }
 
@@ -34,17 +58,35 @@ class _DogsDetailScreenState extends State<DogsDetailScreen> {
     await prefs.setBool(_dog.id.toString(), value);
   }
 
+  Future<void> _saveLove(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('${_dog.id}_love', value);
+  }
+
+  Future<void> _saveRating(double rating) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('${_dog.id}_rating', rating);
+  }
+
+  Future<void> _saveNote() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('${_dog.id}_note', _note);
+  }
+
   void _updateRating(double rating) {
     setState(() {
       _dog.stars = rating;
     });
+    _saveRating(rating);
   }
 
-  void _toggleFavorite(bool value) {
+  void _toggleFavoriteAndLove(bool value) {
     setState(() {
-      _dog.favorite = value;
+      _isFavorite = value;
+      _isLove = value;
     });
     _saveFavorite(value);
+    _saveLove(value);
   }
 
   @override
@@ -69,38 +111,58 @@ class _DogsDetailScreenState extends State<DogsDetailScreen> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: BodyProfileCustomItem(
-                dog: _dog,
-                onFavoriteChanged: _toggleFavorite,
-                onRatingChanged: _updateRating,
-              ),
+                  dog: _dog,
+                  isFavorite: _isFavorite,
+                  isLove: _isLove,
+                  onFavoriteAndLoveChanged: _toggleFavoriteAndLove,
+                  onRatingChanged: _updateRating,
+                  initialNote: _note,
+                  onNoteChanged: (value) {
+                    setState(() {
+                      _note = value;
+                    });
+                    _saveNote();
+                  }),
             ),
           ],
         ),
       ),
+      bottomNavigationBar: BotoneraNavigation(),
     );
   }
 }
 
 class BodyProfileCustomItem extends StatelessWidget {
   final DogsModel dog;
-  final ValueChanged<bool> onFavoriteChanged;
+  final bool isFavorite;
+  final bool isLove;
+  final ValueChanged<bool> onFavoriteAndLoveChanged;
   final ValueChanged<double> onRatingChanged;
+  final String initialNote;
+  final ValueChanged<String> onNoteChanged;
 
   const BodyProfileCustomItem({
     super.key,
     required this.dog,
-    required this.onFavoriteChanged,
+    required this.isFavorite,
+    required this.isLove,
+    required this.onFavoriteAndLoveChanged,
     required this.onRatingChanged,
+    required this.initialNote,
+    required this.onNoteChanged,
   });
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController noteController = TextEditingController();
+    noteController.text = initialNote;
+
     return Column(
       children: [
         SwitchListTile.adaptive(
           title: const Text('Favorito'),
           value: dog.favorite,
-          onChanged: onFavoriteChanged,
+          onChanged: onFavoriteAndLoveChanged,
         ),
         const SizedBox(height: 20),
         DataRow(title: 'Id: ', data: dog.id),
@@ -128,6 +190,41 @@ class BodyProfileCustomItem extends StatelessWidget {
         Text(
           'Calificación: ${dog.stars.toStringAsFixed(1)}',
           style: const TextStyle(fontSize: 18),
+        ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextFormField(
+            controller: noteController,
+            decoration: InputDecoration(
+              labelText: 'Agregar nota',
+              hintText: 'Escribe una nota sobre este perro',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            maxLines: 3,
+            onChanged: onNoteChanged,
+          ),
+        ),
+        const SizedBox(height: 20),
+        // Botón de guardar
+        ElevatedButton(
+          onPressed: () {
+            final String note = noteController.text;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Nota guardada: $note'),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          ),
+          child: const Text('Guardar Nota',
+              selectionColor: Color.fromARGB(255, 255, 255, 255)),
         ),
       ],
     );
@@ -157,7 +254,8 @@ class DataRow extends StatelessWidget {
             ),
             Text(
               data,
-              style: const TextStyle(fontSize: 16, color: Color.fromARGB(255, 134, 132, 132)),
+              style: const TextStyle(
+                  fontSize: 16, color: Color.fromARGB(255, 134, 132, 132)),
             ),
           ],
         ),

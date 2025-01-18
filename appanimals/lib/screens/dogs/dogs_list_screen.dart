@@ -1,9 +1,9 @@
-import 'dart:developer';
 import 'package:appanimals/models/dogs_model.dart';
 import 'package:appanimals/screens/dogs/dogs_detalis_screen.dart';
 import 'package:appanimals/service/dogs_service.dart';
 import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DogsListScreen extends StatefulWidget {
   const DogsListScreen({super.key});
@@ -28,15 +28,40 @@ class _dongsListScreenState extends State<DogsListScreen> {
     _dogsFuture = DogsService.fetchDogs();
   }
 
+  Future<List<DogsModel>> _fetchDogsWithFavorites() async {
+    final dogs = await DogsService.fetchDogs();
+    final prefs = await SharedPreferences.getInstance();
+
+    for (var dog in dogs) {
+      dog.favorite = prefs.getBool(dog.id) ?? false;
+    }
+
+    return dogs;
+  }
+
   void _updateSearch(String? query) {
     setState(() {
       _searchQuery = query ?? '';
       if (_searchQuery.isEmpty) {
-        _auxiliarDogs = _auxiliarDogs; // Restablecer al estado original
+        _dogsFuture = _fetchDogsWithFavorites();
       } else {
-        _auxiliarDogs = _auxiliarDogs.where((dog) {
-          return dog.nombre.toLowerCase().contains(_searchQuery.toLowerCase());
-        }).toList();
+        _dogsFuture = _fetchDogsWithFavorites().then((dogs) {
+          return dogs.where((dog) {
+            final searchLower = _searchQuery.toLowerCase();
+
+            final matchesNombre =
+                dog.nombre.toLowerCase().contains(searchLower);
+            final matchesRaza = dog.raza.toLowerCase().contains(searchLower);
+            final matchesFechaNacimiento =
+                dog.fechaNacimiento.toLowerCase().contains(searchLower);
+            final matchesId = dog.id.toString() == _searchQuery;
+
+            return matchesNombre ||
+                matchesRaza ||
+                matchesFechaNacimiento ||
+                matchesId;
+          }).toList();
+        });
       }
     });
   }
@@ -75,17 +100,24 @@ class _dongsListScreenState extends State<DogsListScreen> {
                     itemBuilder: (context, index) {
                       final dog = _auxiliarDogs[index];
                       return GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           // Navegar a la pantalla de detalles, pasando el objeto completo
-                          Navigator.push(
+                          final updatedDog = await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => DogsDetailScreen(dog: dog),
                             ),
                           );
-                        },
-                        onLongPress: () {
-                          log('onLongPress $index');
+
+                          if (updatedDog != null) {
+                            setState(() {
+                              final dogIndex = _auxiliarDogs
+                                  .indexWhere((d) => d.id == updatedDog.id);
+                              if (dogIndex != -1) {
+                                _auxiliarDogs[dogIndex] = updatedDog;
+                              }
+                            });
+                          }
                         },
                         child: Container(
                           height: 100,
@@ -135,10 +167,13 @@ class _dongsListScreenState extends State<DogsListScreen> {
                                   color:
                                       dog.favorite ? Colors.red : Colors.grey,
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  final perfs =
+                                      await SharedPreferences.getInstance();
                                   setState(() {
                                     dog.favorite = !dog.favorite;
                                   });
+                                  perfs.setBool(dog.id, dog.favorite);
                                 },
                               ),
                             ],

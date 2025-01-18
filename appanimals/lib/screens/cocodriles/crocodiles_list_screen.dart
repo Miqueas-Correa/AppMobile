@@ -1,3 +1,4 @@
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
 import 'package:appanimals/service/crocodiles_service.dart';
@@ -47,9 +48,12 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
           return crocodiles.where((crocodile) {
             final searchLower = _searchQuery.toLowerCase();
 
-            final matchesName = crocodile.name.toLowerCase().contains(searchLower);
-            final matchesColor = crocodile.color.toLowerCase().contains(searchLower);
-            final matchesHabitat = crocodile.habitat.toLowerCase().contains(searchLower);
+            final matchesName =
+                crocodile.name.toLowerCase().contains(searchLower);
+            final matchesColor =
+                crocodile.color.toLowerCase().contains(searchLower);
+            final matchesHabitat =
+                crocodile.habitat.toLowerCase().contains(searchLower);
             final matchesId = crocodile.id.toString() == _searchQuery;
 
             return matchesName || matchesColor || matchesHabitat || matchesId;
@@ -96,22 +100,27 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                           final updatedCrocodile = await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CrocodilesDetailScreen(crocodile: crocodile),
+                              builder: (context) =>
+                                  CrocodilesDetailScreen(crocodile: crocodile),
                             ),
                           );
 
                           if (updatedCrocodile != null) {
                             setState(() {
-                              final crocodileIndex = _auxiliarCrocodiles.indexWhere((c) => c.id == updatedCrocodile.id);
+                              final crocodileIndex =
+                                  _auxiliarCrocodiles.indexWhere(
+                                      (c) => c.id == updatedCrocodile.id);
                               if (crocodileIndex != -1) {
-                                _auxiliarCrocodiles[crocodileIndex] = updatedCrocodile;
+                                _auxiliarCrocodiles[crocodileIndex] =
+                                    updatedCrocodile;
                               }
                             });
                           }
                         },
                         child: Container(
                           height: 100,
-                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -138,7 +147,9 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                                   children: [
                                     Text(
                                       crocodile.name,
-                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text('Color: ${crocodile.color}'),
                                   ],
@@ -146,15 +157,22 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                               ),
                               IconButton(
                                 icon: Icon(
-                                  crocodile.isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: crocodile.isFavorite ? Colors.red : Colors.grey,
+                                  crocodile.isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: crocodile.isFavorite
+                                      ? Colors.red
+                                      : Colors.grey,
                                 ),
                                 onPressed: () async {
-                                  final prefs = await SharedPreferences.getInstance();
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
                                   setState(() {
-                                    crocodile.isFavorite = !crocodile.isFavorite;
+                                    crocodile.isFavorite =
+                                        !crocodile.isFavorite;
                                   });
-                                  prefs.setBool(crocodile.id, crocodile.isFavorite);
+                                  prefs.setBool(
+                                      crocodile.id, crocodile.isFavorite);
                                 },
                               ),
                             ],
@@ -168,6 +186,7 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
