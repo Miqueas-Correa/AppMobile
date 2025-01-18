@@ -37,6 +37,7 @@ class AnimalCard extends StatelessWidget {
           title = "Época Egipcia";
           description =
               'Se cree que los egipcios comenzaron a domesticar gatos alrededor del 4.000 a.C. Los gatos fueron venerados por los egipcios debido a su habilidad para cazar roedores, que eran una amenaza para los alimentos almacenados. \nSe les asociaba con la diosa Bastet, quien representaba la protección, la fertilidad y la casa. Los gatos eran tan respetados que eran momificados y enterrados junto a sus dueños en tumbas reales.';
+          animalType = "gatos";
         } else if (text == 'Perros') {
           title = "Época Prehistórica";
           description =
