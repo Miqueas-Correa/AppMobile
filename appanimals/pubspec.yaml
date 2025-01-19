@@ -112,17 +112,6 @@ flutter:
     - assets/images/avatars_peces/avatar8.png
     - assets/images/avatars_peces/avatar9.png
     - assets/images/avatars_peces/avatar10.png
-    # gatos listados de gatos
-    - assets/images/gatos_listado/gato1.jpg
-    - assets/images/gatos_listado/gato2.jpg
-    - assets/images/gatos_listado/gato3.jpg
-    - assets/images/gatos_listado/gato4.jpg
-    - assets/images/gatos_listado/gato5.jpg
-    - assets/images/gatos_listado/gato6.jpg
-    - assets/images/gatos_listado/gato7.jpg
-    - assets/images/gatos_listado/gato8.jpg
-    - assets/images/gatos_listado/gato9.jpg
-    - assets/images/gatos_listado/gato10.png
     # perfiles
     - assets/images/profiles/
     - assets/images/profiles/Matias.jpeg

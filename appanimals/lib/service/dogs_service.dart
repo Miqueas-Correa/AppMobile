@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:appanimals/models/dogs_model.dart';
-import 'package:appanimals/utils/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DogsService {
-  static final String apiUrl = '${Config.apiUrl}/api/v1/dogs';
+  static const String apiUrl =
+      'https://api-express-g17-tup-utn-1.onrender.com/api/v1/dogs';
 
   static Future<List<DogsModel>> fetchDogs() async {
     try {

@@ -8,11 +8,6 @@ class ThemeProvider with ChangeNotifier {
     return _isLightMode ? ThemeData.light() : ThemeData.dark();
   }
 
-  // Getter para obtener el caption del tema
-  String get themeCaption {
-    return _isLightMode ? 'Modo Claro' : 'Modo Oscuro';
-  }
-
   // Método para alternar entre tema claro y oscuro
   void toggleTheme() {
     _isLightMode = !_isLightMode;

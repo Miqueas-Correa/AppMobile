@@ -15,6 +15,7 @@ export 'package:appanimals/screens/cocodriles/crocodiles_list_screen.dart';
 /*perros*/
 export 'package:appanimals/screens/dogs/dogs_list_screen.dart';
 /*gatos*/
+export 'package:appanimals/screens/gatos/cats_list_item.dart';
 export 'package:appanimals/screens/gatos/cats_list_screen.dart';
 /*peces*/
 export 'package:appanimals/screens/peces/fishes_list_screen.dart';

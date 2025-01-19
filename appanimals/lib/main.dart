@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'providers/theme_provider.dart';
 import 'package:appanimals/screens/screens.dart';
@@ -9,8 +8,7 @@ import 'providers/loading_provider.dart';
 import 'observers/loading_observer.dart';
 import 'widgets/loading_overlay.dart';
 
-main() async {
-  await dotenv.load();
+void main() {
   runApp(
     MultiProvider(
       providers: [

@@ -12,8 +12,8 @@ class FishesService {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
-        List<Fishes> fishes =
-            data.map((json) => Fishes.fromJson(json)).toList();
+        List<Fishes> fishes = 
+          data.map((json) => Fishes.fromJson(json)).toList();
 
         final prefs = await SharedPreferences.getInstance();
 

@@ -1,65 +1,61 @@
-import 'package:appanimals/models/cats/cats_model.dart';
 import 'package:flutter/material.dart';
+import 'package:appanimals/models/cats/cats_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CatsDetailsScreen extends StatefulWidget {
-  final Cats cat;
-  final String avatarPath;
+const Color appGreenColor = Color.fromARGB(255, 21, 100, 21);
+const double avatarSize = 200.0;
 
-  const CatsDetailsScreen({
-    super.key,
-    required this.cat,
-    required this.avatarPath,
-  });
+class CatsDetailScreen extends StatefulWidget {
+  final Cat cat;
+
+  const CatsDetailScreen({super.key, required this.cat});
 
   @override
-  _CatsDetailsScreen createState() => _CatsDetailsScreen();
+  _CatsDetailScreenState createState() => _CatsDetailScreenState();
 }
 
-class _CatsDetailsScreen extends State<CatsDetailsScreen> {
-  late Cats _cats;
-  late TextEditingController _nameController;
-  late TextEditingController _razaController;
-  late TextEditingController _colorController;
+class _CatsDetailScreenState extends State<CatsDetailScreen> {
+  late Cat _cat;
+  late TextEditingController _noteController;
 
   @override
   void initState() {
     super.initState();
-    _cats = widget.cat;
+    _cat = widget.cat;
+    _noteController = TextEditingController();
     _loadFavorite();
-
-    //inicializa
-    _nameController = TextEditingController(text: _cats.nombre);
-    _razaController = TextEditingController(text: _cats.raza);
-    _colorController = TextEditingController(text: _cats.color);
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _razaController.dispose();
-    _colorController.dispose();
+    _noteController.dispose();
     super.dispose();
   }
 
   Future<void> _loadFavorite() async {
     final prefs = await SharedPreferences.getInstance();
-    final favorite = prefs.getBool(_cats.id.toString()) ?? false;
+    final favorite = prefs.getBool(_cat.id.toString()) ?? false;
     setState(() {
-      _cats.favorite = favorite;
+      _cat.favorito = favorite;
     });
+  }
+
+  Future<void> _saveFavorite(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_cat.id.toString(), value);
   }
 
   void _updateRating(double rating) {
     setState(() {
-      _cats.stars = rating;
+      _cat.estrella = rating;
     });
   }
 
   void _toggleFavorite(bool value) {
     setState(() {
-      _cats.favorite = value;
+      _cat.favorito = value;
     });
+    _saveFavorite(value);
   }
 
   @override
@@ -69,24 +65,22 @@ class _CatsDetailsScreen extends State<CatsDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Perfil del gato'),
-        backgroundColor: const Color.fromARGB(255, 21, 100, 21),
+        title: const Text('Perfil del Gato'),
+        backgroundColor: appGreenColor,
         foregroundColor: Colors.white,
         elevation: 10,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderProfileCustomItem(
-              size: size,
-              avatarPath: widget.avatarPath,
-            ),
+            HeaderProfileCustomItem(size: size, avatar: _cat.avatar),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: BodyProfileCustomItem(
-                cats: _cats,
+                cat: _cat,
                 onFavoriteChanged: _toggleFavorite,
                 onRatingChanged: _updateRating,
+                noteController: _noteController,
               ),
             ),
           ],
@@ -97,15 +91,17 @@ class _CatsDetailsScreen extends State<CatsDetailsScreen> {
 }
 
 class BodyProfileCustomItem extends StatelessWidget {
-  final Cats cats;
+  final Cat cat;
   final ValueChanged<bool> onFavoriteChanged;
   final ValueChanged<double> onRatingChanged;
+  final TextEditingController noteController;
 
   const BodyProfileCustomItem({
     super.key,
-    required this.cats,
+    required this.cat,
     required this.onFavoriteChanged,
     required this.onRatingChanged,
+    required this.noteController,
   });
 
   @override
@@ -113,23 +109,17 @@ class BodyProfileCustomItem extends StatelessWidget {
     return Column(
       children: [
         SwitchListTile.adaptive(
-          title: const Text('Favorito',
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          value: cats.favorite,
+          title: const Text('Favorito'),
+          value: cat.favorito,
           onChanged: onFavoriteChanged,
         ),
         const SizedBox(height: 20),
-        DataRow(
-            title: 'Nombre',
-            controller: TextEditingController(text: cats.nombre)),
-        DataRow(
-            title: 'Raza',
-            controller: TextEditingController(text: cats.raza)),
-        DataRow(
-            title: 'Color',
-            controller: TextEditingController(text: cats.color)),
+        DataRow(title: 'Nombre', data: cat.nombre),
+        DataRow(title: 'Color', data: cat.color),
+        DataRow(title: 'Raza', data: cat.raza),
+        DataRow(title: 'ID', data: cat.id.toString()),
         const SizedBox(height: 20),
-        
+        // Calificación con estrellas
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(5, (index) {
@@ -138,8 +128,8 @@ class BodyProfileCustomItem extends StatelessWidget {
                 onRatingChanged(index + 1.0);
               },
               child: Icon(
-                index < cats.stars ? Icons.star : Icons.star_border,
-                color: const Color.fromARGB(255, 21, 100, 21),
+                index < cat.estrella ? Icons.star : Icons.star_border,
+                color: Colors.yellow,
                 size: 40,
               ),
             );
@@ -147,9 +137,10 @@ class BodyProfileCustomItem extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Calificación: ${cats.stars.toStringAsFixed(1)}',
+          'Calificación: ${cat.estrella.toStringAsFixed(1)}',
           style: const TextStyle(fontSize: 18),
         ),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -157,9 +148,9 @@ class BodyProfileCustomItem extends StatelessWidget {
 
 class DataRow extends StatelessWidget {
   final String title;
-  final TextEditingController controller;
+  final String data;
 
-  const DataRow({super.key, required this.title, required this.controller});
+  const DataRow({super.key, required this.title, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -172,14 +163,13 @@ class DataRow extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: TextFormField(
-                controller: controller,
-                decoration: decorationInput(
-                  label: title,
-                  hintText: 'Ingresa $title',
-                ),
-              ),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              data,
+              style: const TextStyle(fontSize: 16, color: Colors.black54),
             ),
           ],
         ),
@@ -188,59 +178,42 @@ class DataRow extends StatelessWidget {
   }
 }
 
-//inputs del textformfield
-InputDecoration decorationInput(
-    {IconData? icon, String? hintText, String? helperText, String? label}) {
-  return InputDecoration(
-    fillColor: Colors.black,
-    label: Text(label ?? ''),
-    hintText: hintText,
-    helperText: helperText,
-    helperStyle: const TextStyle(fontSize: 16),
-    prefixIcon: icon != null ? Icon(icon) : null,
-  );
-}
-
 class HeaderProfileCustomItem extends StatelessWidget {
   final Size size;
-  final String avatarPath;
+  final String? avatar;
 
-  const HeaderProfileCustomItem({
-    super.key,
-    required this.size,
-    required this.avatarPath,
-  });
+  const HeaderProfileCustomItem({super.key, required this.size, this.avatar});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: size.height * 0.40,
-      color: const Color.fromARGB(255, 58, 133, 58),
+      color: appGreenColor,
       child: Center(
         child: Container(
-          width: 200,
-          height: 200,
+          width: avatarSize,
+          height: avatarSize,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: const Color.fromARGB(255, 21, 100, 21),
-              width: 2,
+              color: Colors.white,
+              width: 5,
             ),
           ),
           child: ClipOval(
-            child: avatarPath.isNotEmpty
-                ? Image.asset(
-                    avatarPath,
+            child: avatar != null && avatar!.isNotEmpty
+                ? Image.network(
+                    avatar!,
                     fit: BoxFit.cover,
-                    width: 200,
-                    height: 200,
+                    width: avatarSize,
+                    height: avatarSize,
                   )
                 : Image.asset(
-                    'assets/images/gatos_listado/gato1.jpg',
+                    'assets/images/buscar_page/gato_2.jpg',
                     fit: BoxFit.cover,
-                    width: 200,
-                    height: 200,
+                    width: avatarSize,
+                    height: avatarSize,
                   ),
           ),
         ),

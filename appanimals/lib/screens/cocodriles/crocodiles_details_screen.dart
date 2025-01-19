@@ -97,7 +97,11 @@ class BodyProfileCustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     final TextEditingController noteController = TextEditingController();
+=======
+    final TextEditingController _noteController = TextEditingController();
+>>>>>>> parent of 77bbaae (Merge branch 'dev' into Brenda_Yañez)
 
     return Column(
       children: [
@@ -138,7 +142,7 @@ class BodyProfileCustomItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: TextFormField(
-            controller: noteController,
+            controller: _noteController,
             decoration: InputDecoration(
               labelText: 'Agregar nota',
               hintText: 'Escribe una nota sobre este cocodrilo',
@@ -154,7 +158,7 @@ class BodyProfileCustomItem extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             // Aquí puedes guardar la nota utilizando _noteController.text
-            final String note = noteController.text;
+            final String note = _noteController.text;
             // Implementar lógica de guardado
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
