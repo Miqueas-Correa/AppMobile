@@ -97,11 +97,9 @@ class BodyProfileCustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    final TextEditingController noteController = TextEditingController();
-=======
+
     final TextEditingController _noteController = TextEditingController();
->>>>>>> parent of 77bbaae (Merge branch 'dev' into Brenda_Yañez)
+
 
     return Column(
       children: [

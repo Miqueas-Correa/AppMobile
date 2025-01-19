@@ -57,5 +57,3 @@ class BuscarScreen extends StatelessWidget {
     );
   }
 }
-
-  

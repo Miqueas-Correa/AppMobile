@@ -1,43 +1,37 @@
-class Cat {
+class Cats {
   final String id;
-  final String nombre;
   final String raza;
+  final String nombre;
   final String color;
-  final String avatar;
-  double estrella;
-  bool favorito;
+  bool favorite;
+  double stars;
 
-  Cat({
+  Cats({
     required this.id,
-    required this.nombre,
     required this.raza,
+    required this.nombre,
     required this.color,
-    required this.avatar,
-    required this.estrella,
-    this.favorito = false,
+    this.favorite = false,
+    this.stars = 0.0,
   });
 
-  factory Cat.fromJson(Map<String, dynamic> json) {
-    return Cat(
-      id: json['id'] ?? '', 
-      nombre: json['nombre'] ?? '', 
-      raza: json['raza'] ?? '',
-      color: json['color'] ?? '',
-      avatar: json['avatar'] ?? '', 
-      estrella: (json['estrella'] != null) ? json['estrella'].toDouble() : 0.0,
-      favorito: json['favorito'] ?? false, 
+  factory Cats.fromJson(Map<String, dynamic> json) {
+    return Cats(
+      id: json['id']?.toString() ?? '',
+      raza: json['raza']?.toString() ?? '',
+      nombre: json['nombre']?.toString() ?? '',
+      color: json['color']?.toString() ?? '',
+      favorite: json['favorite'] == 'true' || json['favorite'] == true,
+      stars: double.tryParse(json['stars']?.toString() ?? '0') ?? 0.0,
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'nombre': nombre,
-      'raza': raza,
-      'color': color,
-      'avatar': avatar,
-      'estrella': estrella,
-      'favorito': favorito,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'raza': raza,
+    'nombre': nombre,
+    'color': color,
+    'favorite': favorite,
+    'stars': stars,
+  };
 }

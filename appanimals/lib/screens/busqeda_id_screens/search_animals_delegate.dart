@@ -1,9 +1,10 @@
 import 'package:appanimals/providers/animals_provider.dart';
-import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
+import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart' as cocodriles;
 import 'package:appanimals/screens/dogs/dogs_detalis_screen.dart';
-import 'package:appanimals/screens/gatos/cats_details_screen.dart';
+import 'package:appanimals/screens/gatos/cats_details_screen.dart' as cats;
 import 'package:appanimals/screens/peces/fishes_details_screen.dart';
 import 'package:flutter/material.dart';
+
 
 class SearchAnimalsDelegate extends SearchDelegate<String> {
   final AnimalsProvider animalsProvider;
@@ -141,7 +142,7 @@ class SearchAnimalsDelegate extends SearchDelegate<String> {
     
     switch (type) {
       case 'Gato':
-        screen = CatsDetailsScreen(
+        screen = cats.CatsDetailsScreen(
           cat: animal,
           avatarPath: _getAnimalImage(animal),
         );
@@ -156,7 +157,7 @@ class SearchAnimalsDelegate extends SearchDelegate<String> {
         );
         break;
       case 'Cocodrilo':
-        screen = CrocodilesDetailScreen(crocodile: animal);
+        screen = cocodriles.CrocodilesDetailScreen(crocodile: animal);
         break;
       default:
         return;
