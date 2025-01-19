@@ -40,6 +40,7 @@ class _CatsDetailScreenState extends State<CatsDetailScreen> {
     });
   }
 
+<<<<<<< HEAD
   Future<void> _saveFavorite(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_cat.id.toString(), value);
@@ -48,12 +49,25 @@ class _CatsDetailScreenState extends State<CatsDetailScreen> {
   void _updateRating(double rating) {
     setState(() {
       _cat.estrella = rating;
+=======
+  Future<void> _toggleFavorite(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_cats.id.toString(), value);
+    setState(() {
+      _cats.favorite = value;
+>>>>>>> origin/dev
     });
   }
 
-  void _toggleFavorite(bool value) {
+  Future<void> _updateRating(double rating) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('${_cats.id}_rating', rating);
     setState(() {
+<<<<<<< HEAD
       _cat.favorito = value;
+=======
+      _cats.stars = rating;
+>>>>>>> origin/dev
     });
     _saveFavorite(value);
   }

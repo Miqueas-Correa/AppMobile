@@ -21,7 +21,28 @@ class _CatsListScreenState extends State<CatsListScreen> {
     _catsFuture = CatsService.fetchCats();
   }
 
+<<<<<<< HEAD
   void _updateSearch(String query) {
+=======
+  Future<void> _loadCats() async {
+    try {
+      final cats = await CatsService.fetchCats();
+      setState(() {
+        _allCats = cats;
+        _filteredCats = _allCats;
+        _isLoading = false;
+      });
+      print('Gatos cargados: ${_allCats.length}');
+    } catch (e) {
+      print('Error cargando gatos: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void _onSearchChanged() {
+>>>>>>> origin/dev
     setState(() {
       //logica d bsuqeda
       _catsFuture = CatsService.fetchCats().then((cats) {
