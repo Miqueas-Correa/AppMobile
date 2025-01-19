@@ -29,7 +29,7 @@ class CrocodilesService {
 
         for (var crocodile in crocodiles) {
           // Obtener los valores almacenados localmente
-          crocodile.isFavorite = prefs.getBool(crocodile.id) ?? false;
+          crocodile.favorite = prefs.getBool(crocodile.id) ?? false;
           crocodile.stars = prefs.getDouble('${crocodile.id}_rating') ?? 0.0;
         }
 

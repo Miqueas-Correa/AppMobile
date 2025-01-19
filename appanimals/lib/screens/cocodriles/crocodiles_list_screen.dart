@@ -1,8 +1,9 @@
+import 'dart:developer';
+import 'package:appanimals/widgets/botonera_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:appanimals/screens/cocodriles/crocodiles_details_screen.dart';
 import 'package:appanimals/service/crocodiles_service.dart';
 import 'package:appanimals/models/crocodiles/crocodiles_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CrocodilesListScreen extends StatefulWidget {
   const CrocodilesListScreen({super.key});
@@ -23,33 +24,29 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
   @override
   void initState() {
     super.initState();
-    _crocodilesFuture = _fetchCrocodilesWithFavorites();
-  }
-
-  Future<List<Crocodile>> _fetchCrocodilesWithFavorites() async {
-    final crocodiles = await CrocodilesService.fetchCrocodiles();
-    final prefs = await SharedPreferences.getInstance();
-
-    for (var crocodile in crocodiles) {
-      crocodile.isFavorite = prefs.getBool(crocodile.id) ?? false;
-    }
-
-    return crocodiles;
+    _crocodilesFuture = CrocodilesService.fetchCrocodiles();
   }
 
   void _updateSearch(String? query) {
     setState(() {
       _searchQuery = query ?? '';
       if (_searchQuery.isEmpty) {
-        _crocodilesFuture = _fetchCrocodilesWithFavorites();
+        _crocodilesFuture = CrocodilesService.fetchCrocodiles();
       } else {
-        _crocodilesFuture = _fetchCrocodilesWithFavorites().then((crocodiles) {
+        _crocodilesFuture =
+            CrocodilesService.fetchCrocodiles().then((crocodiles) {
           return crocodiles.where((crocodile) {
             final searchLower = _searchQuery.toLowerCase();
 
-            final matchesName = crocodile.name.toLowerCase().contains(searchLower);
-            final matchesColor = crocodile.color.toLowerCase().contains(searchLower);
-            final matchesHabitat = crocodile.habitat.toLowerCase().contains(searchLower);
+            // Buscar por nombre, color o hábitat (coincidencia parcial)
+            final matchesName =
+                crocodile.name.toLowerCase().contains(searchLower);
+            final matchesColor =
+                crocodile.color.toLowerCase().contains(searchLower);
+            final matchesHabitat =
+                crocodile.habitat.toLowerCase().contains(searchLower);
+
+            // Buscar por id (coincidencia exacta)
             final matchesId = crocodile.id.toString() == _searchQuery;
 
             return matchesName || matchesColor || matchesHabitat || matchesId;
@@ -92,26 +89,23 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                     itemBuilder: (context, index) {
                       final crocodile = _auxiliarCrocodiles[index];
                       return GestureDetector(
-                        onTap: () async {
-                          final updatedCrocodile = await Navigator.push(
+                        onTap: () {
+                          // Navegar a la pantalla de detalles, pasando el objeto completo
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CrocodilesDetailScreen(crocodile: crocodile),
+                              builder: (context) =>
+                                  CrocodilesDetailScreen(crocodile: crocodile),
                             ),
                           );
-
-                          if (updatedCrocodile != null) {
-                            setState(() {
-                              final crocodileIndex = _auxiliarCrocodiles.indexWhere((c) => c.id == updatedCrocodile.id);
-                              if (crocodileIndex != -1) {
-                                _auxiliarCrocodiles[crocodileIndex] = updatedCrocodile;
-                              }
-                            });
-                          }
+                        },
+                        onLongPress: () {
+                          log('onLongPress $index');
                         },
                         child: Container(
                           height: 100,
-                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -138,23 +132,28 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
                                   children: [
                                     Text(
                                       crocodile.name,
-                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text('Color: ${crocodile.color}'),
                                   ],
                                 ),
                               ),
+                              // Opción para marcar como favorito
                               IconButton(
                                 icon: Icon(
-                                  crocodile.isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: crocodile.isFavorite ? Colors.red : Colors.grey,
+                                  crocodile.favorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: crocodile.favorite
+                                      ? Colors.red
+                                      : Colors.grey,
                                 ),
-                                onPressed: () async {
-                                  final prefs = await SharedPreferences.getInstance();
+                                onPressed: () {
                                   setState(() {
-                                    crocodile.isFavorite = !crocodile.isFavorite;
+                                    crocodile.favorite = !crocodile.favorite;
                                   });
-                                  prefs.setBool(crocodile.id, crocodile.isFavorite);
                                 },
                               ),
                             ],
@@ -168,6 +167,7 @@ class _CrocodilesListScreenState extends State<CrocodilesListScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: BotoneraNavigation(),
       ),
     );
   }
