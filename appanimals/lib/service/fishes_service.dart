@@ -5,15 +5,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class FishesService {
-  static final String apiUrl = '${Config.apiUrl}/api/v1/peces';
-
-  static Future<List<Fishes>> fetchFishes() async {
+   static Future<List<Fishes>> fetchFishes() async {
     try {
-      final response = await http.get(Uri.parse(apiUrl));
+      final response = 
+        await http.get(Uri.parse('${Config.apiUrl}/api/v1/peces'));
+      print('Status code: ${response.statusCode}');
+      print('Respuesta: ${response.body}');
+      
       if (response.statusCode == 200) {
-        List<dynamic> data = json.decode(response.body);
-        List<Fishes> fishes =
-            data.map((json) => Fishes.fromJson(json)).toList();
+        final decodedResponse = json.decode(response.body);
+        if (decodedResponse is! Map<String, dynamic> ||
+            !decodedResponse.containsKey('data')) {
+          throw Exception('Formato de respuesta de API no valido');
+        }
+        List<dynamic> data = decodedResponse['data'];
+        List<Fishes> fishes = data.map((json) => Fishes.fromJson(json)).toList();
 
         final prefs = await SharedPreferences.getInstance();
 
@@ -23,6 +29,7 @@ class FishesService {
         }
 
         return fishes;
+
       } else {
         throw Exception('Failed to load fishes');
       }

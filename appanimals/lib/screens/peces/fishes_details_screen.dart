@@ -42,8 +42,7 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     super.dispose();
   }
 
-  //Future<void> _loadFavorite() async {
-  void _loadFavorite() async {
+  Future<void> _loadFavorite() async {
     final prefs = await SharedPreferences.getInstance();
     final favorite = prefs.getBool(_fishes.id.toString()) ?? false;
     setState(() {
@@ -51,13 +50,15 @@ class _FishesDetailScreenState extends State<FishesDetailScreen> {
     });
   }
 
-  void _updateRating(double rating) {
+  Future<void> _updateRating(double rating) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('${_fishes.id}_rating', rating);
     setState(() {
       _fishes.stars = rating;
     });
   }
 
-  void _toggleFavorite(bool value) async {
+  Future<void> _toggleFavorite(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _fishes.favorite = value;

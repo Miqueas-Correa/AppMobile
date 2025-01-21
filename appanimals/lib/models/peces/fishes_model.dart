@@ -1,6 +1,3 @@
-//import 'dart:convert';
-//import 'package:shared_preferences/shared_preferences.dart';
-
 class Fishes {
   final String id;
   final String nombre;
@@ -9,7 +6,6 @@ class Fishes {
   final String avatar;
   double stars;
   bool favorite;
-
 
   Fishes({
     required this.id,
@@ -23,10 +19,10 @@ class Fishes {
 
   factory Fishes.fromJson(Map<String, dynamic> json) {
     return Fishes(
-      id: json["id"],
-      nombre: json["nombre"],
-      color: json["color"],
-      especie: json["especie"],
+      id: json['id'],
+      nombre: json['nombre'],
+      color: json['color'],
+      especie: json['especie'],
       avatar: json['avatar'],
       stars: (json['stars'] != null) ? json['stars'].toDouble() : 0.0,
       favorite: json['favorite'],
